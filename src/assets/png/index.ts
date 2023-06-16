@@ -1,3 +1,3 @@
-import Logins from "./login.jpg";
+import Logins from "./Logins.png";
 
 export { Logins };
