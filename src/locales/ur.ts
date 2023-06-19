@@ -8,4 +8,7 @@ export const ur = {
   "Syed Brothers designers & builders redefine the architecture designing, construction & real estate sector as the best construction company in Pakistan.":
     "سید برادران کے ڈیزائنرز اور بلڈرز آرکیٹیکچر ڈیزائننگ، تعمیرات اور رئیل اسٹیٹ سیکٹر کو پاکستان کی بہترین تعمیراتی کمپنی کے طور پر دوبارہ بیان کرتے ہیں۔",
   "Please Login": "برائے مہربانی لاگ ان کریں",
+  "Upload Your File": "اپنی فائل اپ لوڈ کریں۔",
+  Add:'شامل کریں۔',
+
 };
