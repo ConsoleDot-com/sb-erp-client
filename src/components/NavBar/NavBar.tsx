@@ -12,9 +12,7 @@ import React, { useState } from "react";
 
 import { Logins } from "../../assets";
 import { SideNav } from "../SideNav";
-import { UploadFile } from "../UploadFile";
-import { CustomerData } from "../CustomerData";
-import { Login } from "../Login";
+
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -31,9 +29,8 @@ export const NavBar = () => {
     setAnchorElUser(null);
   };
 
-
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: "white" }}>
       <Container maxWidth="xl">
         <Box
           sx={{
@@ -62,7 +59,11 @@ export const NavBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar
+                  alt="Remy Sharp"
+                  src={Logins}
+                  sx={{ border: "1px solid #26255f" }}
+                />
               </IconButton>
             </Tooltip>
             <Menu

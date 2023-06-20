@@ -6,13 +6,13 @@ export const Input = styled("input")({
   maxWidth: "100%",
   color: "#444",
   background: " #fff",
-  borderRadius: "10px",
+  borderRadius: "8px",
   border: "1px solid #555",
   height: "2rem",
   "&::file-selector-button": {
     marginRight: " 20px",
     border: "none",
-    background: "#084cdf",
+    background: "#26255f",
     borderRadius: "8px",
     color: "#fff",
     cursor: "pointer",
@@ -20,8 +20,12 @@ export const Input = styled("input")({
     padding: "10px 20px",
     transition: "background .2s ease-in-out",
   },
+  "&::file-selector-button:hover": {
+    color: "black",
+    background: "white",
+  },
   " &:hover": {
-    background: Dark,
+    background: '#ddd',
     color: "white",
   },
 });
@@ -33,6 +37,7 @@ export const AddNew = () => {
         <Input
           style={{
             width: "100%",
+            padding: "10px 10px",
           }}
           type="file"
           accept="image/*"

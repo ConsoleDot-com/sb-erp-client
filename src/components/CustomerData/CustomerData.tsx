@@ -7,6 +7,8 @@ import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import { Dark, H1, Primary, Secondary } from "../../utils";
 import { Layout } from "../Layout/Layout";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 const columns: GridColDef[] = [
   {
@@ -87,6 +89,23 @@ export const Td = styled("td")({
   textAlign: "center",
 });
 
+const Select = styled.select`
+  border: none;
+  background-color: transparent;
+  color: white;
+  width: 5rem;
+  outline: none;
+  position: relative;
+  & option {
+    color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+`;
+
+// this is how text fields of mui is styled
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
     color: "white",
@@ -110,17 +129,25 @@ const CssTextField = styled(TextField)({
   },
 });
 export const CustomerData = () => {
-  let navigate = useNavigate();
-  const routeChange = () => {
-    let path = `/uploadData`;
-    navigate(path);
+  const [selectedValue, setSelectedValue] = useState<string>("");
+  const navigate = useNavigate();
+  // setting the state with the selected option
+  const handleSelectChange = (event: any) => {
+    const selectedOption = event.target.value;
+    setSelectedValue(selectedOption);
+    // Navigate to the desired page based on the selected option
+    if (selectedOption === "auto") {
+      navigate("/uploadData");
+    }
   };
+  const { t } = useTranslation();
+
   return (
     <Layout>
       <Box>
         <Container>
-          <H1 variant="h1" sx={{ color: Dark, textAlign: "center" }}>
-            Customers Data
+          <H1 mt={3} variant="h1" sx={{ color: Dark, textAlign: "center" }}>
+            {t("Customers Data")}
           </H1>
           <Box
             sx={{
@@ -143,7 +170,7 @@ export const CustomerData = () => {
                 renderInput={(params) => (
                   <CssTextField
                     {...params}
-                    label="Search input"
+                    label={t("Search input")}
                     InputLabelProps={{
                       style: {
                         color: "black",
@@ -170,18 +197,25 @@ export const CustomerData = () => {
                 )}
               />
             </Stack>
+
             <Button
               sx={{
                 backgroundColor: "#26255f",
                 color: "white",
-                padding: "10px 20px",
+                padding: "10px 10px",
                 "&:hover": {
                   bgcolor: Dark,
                 },
               }}
-              onClick={routeChange}
+              // onClick={routeChange}
             >
-              New
+              <Select value={selectedValue} onChange={handleSelectChange}>
+                <option value="volvo" selected>
+                  Select
+                </option>
+                <option value="auto">Auto</option>
+                <option value="manual">Manual</option>
+              </Select>
             </Button>
           </Box>
           <Box mt={5}>

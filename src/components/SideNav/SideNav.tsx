@@ -5,6 +5,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/material";
 import styled from "@emotion/styled";
 import { Secondary } from "../../utils";
+
+// styling it as component
 export const A = styled("a")({
   padding: "8px , 8px , 8px, 32px",
   textDecoration: "none",
@@ -19,6 +21,7 @@ export const A = styled("a")({
     color: "#f1f1f1",
   },
 });
+// styling as css-in-js
 const StyledLink = styled(Link)`
   padding: 8px 8px 8px 32px;
   text-decoration: none;
@@ -44,13 +47,14 @@ export const SideNav = ({ role }: any) => {
   ];
 
   const [filteredNavLinks, setFilteredNavLinks] = useState<object[]>([]);
-  const [userRole, setUserRole] = useState<any>("user");
+  const [userRole, setUserRole] = useState<string>("");
 
   //filtering the links by the role of the user
 
   useEffect(() => {
+    // on mount and on ready it'll filter the options on passed role to side nav component
     const temp = navLinks.filter((link) => link.roles.includes(role));
-    console.log(temp, "value of temp");
+    // setting the filtered roles in state
     setFilteredNavLinks(temp);
   }, [userRole]);
 
@@ -100,7 +104,7 @@ export const SideNav = ({ role }: any) => {
           zIndex: "2",
           top: 0,
           left: 0,
-          backgroundColor: "#26255f",
+          backgroundColor: Secondary,
           overflowX: "hidden",
 
           transition: "0.5s",
@@ -115,6 +119,7 @@ export const SideNav = ({ role }: any) => {
             </a>
           </Box>
           <div style={{ display: "flex", flexDirection: "column" }}>
+            {/* maping the filtered array */}
             {filteredNavLinks?.map((link: any) => (
               <StyledLink
                 style={{
@@ -133,7 +138,7 @@ export const SideNav = ({ role }: any) => {
         style={{ fontSize: "30px", cursor: "pointer" }}
         onClick={handleToggle}
       >
-        <MenuIcon />
+        <MenuIcon sx={{ color: "#26255f" }} />
       </span>
     </>
   );

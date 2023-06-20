@@ -10,4 +10,10 @@ export const en = {
   "Please Login": "Please Login",
   "Upload Your File": "Upload Your File",
   Add: "Add",
+  View: "View",
+  Delete: "Delete",
+  "Whole Replort": "Whole Report",
+  New: "New",
+  "Customers Data": "Customers Data",
+  "Search input": "Search input",
 };

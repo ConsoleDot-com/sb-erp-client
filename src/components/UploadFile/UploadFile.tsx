@@ -9,7 +9,7 @@ import { Layout } from "../Layout/Layout";
 export const UploadFile = () => {
   const { t } = useTranslation();
   const [addComponent, setAddComponent] = useState<any[]>([]);
-
+  // calling function onDelete and splicing it with 1
   const onDelete = (index: number) => {
     const newState = [...addComponent];
 
@@ -17,7 +17,9 @@ export const UploadFile = () => {
 
     setAddComponent(newState);
   };
+
   const addNewComponent = () => {
+    // every time on click to add adding a component to the state and displaying it using map in template
     let tempComponent = <AddNew />;
     setAddComponent((addComponent) => [...addComponent, tempComponent]);
   };
@@ -25,10 +27,81 @@ export const UploadFile = () => {
     <Layout>
       <Box>
         <Container>
-          <Box>
+          <Box mt={3}>
             <H1 sx={{ textAlign: "center", color: Dark }}>
               {t("Upload Your File")}
             </H1>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+                flexDirection: {
+                  xl: "row",
+                  lg: "row",
+                  md: "row",
+                  sm: "column",
+                  xs: "column",
+                },
+              }}
+            >
+              <Box
+                sx={{
+                  width: {
+                    xl: "50%",
+                    lg: "50%",
+                    md: "50%",
+                    sm: "100%",
+                    xs: "100%",
+                  },
+                }}
+              >
+                <AddNew />
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "1rem",
+                  width: {
+                    xl: "50%",
+                    lg: "50%",
+                    md: "50%",
+                    sm: "100%",
+                    xs: "100%",
+                  },
+                  justifyContent: "flex-end",
+                }}
+              >
+                <Button
+                  variant="outlined"
+                  sx={{
+                    backgroundColor: "#26255f",
+                    color: "white",
+                    padding: "10px 20px",
+                    "&:hover": {
+                      bgcolor: Dark,
+                    },
+                  }}
+                >
+                  {t("View")}
+                </Button>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    backgroundColor: "#26255f",
+                    color: "white",
+                    padding: "10px 20px",
+                    "&:hover": {
+                      bgcolor: Dark,
+                    },
+                  }}
+                >
+                  {t("Delete")}
+                </Button>
+              </Box>
+            </Box>
+            {/* compnents are being maped here */}
             {addComponent.map((component: any, index: number) => (
               <>
                 <Box
@@ -77,30 +150,29 @@ export const UploadFile = () => {
                     <Button
                       variant="outlined"
                       sx={{
+                        backgroundColor: "#26255f",
                         color: "white",
-                        backgroundColor: Secondary,
-
+                        padding: "10px 20px",
                         "&:hover": {
-                          backgroundColor: Dark,
-                          color: "white",
+                          bgcolor: Dark,
                         },
                       }}
                     >
-                      View
+                      {t("    View")}
                     </Button>
                     <Button
                       variant="outlined"
                       sx={{
+                        backgroundColor: "#26255f",
                         color: "white",
-                        backgroundColor: Secondary,
+                        padding: "10px 20px",
                         "&:hover": {
-                          backgroundColor: Dark,
-                          color: "white",
+                          bgcolor: Dark,
                         },
                       }}
                       onClick={() => onDelete(index)}
                     >
-                      Delete
+                      {t("  Delete")}
                     </Button>
                   </Box>
                 </Box>
@@ -120,9 +192,10 @@ export const UploadFile = () => {
                 }}
                 onClick={() => addNewComponent()}
               >
-                Add
+                {t("Add")}
               </Button>
-              {addComponent?.length > 1 && (
+              {/* conditional rendring of button when user adds more than 1 files  */}
+              {addComponent?.length > 0 && (
                 <Button
                   sx={{
                     mt: 3,
@@ -134,9 +207,8 @@ export const UploadFile = () => {
                       color: "white",
                     },
                   }}
-                  onClick={() => addNewComponent()}
                 >
-                  Whole Report
+                  {t("Whole Report")}
                 </Button>
               )}
             </Box>
