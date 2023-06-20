@@ -1,4 +1,5 @@
 import { Box, Button, Container } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import {
   Body,
   ButtonPadding,
@@ -22,6 +23,11 @@ interface AdInterface {
 
 export const Login = () => {
   const { t } = useTranslation();
+  let navigate = useNavigate();
+  const routeChange = () => {
+    let path = `/customerData`;
+    navigate(path);
+  };
   return (
     <>
       <Box
@@ -150,13 +156,14 @@ export const Login = () => {
                   <Button
                     variant="contained"
                     sx={{
-                      backgroundColor: Secondary,
+                      backgroundColor: "#26255f",
                       padding: ButtonPadding,
                       width: "100%",
                       "&:hover": {
                         bgcolor: Dark,
                       },
                     }}
+                    onClick={routeChange}
                   >
                     {t("Login")}
                   </Button>

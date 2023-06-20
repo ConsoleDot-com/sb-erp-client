@@ -51,7 +51,7 @@ export const NavBar = () => {
               alignItems: "center",
             }}
           >
-            <SideNav userRole={"user"} />
+            <SideNav role={"user"} />
 
             <img
               src={Logins}

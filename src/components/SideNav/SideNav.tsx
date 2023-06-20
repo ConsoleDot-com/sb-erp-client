@@ -19,30 +19,70 @@ export const A = styled("a")({
     color: "#f1f1f1",
   },
 });
+const StyledLink = styled(Link)`
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  display: block;
+  transition: 0.3s;
+  margin-bottom: 1rem;
+  color: black;
 
+  &:last-child {
+    margin-bottom: 0;
+  }
 
-export const SideNav = ({ links }: any) => {
-console.log(links , 'links')
+  &:hover {
+    color: #f1f1f1;
+  }
+`;
+
+export const SideNav = ({ role }: any) => {
+  const navLinks = [
+    { label: "UploadData", path: "/uploadData", roles: ["admin", "user"] },
+    { label: "CustomerData", path: "/customerData", roles: ["admin", "user"] },
+    { label: "Admin", path: "/login", roles: ["admin"] },
+  ];
+
+  const [filteredNavLinks, setFilteredNavLinks] = useState<object[]>([]);
+  const [userRole, setUserRole] = useState<any>("user");
+
+  //filtering the links by the role of the user
+
+  useEffect(() => {
+    const temp = navLinks.filter((link) => link.roles.includes(role));
+    console.log(temp, "value of temp");
+    setFilteredNavLinks(temp);
+  }, [userRole]);
+
+  // toggling the nav
 
   const [isOpen, setIsOpen] = useState(false);
   const sideNavRef = useRef(null);
 
   const handleToggle = () => {
-    setIsOpen((isOpen) => !isOpen); // toggling the nav
+    setIsOpen((isOpen) => !isOpen);
   };
-    // useEffect(() => {
-    //   const handleOutsideClick = (event:any) => {
-    //     if (sideNavRef.current && !sideNavRef.current?.contains(event.target)) {
-    //       setIsOpen(false);
-    //     }
-    //   };
 
-    //   document.addEventListener("click", handleOutsideClick);
+  // make the nav disappear on click
+  useEffect(() => {
+    const handleOutsideClick = (event: any) => {
+      console.log(event.clientX, "event");
+      console.log(event.clientY, "event");
 
-    //   return () => {
-    //     document.removeEventListener("click", handleOutsideClick);
-    //   };
-    // }, []);
+      console.log(sideNavRef, "side nav ref");
+      console.log(event.target, "event targeyt");
+
+      if (event.clientX > 300) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
   interface Test {
     path: string;
     label: string;
@@ -60,7 +100,7 @@ console.log(links , 'links')
           zIndex: "2",
           top: 0,
           left: 0,
-          backgroundColor: Secondary,
+          backgroundColor: "#26255f",
           overflowX: "hidden",
 
           transition: "0.5s",
@@ -68,13 +108,23 @@ console.log(links , 'links')
       >
         <Box sx={{ padding: "1rem 2rem" }}>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <a href="/" onClick={handleToggle}>
-              <CloseIcon />
+            <a href="#" onClick={handleToggle}>
+              <CloseIcon
+                sx={{ color: "white", width: "30px", height: "30px" }}
+              />
             </a>
           </Box>
-          <div>
-            {links?.map((link: any) => (
-              <Link to={link?.path}>{link?.label}</Link>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {filteredNavLinks?.map((link: any) => (
+              <StyledLink
+                style={{
+                  marginBottom: "10px",
+                  textDecoration: "none",
+                }}
+                to={link?.path}
+              >
+                {link?.label}
+              </StyledLink>
             ))}
           </div>
         </Box>

@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { Box, Container, Button } from "@mui/material";
-import {  Dark, Secondary } from "../../utils";
+import { Dark, Secondary } from "../../utils";
 export const Input = styled("input")({
-  width: "300px",
+  // width: "300px",
   maxWidth: "100%",
   color: "#444",
   background: " #fff",
@@ -13,11 +13,11 @@ export const Input = styled("input")({
     marginRight: " 20px",
     border: "none",
     background: "#084cdf",
-    padding: "10px 15px",
     borderRadius: "8px",
     color: "#fff",
     cursor: "pointer",
     height: "2rem",
+    padding: "10px 20px",
     transition: "background .2s ease-in-out",
   },
   " &:hover": {
@@ -26,63 +26,18 @@ export const Input = styled("input")({
   },
 });
 
-interface AddNewProps {
-  onDelete: () => void;
-}
-export const AddNew = ({ onDelete }: AddNewProps) => {
-  const handleDelete = () => {
-    onDelete();
-  };
+export const AddNew = () => {
   return (
-    <Container>
-      <Box
-        mt={2}
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: {
-            xl: "row",
-            lg: "row",
-            md: "row",
-            sm: "column",
-            xs: "column",
-          },
-        }}
-      >
-        <Box mr={3}>
-          <Input type="file" accept="image/*" />
-        </Box>
-        <Box sx={{ display: "flex", gap: "1rem" }}>
-          <Button
-            variant="outlined"
-            sx={{
-              color: "white",
-              backgroundColor: Secondary,
-              "&:hover": {
-                backgroundColor: Dark,
-                color: "white",
-              },
-            }}
-          >
-            View
-          </Button>
-          <Button
-            variant="outlined"
-            sx={{
-              color: "white",
-              backgroundColor: Secondary,
-              "&:hover": {
-                backgroundColor: Dark,
-                color: "white",
-              },
-            }}
-            onClick={() => handleDelete()}
-          >
-            Delete
-          </Button>
-        </Box>
+    <Box mt={2}>
+      <Box mr={3}>
+        <Input
+          style={{
+            width: "100%",
+          }}
+          type="file"
+          accept="image/*"
+        />
       </Box>
-    </Container>
+    </Box>
   );
 };

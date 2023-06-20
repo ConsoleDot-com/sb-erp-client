@@ -1,10 +1,13 @@
 import styled from "@emotion/styled";
-import { Container, Box } from "@mui/material";
+import { Container, Box, Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
-import { Dark, Primary, Secondary } from "../../utils";
+import { Dark, H1, Primary, Secondary } from "../../utils";
+import { Layout } from "../Layout/Layout";
+import { useNavigate } from "react-router-dom";
+
 const columns: GridColDef[] = [
   {
     field: "id",
@@ -89,14 +92,14 @@ const CssTextField = styled(TextField)({
     color: "white",
   },
   "& .MuiInput-underline:after": {
-    borderBottomColor: "#B2BAC2",
+    borderBottomColor: "#26255f",
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: "#E0E3E7",
+      borderColor: "#26255f",
     },
     "&:hover fieldset": {
-      borderColor: "#B2BAC2",
+      borderColor: "#26255f",
     },
     "&.Mui-focused fieldset": {
       borderColor: Dark,
@@ -107,74 +110,98 @@ const CssTextField = styled(TextField)({
   },
 });
 export const CustomerData = () => {
+  let navigate = useNavigate();
+  const routeChange = () => {
+    let path = `/uploadData`;
+    navigate(path);
+  };
   return (
-    <Box>
-      <Container>
-        <Box
-          mt={3}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-around",
-            border: "1px solid #ddd",
-            backgroundColor: Primary,
-            borderRadius: "8px",
-            color: "white",
-            height: "5rem",
-            maxHeight: "7rem",
-          }}
-        >
-          <Stack spacing={2} sx={{ width: 300 }}>
-            <Autocomplete
-              freeSolo
-              id="free-solo-2-demo"
-              disableClearable
-              options={rows.map((option) => option.name)}
-              renderInput={(params) => (
-                <CssTextField
-                  {...params}
-                  label="Search input"
-                  InputLabelProps={{
-                    style: {
-                      color: 'white',
-                      fontSize: "16px",
-                    },
-                  }}
-                  InputProps={{
-                    ...params.InputProps,
-                    type: "search",
-                    style: {
+    <Layout>
+      <Box>
+        <Container>
+          <H1 variant="h1" sx={{ color: Dark, textAlign: "center" }}>
+            Customers Data
+          </H1>
+          <Box
+            sx={{
+              display: "flex",
+              height: "4rem",
+              justifyContent: "flex-start",
+              alignItems: "flex-end",
+              gap: "1rem",
+            }}
+          >
+            <Stack
+              spacing={2}
+              sx={{ width: "400px", maxWidth: "500px", mt: 3, mb: 2 }}
+            >
+              <Autocomplete
+                freeSolo
+                id="free-solo-2-demo"
+                disableClearable
+                options={rows.map((option) => option.name)}
+                renderInput={(params) => (
+                  <CssTextField
+                    {...params}
+                    label="Search input"
+                    InputLabelProps={{
+                      style: {
+                        color: "black",
+                      },
+                    }}
+                    InputProps={{
+                      ...params.InputProps,
+                      type: "search",
+                      style: {
+                        color: "black",
+                        backgroundColor: "white",
+                        // height: "2.5rem",
+                      },
+                    }}
+                    sx={{
                       color: "white",
-                      fontWeight: "bold",
-                      backgroundColor: Secondary,
-                      height: "3rem",
-                    },
-                  }}
-                  sx={{
-                    color: "white",
-                  }}
-                />
-              )}
-            />
-          </Stack>
-        </Box>
 
-        <Box mt={5}>
-          <div style={{ height: 400, width: "100%" }}>
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              initialState={{
-                pagination: {
-                  paginationModel: { page: 0, pageSize: 5 },
+                      height: "2rem",
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      alignItems: "center",
+                    }}
+                  />
+                )}
+              />
+            </Stack>
+            <Button
+              sx={{
+                backgroundColor: "#26255f",
+                color: "white",
+                padding: "10px 20px",
+                "&:hover": {
+                  bgcolor: Dark,
                 },
               }}
-              pageSizeOptions={[5, 10]}
-              checkboxSelection
-            />
-          </div>
-        </Box>
-      </Container>
-    </Box>
+              onClick={routeChange}
+            >
+              New
+            </Button>
+          </Box>
+          <Box mt={5}>
+            <div style={{ height: 400, width: "100%" }}>
+              <DataGrid
+                sx={{ border: "1px solid black" }}
+                rows={rows}
+                columns={columns}
+                initialState={{
+                  pagination: {
+                    paginationModel: { page: 0, pageSize: 5 },
+                  },
+                }}
+                pageSizeOptions={[5, 10]}
+                checkboxSelection
+              />
+            </div>
+          </Box>
+        </Container>
+      </Box>
+    </Layout>
   );
 };
