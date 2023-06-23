@@ -70,11 +70,6 @@ export const SideNav = ({ role }: any) => {
   // make the nav disappear on click
   useEffect(() => {
     const handleOutsideClick = (event: any) => {
-      console.log(event.clientX, "event");
-      console.log(event.clientY, "event");
-
-      console.log(sideNavRef, "side nav ref");
-      console.log(event.target, "event targeyt");
 
       if (event.clientX > 300) {
         setIsOpen(false);

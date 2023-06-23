@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import { Box, Container, Button } from "@mui/material";
-import { Dark, Secondary } from "../../utils";
+import { Dark, Secondary, wallReader } from "../../utils";
+import * as xlsx from "xlsx";
+
+import { useEffect, useState } from "react";
 export const Input = styled("input")({
   // width: "300px",
   maxWidth: "100%",
@@ -31,6 +34,22 @@ export const Input = styled("input")({
 });
 
 export const AddNew = () => {
+const [file , setFile]= useState<any>(null);
+ useEffect (()=>{
+  if(file){
+    const reader= new FileReader();
+    reader.onload=(e : any)=>{
+      const data= e.target.result;
+      const workbook= xlsx.read(data, {type : 'array'});
+      const sheetName= workbook.SheetNames[0];
+      const worksheet= workbook.Sheets[sheetName];
+     const floorData = xlsx.utils.sheet_to_json(worksheet);
+     wallReader(floorData);
+
+    }
+    reader.readAsArrayBuffer(file);
+  }
+ }, [file])
   return (
     <Box mt={2}>
       <Box mr={3}>
@@ -38,9 +57,11 @@ export const AddNew = () => {
           style={{
             width: "100%",
             padding: "10px 10px",
+
           }}
           type="file"
-          accept="image/*"
+          // accept="image/*"
+          onChange={(e : any)=> setFile(e.target.files[0])}
         />
       </Box>
     </Box>
