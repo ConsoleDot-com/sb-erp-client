@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Box, Container, Button } from "@mui/material";
-import { Dark, Secondary, wallReader } from "../../utils";
+import { Dark, Secondary, foundationReader, wallReader } from "../../utils";
 import * as xlsx from "xlsx";
 
 import { useEffect, useState } from "react";
@@ -28,28 +28,36 @@ export const Input = styled("input")({
     background: "white",
   },
   " &:hover": {
-    background: '#ddd',
+    background: "#ddd",
     color: "white",
   },
 });
 
-export const AddNew = () => {
-const [file , setFile]= useState<any>(null);
- useEffect (()=>{
-  if(file){
-    const reader= new FileReader();
-    reader.onload=(e : any)=>{
-      const data= e.target.result;
-      const workbook= xlsx.read(data, {type : 'array'});
-      const sheetName= workbook.SheetNames[0];
-      const worksheet= workbook.Sheets[sheetName];
-     const floorData = xlsx.utils.sheet_to_json(worksheet);
-     wallReader(floorData);
-
+export const AddNew = ({ setData }: any) => {
+  const [file, setFile] = useState<any>(null);
+  const[fileName , setFileName]=useState("")
+  useEffect(() => {
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const data = e.target.result;
+        const workbook = xlsx.read(data, { type: "array" });
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
+        const floorData = xlsx.utils.sheet_to_json(worksheet);
+        if( fileName.split(".")[0] == "GroundFloor" ||  fileName.split(".")[0] == "SecondFloor" || fileName.split(".")[0] == "FirstFloor"){
+        setData({ ...wallReader(floorData) });
+        }
+        else if (fileName.split(".")[0]=="Foundation"){
+          setData({ ...foundationReader(floorData) });
+        }else{
+          alert("wrong input");
+        }
+      };
+      reader.readAsArrayBuffer(file);
     }
-    reader.readAsArrayBuffer(file);
-  }
- }, [file])
+  }, [file]);
+  
   return (
     <Box mt={2}>
       <Box mr={3}>
@@ -57,11 +65,10 @@ const [file , setFile]= useState<any>(null);
           style={{
             width: "100%",
             padding: "10px 10px",
-
           }}
           type="file"
           // accept="image/*"
-          onChange={(e : any)=> setFile(e.target.files[0])}
+          onChange={(e: any) => {setFile(e.target.files[0] );  setFileName(e.target.files[0].name)}}
         />
       </Box>
     </Box>

@@ -1,14 +1,20 @@
 import { Box, Container, Button } from "@mui/material";
 import { AddNew } from "../AddNew";
 import { useState } from "react";
-
+import Dialog from "@mui/material/Dialog";
 import { Dark, H1, Secondary } from "../../utils";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../Layout/Layout";
+import { FileViewDialog } from "../FileViewDialog";
+import { TransitionProps } from "@mui/material/transitions";
+import React from "react";
+import Slide from "@mui/material/Slide";
 
 export const UploadFile = () => {
   const { t } = useTranslation();
+  const [open, setOpen] = useState(false);
   const [addComponent, setAddComponent] = useState<any[]>([]);
+  const [data, setData] = useState<any>({});
   // calling function onDelete and splicing it with 1
   const onDelete = (index: number) => {
     const newState = [...addComponent];
@@ -20,9 +26,20 @@ export const UploadFile = () => {
 
   const addNewComponent = () => {
     // every time on click to add adding a component to the state and displaying it using map in template
-    let tempComponent = <AddNew />;
-    setAddComponent((addComponent) => [...addComponent, tempComponent]);
+    setAddComponent((addComponent) => [
+      ...addComponent,
+      <AddNew setData={setData} />,
+    ]);
   };
+
+  const Transition = React.forwardRef(function Transition(
+    props: TransitionProps & {
+      children: React.ReactElement;
+    },
+    ref: React.Ref<unknown>
+  ) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
   return (
     <Layout>
       <Box>
@@ -57,7 +74,7 @@ export const UploadFile = () => {
                   },
                 }}
               >
-                <AddNew />
+                <AddNew setData={setData} />
               </Box>
               <Box
                 sx={{
@@ -83,10 +100,12 @@ export const UploadFile = () => {
                       bgcolor: Dark,
                     },
                   }}
+                  onClick={() => setOpen(true)}
                 >
                   {t("View")}
                 </Button>
-                <Button
+                
+                {addComponent.length > 0 && ( <Button
                   variant="outlined"
                   sx={{
                     backgroundColor: "#26255f",
@@ -97,8 +116,8 @@ export const UploadFile = () => {
                     },
                   }}
                 >
-                  {t("Delete")}
-                </Button>
+                 {t("Delete")} 
+                </Button>)}
               </Box>
             </Box>
             {/* compnents are being maped here */}
@@ -157,6 +176,7 @@ export const UploadFile = () => {
                           bgcolor: Dark,
                         },
                       }}
+                      onClick={() => setOpen(true)}
                     >
                       {t("    View")}
                     </Button>
@@ -215,6 +235,14 @@ export const UploadFile = () => {
           </Box>
         </Container>
       </Box>
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={() => setOpen(false)}
+        // TransitionComponent={Transition}
+      >
+        <FileViewDialog data={data} close={() => setOpen(false)} />
+      </Dialog>
     </Layout>
   );
 };
