@@ -162,42 +162,9 @@ const foundationReader = (data: any[]): any => {
     console.log(totalWall, "Wall", char);
     console.log(totalStepHeight, "Step", char);
     console.log(totalPcc, "PCC", char);
-    console.log(totalHeight, "Height", char);
+    console.log(totalHeight, "wall cft", char);
   });
   section = Object.keys(dataValues);
-  // for (let i = 0; i <= charIndex; i++) {
-  //   section.map((index: any) => {
-  //     if (index === chars[i]) {
-  //       let len: any = 0;
-  //       let height: any = 0;
-  //       let stepHeight: any = 1;
-  //       let sqft: any = 0;
-  //       dataValues[index].map((item: any) => {
-  //         if (item?.Layer === `Wall${index}`) {
-  //           const infeet = formatToFeet(item?.Length, false);
-  //           len += infeet;
-  //         }
-  //         if (item?.Layer === `Height${index}`) {
-  //           height = formatToFeet(item?.Length, false);
-  //         }
-  //         if(item?.Layer === `Step${index}` && item.Length === "0'-3\""){
-  //           stepHeight = 0.25;
-  //         }
-  //         if(item?.Layer === `Step${index}` && item.Length === "0'-6\""){
-  //           stepHeight = 0.5;
-  //         }
-  //         if (
-  //           item?.Layer === `Step${index}` &&
-  //           item.Length != "0'-3\"" &&
-  //           item.Length != "0'-6\""
-  //         ) {
-  //           sqft=stepHeight*formatToFeet(item?.Length, false);
-  //         }
-  //       });
-  //       console.log(len, `length${index}`)
-  //     }
-  //   });
-  // }
 };
 
 const getTotal = (data: any[], title: string): number => {
