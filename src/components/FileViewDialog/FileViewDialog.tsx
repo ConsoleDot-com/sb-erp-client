@@ -47,7 +47,7 @@ export const FileViewDialog = ({close, data}: any) =>{
     createData(1, 'Sand',"No's", Math.ceil(data?.sand)||0, 37, 4.3),
     createData(1, 'Cement', "No's", Math.ceil(data?.cement)||0, 24, 6.0),
     createData(1, 'Crush', "No's", 3.7, 67, 4.3),
-    createData(1, 'Bajar', "No's", 16.0, 49, 3.9),
+    createData(1, 'Bajar', "No's", Math.ceil(data?.bajar)||0, 49, 3.9),
     createData(1, 'Ghausa', "No's", 16.0, 49, 3.9),
     createData(1, 'Steel', "No's", 16.0, 49, 3.9),
     createData(1, 'Membrane Sheet',"No's", 16.0, 49, 3.9)

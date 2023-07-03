@@ -46,10 +46,10 @@ export const AddNew = ({ setData }: any) => {
         const worksheet = workbook.Sheets[sheetName];
         const floorData = xlsx.utils.sheet_to_json(worksheet);
         if( fileName.split(".")[0] == "GroundFloor" ||  fileName.split(".")[0] == "SecondFloor" || fileName.split(".")[0] == "FirstFloor"){
-        setData({ ...wallReader(floorData) });
+        setData({ ...wallReader(floorData, fileName.split(".")[0])} );
         }
         else if (fileName.split(".")[0]=="Foundation"){
-          setData({ ...foundationReader(floorData) });
+          setData({ ...foundationReader(floorData, fileName.split(".")[0]) });
         }else{
           alert("wrong input");
         }
