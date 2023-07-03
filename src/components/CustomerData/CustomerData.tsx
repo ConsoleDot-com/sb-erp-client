@@ -93,7 +93,6 @@ const Select = styled.select`
   border: none;
   background-color: transparent;
   color: white;
-  width: 5rem;
   outline: none;
   position: relative;
   & option {
@@ -153,15 +152,12 @@ export const CustomerData = () => {
             sx={{
               display: "flex",
               height: "4rem",
-              justifyContent: "flex-start",
+              justifyContent: "space-between",
               alignItems: "flex-end",
               gap: "1rem",
             }}
           >
-            <Stack
-              spacing={2}
-              sx={{ width: "400px", maxWidth: "500px", mt: 3, mb: 2 }}
-            >
+            <Stack spacing={2} sx={{ width: "100%", mt: 3, mb: 2 }}>
               <Autocomplete
                 freeSolo
                 id="free-solo-2-demo"
@@ -202,18 +198,24 @@ export const CustomerData = () => {
               sx={{
                 backgroundColor: "#26255f",
                 color: "white",
-                padding: "10px 10px",
+                padding: "10px 0px",
+                width: "30%",
+                fontSize: "14px",
                 "&:hover": {
                   bgcolor: Dark,
                 },
               }}
               // onClick={routeChange}
             >
-              <Select value={selectedValue} onChange={handleSelectChange}>
-                <option value="volvo" selected>
-                  Select
+              <Select
+                value={selectedValue}
+                onChange={handleSelectChange}
+                style={{ width: "100%",fontSize:"16px", padding:"4px 10px", alignItems:"center" }}
+              >
+                <option value="volvo" selected >
+                  Add New
                 </option>
-                <option value="auto">Auto</option>
+                <option value="auto" >Auto</option>
                 <option value="manual">Manual</option>
               </Select>
             </Button>
@@ -221,7 +223,7 @@ export const CustomerData = () => {
           <Box mt={5}>
             <div style={{ height: 400, width: "100%" }}>
               <DataGrid
-                sx={{ border: "1px solid black" }}
+                sx={{ border: "1px solid black" ,}}
                 rows={rows}
                 columns={columns}
                 initialState={{

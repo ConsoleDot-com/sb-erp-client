@@ -11,6 +11,8 @@ import React from "react";
 import Slide from "@mui/material/Slide";
 
 export const UploadFile = () => {
+  const [isFileUploaded, setIsFileUploaded] = useState<any>(false);
+  console.log(isFileUploaded, "file");
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [addComponent, setAddComponent] = useState<any[]>([]);
@@ -46,11 +48,17 @@ export const UploadFile = () => {
   const addNewComponent = () => {
     // every time on click to add adding a component to the state and displaying it using map in template
     const temp = [...addComponent];
-    temp.push(<AddNew setDataValue={setDataValue} index={currIndex} />);
+    temp.push(
+      <AddNew
+        setDataValue={setDataValue}
+        index={currIndex}
+        setIsFileUploaded={setIsFileUploaded}
+      />
+    );
     setAddComponent([...temp]);
     // setAddComponent((prevValue) => [
     //   ...prevValue,
-    //   <AddNew setData={setData} />,
+    //   <AddNew setData={setData} setIsFileUploaded={setIsFileUploaded}/>,
     // ]);
   };
 
@@ -83,6 +91,7 @@ export const UploadFile = () => {
                   sm: "column",
                   xs: "column",
                 },
+                rowGap: "16px",
               }}
             >
               <Box
@@ -96,7 +105,11 @@ export const UploadFile = () => {
                   },
                 }}
               >
-                <AddNew setDataValue={setDataValue} index={currIndex} />
+                <AddNew
+                  setDataValue={setDataValue}
+                  index={currIndex}
+                  setIsFileUploaded={setIsFileUploaded}
+                />
               </Box>
               <Box
                 sx={{
@@ -112,25 +125,27 @@ export const UploadFile = () => {
                   justifyContent: "flex-end",
                 }}
               >
-                <Button
-                  variant="outlined"
-                  sx={{
-                    backgroundColor: "#26255f",
-                    color: "white",
-                    padding: "10px 20px",
-                    "&:hover": {
-                      bgcolor: Dark,
-                    },
-                  }}
-                  onClick={() => {
-                    setDisplayIndex(0);
-                    setOpen(true);
-                  }}
-                >
-                  {t("View")}
-                </Button>
+                {isFileUploaded && (
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      backgroundColor: "#26255f",
+                      color: "white",
+                      padding: "10px 20px",
+                      "&:hover": {
+                        bgcolor: Dark,
+                      },
+                    }}
+                    onClick={() => {
+                      setDisplayIndex(0);
+                      setOpen(true);
+                    }}
+                  >
+                    {t("View")}
+                  </Button>
+                )}
 
-                {addComponent.length > 0 && (
+                {isFileUploaded && (
                   <Button
                     variant="outlined"
                     sx={{
@@ -163,6 +178,7 @@ export const UploadFile = () => {
                       sm: "column",
                       xs: "column",
                     },
+                    rowGap: "16px",
                   }}
                 >
                   <Box
@@ -193,42 +209,60 @@ export const UploadFile = () => {
                       justifyContent: "flex-end",
                     }}
                   >
-                    <Button
-                      variant="outlined"
-                      sx={{
-                        backgroundColor: "#26255f",
-                        color: "white",
-                        padding: "10px 20px",
-                        "&:hover": {
-                          bgcolor: Dark,
-                        },
-                      }}
-                      onClick={() => {
-                        setDisplayIndex(index + 1);
-                        setOpen(true);
-                      }}
-                    >
-                      {t("    View")}
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      sx={{
-                        backgroundColor: "#26255f",
-                        color: "white",
-                        padding: "10px 20px",
-                        "&:hover": {
-                          bgcolor: Dark,
-                        },
-                      }}
-                      onClick={() => onDelete(index)}
-                    >
-                      {t("  Delete")}
-                    </Button>
+                    {isFileUploaded && (
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          backgroundColor: "#26255f",
+                          color: "white",
+                          padding: "10px 20px",
+                          "&:hover": {
+                            bgcolor: Dark,
+                          },
+                        }}
+                        onClick={() => {
+                          setDisplayIndex(index + 1);
+                          setOpen(true);
+                        }}
+                      >
+                        {t("    View")}
+                      </Button>
+                    )}
+                    {isFileUploaded && (
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          backgroundColor: "#26255f",
+                          color: "white",
+                          padding: "10px 20px",
+                          "&:hover": {
+                            bgcolor: Dark,
+                          },
+                        }}
+                        onClick={() => onDelete(index)}
+                      >
+                        {t("  Delete")}
+                      </Button>
+                    )}
                   </Box>
                 </Box>
               </>
             ))}
-            <Box sx={{ width: "100%", display: "flex", gap: "1rem" }}>
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                gap: "1rem",
+                marginBottom: "16px",
+                justifyContent: {
+                  xl: "flex-start",
+                  lg: "flex-start",
+                  md: "flex-start",
+                  sm: "center",
+                  xs: "center",
+                },
+              }}
+            >
               <Button
                 sx={{
                   mt: 3,

@@ -4,6 +4,8 @@ import { Dark, Secondary, foundationReader, wallReader } from "../../utils";
 import * as xlsx from "xlsx";
 
 import { useEffect, useState } from "react";
+import { UploadFile } from "../UploadFile";
+import { AnyMxRecord } from "dns";
 export const Input = styled("input")({
   // width: "300px",
   maxWidth: "100%",
@@ -33,7 +35,7 @@ export const Input = styled("input")({
   },
 });
 
-export const AddNew = ({ index, setDataValue }: any) => {
+export const AddNew = ({ index, setDataValue, setIsFileUploaded }: any) => {
   const [file, setFile] = useState<any>(null);
   const [fileName, setFileName] = useState("");
   useEffect(() => {
@@ -62,6 +64,10 @@ export const AddNew = ({ index, setDataValue }: any) => {
           });
         } else {
           alert("wrong input");
+        }
+        console.log(floorData.length, "floorData.length")
+        if(floorData.length>0){
+          setIsFileUploaded(true);
         }
       };
       reader.readAsArrayBuffer(file);
