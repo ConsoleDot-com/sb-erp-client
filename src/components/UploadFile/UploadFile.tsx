@@ -17,6 +17,8 @@ export const UploadFile = () => {
   const [open, setOpen] = useState(false);
   const [addComponent, setAddComponent] = useState<any[]>([]);
   const [data, setData] = useState<any>({});
+  const [currIndex, setCurrIndex] = useState<number>(0);
+  const [displayIndex, setDisplayIndex] = useState<number>(0);
   // calling function onDelete and splicing it with 1
   const onDelete = (index: number) => {
     const newState = [...addComponent];
@@ -25,23 +27,43 @@ export const UploadFile = () => {
 
     setAddComponent(newState);
   };
+  const [myDataArr, setMyDataArr] = useState<any[]>([]);
+  const setDataValue = (index: number, data: any) => {
+    let temp: any[];
+    if (index < myDataArr.length - 1) {
+      temp = [
+        ...myDataArr.slice(0, index),
+        data,
+        ...myDataArr.slice(index + 1, myDataArr.length - 1),
+      ];
+    } else {
+      temp = [...myDataArr];
+      temp.push(data);
+    }
+    setMyDataArr([...temp]);
+    setCurrIndex(currIndex + 1);
+    console.log([...myDataArr], currIndex, "debug");
+  };
 
   const addNewComponent = () => {
     // every time on click to add adding a component to the state and displaying it using map in template
-    setAddComponent((addComponent) => [
-      ...addComponent,
-      <AddNew setData={setData} setIsFileUploaded={setIsFileUploaded}/>,
-    ]);
+    const temp = [...addComponent];
+    temp.push(<AddNew setDataValue={setDataValue} index={currIndex} setIsFileUploaded={setIsFileUploaded} />);
+    setAddComponent([...temp]);
+    // setAddComponent((prevValue) => [
+    //   ...prevValue,
+    //   <AddNew setData={setData} setIsFileUploaded={setIsFileUploaded}/>,
+    // ]);
   };
-  console.log(isFileUploaded,"isFileUploaded")
-  const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & {
-      children: React.ReactElement;
-    },
-    ref: React.Ref<unknown>
-  ) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
+
+  // const Transition = React.forwardRef(function Transition(
+  //   props: TransitionProps & {
+  //     children: React.ReactElement;
+  //   },
+  //   ref: React.Ref<unknown>
+  // ) {
+  //   return <Slide direction="up" ref={ref} {...props} />;
+  // });
   return (
     <Layout>
       <Box>
@@ -77,7 +99,7 @@ export const UploadFile = () => {
                   },
                 }}
               >
-                <AddNew setData={setData} setIsFileUploaded={setIsFileUploaded}/>
+                <AddNew setDataValue={setDataValue} index={currIndex} setIsFileUploaded={setIsFileUploaded}/>
               </Box>
               <Box
                 sx={{
@@ -103,10 +125,13 @@ export const UploadFile = () => {
                       bgcolor: Dark,
                     },
                   }}
-                  onClick={() => setOpen(true)}
+                  onClick={() => {
+                    setDisplayIndex(0);
+                    setOpen(true);
+                  }}
                 >
                   {t("View")}
-                </Button>)}
+                </Button>
 
                 {isFileUploaded && (
                   <Button
@@ -182,7 +207,10 @@ export const UploadFile = () => {
                           bgcolor: Dark,
                         },
                       }}
-                      onClick={() => setOpen(true)}
+                      onClick={() => {
+                        setDisplayIndex(index + 1);
+                        setOpen(true);
+                      }}
                     >
                       {t("    View")}
                     </Button>)}
@@ -261,7 +289,10 @@ export const UploadFile = () => {
         onClose={() => setOpen(false)}
         // TransitionComponent={Transition}
       >
-        <FileViewDialog data={data} close={() => setOpen(false)} />
+        <FileViewDialog
+          data={myDataArr[displayIndex]}
+          close={() => setOpen(false)}
+        />
       </Dialog>
     </Layout>
   );

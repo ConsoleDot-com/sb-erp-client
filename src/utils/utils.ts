@@ -36,22 +36,55 @@ const dryMaterial = (totalcft: number): number => {
 };
 
 const calculateSandCft = (
-  sandportion: number,
-  cementportion: number,
+  sandPortion: number,
+  cementPortion: number,
   drymaterial: number
 ): number => {
-  const totalportion = sandportion + cementportion;
-  return (sandportion / totalportion) * drymaterial;
+  const totalPortion = sandPortion + cementPortion;
+  return (sandPortion / totalPortion) * drymaterial;
 };
 
 const calculateCementBags = (
-  sandportion: number,
-  cementportion: number,
+  sandPortion: number,
+  cementPortion: number,
   drymaterial: number
 ): number => {
-  const totalportion = sandportion + cementportion;
-  const cementCft = (cementportion / totalportion) * drymaterial;
+  const totalPortion = sandPortion + cementPortion;
+  const cementCft = (cementPortion / totalPortion) * drymaterial;
   return cementCft * 1.25;
+};
+
+const calculateSandCft3 = (
+  sandPortion: number,
+  cementPortion: number,
+  thirdPortion: number,
+  drymaterial: number
+): number => {
+  const totalPortion = sandPortion + cementPortion + thirdPortion;
+  return (sandPortion / totalPortion) * drymaterial;
+};
+
+const calculateCementBags3 = (
+  sandPortion: number,
+  cementPortion: number,
+  thirdPortion: number,
+  drymaterial: number
+): number => {
+  const totalPortion = sandPortion + cementPortion + thirdPortion;
+  const cementCft = (cementPortion / totalPortion) * drymaterial;
+  console.log(cementCft, "cementCft");
+  return cementCft * 1.25;
+};
+const calculateBajarCft3 = (
+  sandPortion: number,
+  cementPortion: number,
+  thirdPortion: number,
+  drymaterial: number
+): number => {
+  const totalPortion = sandPortion + cementPortion + thirdPortion;
+  console.log((thirdPortion / totalPortion) * drymaterial, "bajar Cft");
+
+  return (thirdPortion / totalPortion) * drymaterial;
 };
 
 const foundationReader = (data: any[]): any => {
@@ -103,7 +136,6 @@ const foundationReader = (data: any[]): any => {
   );
 
   const dataValues: any = {};
-  let section: any[] = [];
   data.forEach((i: any) => {
     for (let index = 0; index <= charIndex; index++) {
       if (
@@ -120,16 +152,19 @@ const foundationReader = (data: any[]): any => {
       }
     }
   });
+  let totalStepCft: any = 0;
+  let totalPccCft: any = 0;
+  let totalWallCft: any = 0;
   Object.keys(dataValues).map((char) => {
-    let totalWall = 0;
-    let totalStepHeight = 0;
-    let totalPcc = 0;
-    let totalHeight = 0;
+    let stepWallLength = 0;
+    let stepCft = 0;
+    let pccCft = 0;
+    let foundationWallCft = 0;
     let is3 = false;
     let is6 = false;
     dataValues[char].map((i: any) => {
       if (i?.Layer.includes("Wall"))
-        totalWall += formatToFeet(i?.Length, false);
+        stepWallLength += formatToFeet(i?.Length, false);
     });
     dataValues[char].map((i: any) => {
       if (i?.Layer.includes("Step") && i?.Length === "0'-6\"") is6 = true;
@@ -141,30 +176,52 @@ const foundationReader = (data: any[]): any => {
         i?.Length !== "0'-6\"" &&
         i?.Length !== "0'-3\""
       ) {
-        totalStepHeight +=
+        stepCft +=
           formatToFeet(i?.Length, false) *
           (is3 ? 0.25 : is6 ? 0.5 : 0) *
-          totalWall;
+          stepWallLength;
       }
     });
     dataValues[char].map((i: any) => {
       if (i?.Layer.includes("P.c.c")) {
-        totalPcc += formatToFeet(i?.Length, false) * 0.5 * totalWall;
+        pccCft += formatToFeet(i?.Length, false) * 0.5 * stepWallLength;
       }
     });
     dataValues[char].map((i: any) => {
       if (i?.Layer.includes("Height")) {
-        totalHeight += formatToFeet(i?.Length, false) * 0.75 * totalWall;
+        foundationWallCft +=
+          formatToFeet(i?.Length, false) * 0.75 * stepWallLength;
       }
     });
     is3 = false;
     is6 = false;
-    console.log(totalWall, "Wall", char);
-    console.log(totalStepHeight, "Step", char);
-    console.log(totalPcc, "PCC", char);
-    console.log(totalHeight, "wall cft", char);
+
+    console.log(stepCft, "Step", char);
+    console.log(pccCft, "PCC", char);
+    console.log(foundationWallCft, "Height", char);
+    console.log("--------------------------");
+
+    totalStepCft += stepCft;
+    totalPccCft += pccCft;
+    totalWallCft += foundationWallCft;
+
+    console.log(totalStepCft, " step height");
+    console.log(totalPccCft, "total pcc");
+    console.log(totalWallCft, "totalWallCft");
+    console.log("*********************");
   });
-  section = Object.keys(dataValues);
+  const finalCft = totalStepCft + totalWallCft;
+  const foundationDryQuantity = dryMaterial(finalCft);
+  const bricks = calculateBricks(finalCft);
+  const sand = calculateSandCft3(1, 4, 5, foundationDryQuantity);
+  const cement = calculateCementBags3(1, 4, 5, foundationDryQuantity);
+  const bajar = calculateBajarCft3(1, 4, 5, foundationDryQuantity);
+    return {
+      bricks,
+      sand,
+      cement,
+      bajar
+    };
 };
 
 const getTotal = (data: any[], title: string): number => {
@@ -252,12 +309,11 @@ const wallReader = (data: any[]): any => {
   const bricks = calculateBricks(finalCft);
   const sand = calculateSandCft(1, 4, dryQuantity);
   const cement = calculateCementBags(1, 4, dryQuantity);
-
-  return {
-    bricks,
-    sand,
-    cement,
-  };
+    return {
+      bricks,
+      sand,
+      cement,
+    };
 };
 
 export { wallReader, foundationReader };
