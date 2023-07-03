@@ -87,7 +87,7 @@ const calculateBajarCft3 = (
   return (thirdPortion / totalPortion) * drymaterial;
 };
 
-const foundationReader = (data: any[], fileName: any): any => {
+const foundationReader = (data: any[]): any => {
   const chars = [
     "A",
     "B",
@@ -216,14 +216,12 @@ const foundationReader = (data: any[], fileName: any): any => {
   const sand = calculateSandCft3(1, 4, 5, foundationDryQuantity);
   const cement = calculateCementBags3(1, 4, 5, foundationDryQuantity);
   const bajar = calculateBajarCft3(1, 4, 5, foundationDryQuantity);
-  if (fileName === "Foundation") {
     return {
       bricks,
       sand,
       cement,
       bajar
     };
-  }
 };
 
 const getTotal = (data: any[], title: string): number => {
@@ -241,7 +239,7 @@ const doorWindowCFT = (data: any[], thickness: number): number => {
   return cft;
 };
 
-const wallReader = (data: any[], fileName: any): any => {
+const wallReader = (data: any[]): any => {
   const wall9Data: any[] = [];
   const wall4Data: any[] = [];
   const wallHeight: any[] = [];
@@ -311,13 +309,11 @@ const wallReader = (data: any[], fileName: any): any => {
   const bricks = calculateBricks(finalCft);
   const sand = calculateSandCft(1, 4, dryQuantity);
   const cement = calculateCementBags(1, 4, dryQuantity);
-  if (fileName === "GroundFloor") {
     return {
       bricks,
       sand,
       cement,
     };
-  }
 };
 
 export { wallReader, foundationReader };

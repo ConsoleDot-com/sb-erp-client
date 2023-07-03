@@ -33,9 +33,9 @@ export const Input = styled("input")({
   },
 });
 
-export const AddNew = ({ setData }: any) => {
+export const AddNew = ({ index, setDataValue }: any) => {
   const [file, setFile] = useState<any>(null);
-  const[fileName , setFileName]=useState("")
+  const [fileName, setFileName] = useState("");
   useEffect(() => {
     if (file) {
       const reader = new FileReader();
@@ -45,19 +45,29 @@ export const AddNew = ({ setData }: any) => {
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
         const floorData = xlsx.utils.sheet_to_json(worksheet);
-        if( fileName.split(".")[0] == "GroundFloor" ||  fileName.split(".")[0] == "SecondFloor" || fileName.split(".")[0] == "FirstFloor"){
-        setData({ ...wallReader(floorData, fileName.split(".")[0])} );
-        }
-        else if (fileName.split(".")[0]=="Foundation"){
-          setData({ ...foundationReader(floorData, fileName.split(".")[0]) });
-        }else{
+        if (
+          fileName.split(".")[0] == "GroundFloor" ||
+          fileName.split(".")[0] == "SecondFloor" ||
+          fileName.split(".")[0] == "FirstFloor"
+        ) {
+          // setData({ ...wallReader(floorData) });
+          setDataValue(index, {
+            ...wallReader(floorData),
+          });
+
+        } else if (fileName.split(".")[0] == "Foundation") {
+          // setData({ ...foundationReader(floorData) });
+          setDataValue(index, {
+            ...foundationReader(floorData),
+          });
+        } else {
           alert("wrong input");
         }
       };
       reader.readAsArrayBuffer(file);
     }
   }, [file]);
-  
+
   return (
     <Box mt={2}>
       <Box mr={3}>
@@ -68,7 +78,10 @@ export const AddNew = ({ setData }: any) => {
           }}
           type="file"
           // accept="image/*"
-          onChange={(e: any) => {setFile(e.target.files[0] );  setFileName(e.target.files[0].name)}}
+          onChange={(e: any) => {
+            setFile(e.target.files[0]);
+            setFileName(e.target.files[0].name);
+          }}
         />
       </Box>
     </Box>
