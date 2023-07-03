@@ -4,6 +4,8 @@ import { Dark, Secondary, foundationReader, wallReader } from "../../utils";
 import * as xlsx from "xlsx";
 
 import { useEffect, useState } from "react";
+import { UploadFile } from "../UploadFile";
+import { AnyMxRecord } from "dns";
 export const Input = styled("input")({
   // width: "300px",
   maxWidth: "100%",
@@ -33,9 +35,11 @@ export const Input = styled("input")({
   },
 });
 
-export const AddNew = ({ setData }: any) => {
+export const AddNew = ({ setData, setIsFileUploaded }: any) => {
   const [file, setFile] = useState<any>(null);
-  const[fileName , setFileName]=useState("")
+  const[fileName , setFileName]=useState("");
+
+
   useEffect(() => {
     if (file) {
       const reader = new FileReader();
@@ -46,17 +50,22 @@ export const AddNew = ({ setData }: any) => {
         const worksheet = workbook.Sheets[sheetName];
         const floorData = xlsx.utils.sheet_to_json(worksheet);
         if( fileName.split(".")[0] == "GroundFloor" ||  fileName.split(".")[0] == "SecondFloor" || fileName.split(".")[0] == "FirstFloor"){
-        setData({ ...wallReader(floorData) });
+          setData({ ...wallReader(floorData) });
         }
         else if (fileName.split(".")[0]=="Foundation"){
           setData({ ...foundationReader(floorData) });
         }else{
           alert("wrong input");
         }
+        console.log(floorData.length, "floorData.length")
+        if(floorData.length>0){
+          setIsFileUploaded(true);
+        }
       };
       reader.readAsArrayBuffer(file);
     }
   }, [file]);
+
   
   return (
     <Box mt={2}>
