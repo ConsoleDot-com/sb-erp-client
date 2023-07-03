@@ -93,7 +93,6 @@ const Select = styled.select`
   border: none;
   background-color: transparent;
   color: white;
-  width: 5rem;
   outline: none;
   position: relative;
   & option {
@@ -224,7 +223,7 @@ export const CustomerData = () => {
           <Box mt={5}>
             <div style={{ height: 400, width: "100%" }}>
               <DataGrid
-                sx={{ border: "1px solid black" }}
+                sx={{ border: "1px solid black" ,}}
                 rows={rows}
                 columns={columns}
                 initialState={{
