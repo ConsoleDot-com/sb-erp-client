@@ -16,4 +16,11 @@ export const en = {
   New: "New",
   "Customers Data": "Customers Data",
   "Search input": "Search input",
+  'S.No':"S.No",
+  'Description':"Description",
+  'Unit':"Unit",
+  'Quantity':"Quantity",
+  'Rate':"Rate",
+  'Amount':"Amount"
+
 };
