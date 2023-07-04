@@ -1,6 +1,7 @@
 import Button from "@mui/material/Button";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
+import { useTranslation } from "react-i18next";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
@@ -11,6 +12,8 @@ import { ButtonHover, ButtonPadding, Dark } from "../../utils";
 import { Logins } from "../../assets";
 
 export const FileViewDialog = ({ close, data }: any) => {
+  
+  const { t } = useTranslation();
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: Dark,
@@ -43,14 +46,14 @@ export const FileViewDialog = ({ close, data }: any) => {
   }
 
   const rows = [
-    createData(1, "Bricks", "No's", Math.ceil(data?.bricks) || 0, 24, 4.0),
-    createData(1, "Sand", "No's", Math.ceil(data?.sand) || 0, 37, 4.3),
-    createData(1, "Cement", "No's", Math.ceil(data?.cement) || 0, 24, 6.0),
-    createData(1, "Crush", "No's", 3.7, 67, 4.3),
-    createData(1, "Bajar", "No's", Math.ceil(data?.bajar) || 0, 49, 3.9),
-    createData(1, "Ghausa", "No's", 16.0, 49, 3.9),
-    createData(1, "Steel", "No's", 16.0, 49, 3.9),
-    createData(1, "Membrane Sheet", "No's", 16.0, 49, 3.9),
+    createData(1, t("Bricks"), t("No's"), Math.ceil(data?.bricks) || 0, 24, 4.0),
+    createData(1, t("Sand"), t("CFT"), Math.ceil(data?.sand) || 0, 37, 4.3),
+    createData(1, t("Cement"), t("Bags"), Math.ceil(data?.cement) || 0, 24, 6.0),
+    createData(1, t("Crush"), t("CFT"), 3.7, 67, 4.3),
+    createData(1, t("Bajar"), t("CFT"), Math.ceil(data?.bajar) || 0, 49, 3.9),
+    createData(1, t("Ghasu"), t("CFT"), 16.0, 49, 3.9),
+    createData(1, t("Steel"), t("Kg"), 16.0, 49, 3.9),
+    createData(1, t("Membrane Sheet"), t("Sft"), 16.0, 49, 3.9),
   ];
   return (
     <div>
@@ -80,18 +83,18 @@ export const FileViewDialog = ({ close, data }: any) => {
               color: Dark,
             }}
           >
-            View Report
+            {t("View Report")}
           </Typography>
         </Box>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>S.No</StyledTableCell>
-              <StyledTableCell align="left">Description</StyledTableCell>
-              <StyledTableCell align="left">Unit</StyledTableCell>
-              <StyledTableCell align="left">Quantity</StyledTableCell>
-              <StyledTableCell align="left">Rate</StyledTableCell>
-              <StyledTableCell align="left">Amount</StyledTableCell>
+              <StyledTableCell>{t("S.No")}</StyledTableCell>
+              <StyledTableCell align="left">{t("Description")}</StyledTableCell>
+              <StyledTableCell align="left">{t("Unit")}</StyledTableCell>
+              <StyledTableCell align="left">{t("Quantity")}</StyledTableCell>
+              <StyledTableCell align="left">{t("Rate")}</StyledTableCell>
+              <StyledTableCell align="left">{t("Amount")}</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -131,7 +134,7 @@ export const FileViewDialog = ({ close, data }: any) => {
               "&:hover":ButtonHover
             }}
           >
-            Back{" "}
+            {t("BACK")}
           </Button>
           <Button
             variant="outlined"
@@ -142,7 +145,7 @@ export const FileViewDialog = ({ close, data }: any) => {
               "&:hover":ButtonHover
             }}
           >
-            Export
+            {t("EXPORT")}
           </Button>
         </Box>
       </TableContainer>

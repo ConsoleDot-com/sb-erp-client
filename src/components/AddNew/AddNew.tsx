@@ -82,6 +82,7 @@ export const AddNew = ({ index, setDataValue, setIsFileUploaded }: any) => {
           style={{
             width: "100%",
             padding: "10px 10px",
+            
           }}
           type="file"
           // accept="image/*"

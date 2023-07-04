@@ -217,10 +217,10 @@ export const CustomerData = () => {
                 style={{ width: "100%",fontSize:"16px", padding:"4px 10px", alignItems:"center" }}
               >
                 <option value="volvo" selected >
-                  Add New
+                  {t("Add New")}
                 </option>
-                <option value="auto" >Auto</option>
-                <option value="manual">Manual</option>
+                <option value="auto" >{t("Auto")}</option>
+                <option value="manual">{t("Manual")}</option>
               </Select>
             </Button>
           </Box>

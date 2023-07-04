@@ -68,11 +68,11 @@ export const UploadFile = () => {
     const newComponents = [...addComponent];
     newComponents.splice(deleteIndex, 1);
     setAddComponent(newComponents);
-  
+
     const newData = [...myDataArr];
-    newData.splice(deleteIndex+1, 1);
+    newData.splice(deleteIndex + 1, 1);
     setMyDataArr(newData);
-    console.log(newData, "new data")
+    console.log(newData, "new data");
     setDeleteIndex(-1);
   }
   const addNewComponent = () => {
@@ -109,8 +109,11 @@ export const UploadFile = () => {
             <H1 sx={{ textAlign: "center", color: Dark }}>
               {t("Upload Your File")}
             </H1>
-            <Typography sx={{textAlign:"center"}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, nulla? Suscipit eligendi fugit distinctio omnis nam libero dolorem saepe, modi eaque quasi incidunt deleniti maxime laboriosam quam ut exercitationem ducimus.
-            Enim, possimus. Quasi, debitit, consectetur repudiandae iste veritatis sapiente doloribus ad ipsa alias doloremque. Perferendis maxime delectus eaque consequatur! Temporibus aperiam corrupti voluptates eveniet explicabo officiis facilis quos ab?</Typography>
+            <Typography sx={{ textAlign: "center" }}>
+              {t(
+                "Upload only XLS files.Include accurate and complete tabular data.Use a single sheet with clear column headers.Avoid merged cells, special characters, and formulas.Check the file size (max 10 MB) and compress if needed.Remove sensitive information before uploading.Zip multiple XLS files into one, if applicable.Double-check the file's content for accuracy."
+              )}
+            </Typography>
             <Box
               sx={{
                 display: "flex",
@@ -164,7 +167,7 @@ export const UploadFile = () => {
                     sx={{
                       backgroundColor: "#26255f",
                       color: "white",
-                      padding:ButtonPadding,
+                      padding: ButtonPadding,
                       "&:hover": {
                         bgcolor: Dark,
                       },
@@ -184,7 +187,7 @@ export const UploadFile = () => {
                     sx={{
                       backgroundColor: "#26255f",
                       color: "white",
-                      padding:ButtonPadding,
+                      padding: ButtonPadding,
                       "&:hover": {
                         bgcolor: Dark,
                       },
@@ -248,7 +251,7 @@ export const UploadFile = () => {
                         sx={{
                           backgroundColor: "#26255f",
                           color: "white",
-                          padding:ButtonPadding,
+                          padding: ButtonPadding,
                           "&:hover": {
                             bgcolor: Dark,
                           },
@@ -267,7 +270,7 @@ export const UploadFile = () => {
                         sx={{
                           backgroundColor: "#26255f",
                           color: "white",
-                          padding:ButtonPadding,
+                          padding: ButtonPadding,
                           "&:hover": {
                             bgcolor: Dark,
                           },
@@ -301,7 +304,7 @@ export const UploadFile = () => {
                   mt: 3,
                   backgroundColor: "#26255f",
                   color: "white",
-                  padding:ButtonPadding,
+                  padding: ButtonPadding,
                   "&:hover": {
                     backgroundColor: Dark,
                     color: "white",
@@ -314,19 +317,18 @@ export const UploadFile = () => {
               {/* conditional rendring of button when user adds more than 1 files  */}
               {addComponent?.length > 0 && (
                 <Button
-                  onClick={() => navigate("/wholereport")}
+                  onClick={() => setReportOpen(true)}
                   sx={{
                     mt: 3,
                     backgroundColor: "#26255f",
                     color: "white",
-                    padding:ButtonPadding,
+                    padding: ButtonPadding,
 
                     "&:hover": {
                       backgroundColor: Dark,
                       color: "white",
                     },
                   }}
-                  onClickCapture={() => setReportOpen(true)}
                 >
                   {t("Whole Report")}
                 </Button>
@@ -352,7 +354,12 @@ export const UploadFile = () => {
         onClose={() => setReportOpen(false)}
         // TransitionComponent={Transition}
       >
-        <WholeReportDialog/>
+        <WholeReportDialog
+          close={() => {
+             setReportOpen(false);
+            console.log("HI");
+          }}
+        />
       </Dialog>
     </Layout>
   );

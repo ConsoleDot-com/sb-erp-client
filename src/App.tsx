@@ -13,7 +13,6 @@ function App() {
 
         <Route path="/uploadData" element={<UploadFile />} />
         <Route path="/customerData" element={<CustomerData />} />
-        <Route path="/wholereport" element={<WholeReportDialog/>}/>
         <Route path="/login" element={<Login />} />
       </Routes>
     </>
