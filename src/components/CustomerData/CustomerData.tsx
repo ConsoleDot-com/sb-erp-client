@@ -93,6 +93,7 @@ const Select = styled.select`
   border: none;
   background-color: transparent;
   color: white;
+  width: 5rem;
   outline: none;
   position: relative;
   & option {
