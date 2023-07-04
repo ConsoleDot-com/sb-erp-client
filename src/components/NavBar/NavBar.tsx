@@ -10,9 +10,10 @@ import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
 import React, { useState } from "react";
 
-import { Logins } from "../../assets";
+import { Logins, profile } from "../../assets";
 import { SideNav } from "../SideNav";
-
+import zIndex from "@mui/material/styles/zIndex";
+import { Dark } from "../../utils";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -56,12 +57,31 @@ export const NavBar = () => {
               style={{ width: "70px", height: "70px" }}
             />
           </Box>
+          <Box
+            sx={{
+              mr: 2,
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              sx={{
+                color: Dark,
+                letterSpacing: { lg: "4px", xl: "4px", md: "3px", sm: "0px" },
+                fontFamily: "Monospace",
+                fontSize: { lg: "40px", xl: "40px", md: "32px", sm: "30px", xs:"18px" }
+              }}
+            >
+              Syed Brothers(BOQ)
+            </Typography>
+          </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   alt="Remy Sharp"
-                  src={Logins}
+                  src={profile}
                   sx={{ border: "1px solid #26255f" }}
                 />
               </IconButton>

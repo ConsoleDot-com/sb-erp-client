@@ -129,12 +129,12 @@ export const SideNav = ({ role }: any) => {
           </div>
         </Box>
       </div>
-      <span
+      {/* <span
         style={{ fontSize: "30px", cursor: "pointer" }}
         onClick={handleToggle}
       >
         <MenuIcon sx={{ color: "#26255f" }} />
-      </span>
+      </span> */}
     </>
   );
 };
