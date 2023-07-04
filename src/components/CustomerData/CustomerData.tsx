@@ -138,6 +138,9 @@ export const CustomerData = () => {
     if (selectedOption === "auto") {
       navigate("/uploadData");
     }
+    if (selectedOption === "manual") {
+      window.location.href = "https://boq-client.vercel.app/";
+    }
   };
   const { t } = useTranslation();
 
