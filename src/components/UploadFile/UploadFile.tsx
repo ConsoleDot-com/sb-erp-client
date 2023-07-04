@@ -9,11 +9,14 @@ import { FileViewDialog } from "../FileViewDialog";
 import { TransitionProps } from "@mui/material/transitions";
 import React from "react";
 import Slide from "@mui/material/Slide";
+import { useNavigate } from "react-router-dom";
+import { WholeReportDialog } from "../WholeReportDialog";
 
 export const UploadFile = () => {
   const [isFileUploaded, setIsFileUploaded] = useState<any>(false);
   console.log(isFileUploaded, "file");
   const { t } = useTranslation();
+  const [reportOpen, setReportOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [addComponent, setAddComponent] = useState<any[]>([]);
   const [data, setData] = useState<any>({});
@@ -42,9 +45,9 @@ export const UploadFile = () => {
     }
     setMyDataArr([...temp]);
     setCurrIndex(currIndex + 1);
-    console.log([...myDataArr], currIndex, "debug");
+    
   };
-
+  console.log([...myDataArr], currIndex, "debug");
   const addNewComponent = () => {
     // every time on click to add adding a component to the state and displaying it using map in template
     const temp = [...addComponent];
@@ -70,6 +73,7 @@ export const UploadFile = () => {
   // ) {
   //   return <Slide direction="up" ref={ref} {...props} />;
   // });
+  const navigate= useNavigate();
   return (
     <Layout>
       <Box>
@@ -281,16 +285,19 @@ export const UploadFile = () => {
               {/* conditional rendring of button when user adds more than 1 files  */}
               {addComponent?.length > 0 && (
                 <Button
+                onClick={()=> navigate("/wholereport")}
                   sx={{
                     mt: 3,
                     backgroundColor: "#26255f",
                     color: "white",
+                    
 
                     "&:hover": {
                       backgroundColor: Dark,
                       color: "white",
                     },
                   }}
+                onClickCapture={()=> setReportOpen(true)}
                 >
                   {t("Whole Report")}
                 </Button>
@@ -309,6 +316,14 @@ export const UploadFile = () => {
           data={myDataArr[displayIndex]}
           close={() => setOpen(false)}
         />
+      </Dialog>
+      <Dialog
+        fullScreen
+        open={reportOpen}
+        onClose={() => setReportOpen(false)}
+        // TransitionComponent={Transition}
+      >
+        <WholeReportDialog/>
       </Dialog>
     </Layout>
   );
