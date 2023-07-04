@@ -47,7 +47,20 @@ export const UploadFile = () => {
     setCurrIndex(currIndex + 1);
     
   };
-  console.log([...myDataArr], currIndex, "debug");
+  let finalBrick : any = 0;
+  let finalSand : any = 0;
+  let finalCement : any = 0;
+  let finalBajar : any = 0;
+    [...myDataArr].map((i) => {
+      finalBrick += i.bricks;
+      finalSand += i.sand;
+      finalCement += i.cement;
+      finalBajar += i.bajar;
+    })
+    console.log(finalBrick,"finalBrick");
+    console.log(finalSand,"finalSand");
+    console.log(finalCement,"finalCement");
+    console.log(finalBajar,"finalBajar");
   const addNewComponent = () => {
     // every time on click to add adding a component to the state and displaying it using map in template
     const temp = [...addComponent];
