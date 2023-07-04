@@ -2,7 +2,7 @@ import { Box, Container, Button } from "@mui/material";
 import { AddNew } from "../AddNew";
 import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
-import { Dark, H1, Secondary } from "../../utils";
+import { ButtonPadding, Dark, H1, Secondary } from "../../utils";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../Layout/Layout";
 import { FileViewDialog } from "../FileViewDialog";
@@ -148,7 +148,7 @@ export const UploadFile = () => {
                     sx={{
                       backgroundColor: "#26255f",
                       color: "white",
-                      padding: "10px 20px",
+                      padding:ButtonPadding,
                       "&:hover": {
                         bgcolor: Dark,
                       },
@@ -168,7 +168,7 @@ export const UploadFile = () => {
                     sx={{
                       backgroundColor: "#26255f",
                       color: "white",
-                      padding: "10px 20px",
+                      padding:ButtonPadding,
                       "&:hover": {
                         bgcolor: Dark,
                       },
@@ -232,7 +232,7 @@ export const UploadFile = () => {
                         sx={{
                           backgroundColor: "#26255f",
                           color: "white",
-                          padding: "10px 20px",
+                          padding:ButtonPadding,
                           "&:hover": {
                             bgcolor: Dark,
                           },
@@ -251,7 +251,7 @@ export const UploadFile = () => {
                         sx={{
                           backgroundColor: "#26255f",
                           color: "white",
-                          padding: "10px 20px",
+                          padding:ButtonPadding,
                           "&:hover": {
                             bgcolor: Dark,
                           },
@@ -285,7 +285,7 @@ export const UploadFile = () => {
                   mt: 3,
                   backgroundColor: "#26255f",
                   color: "white",
-
+                  padding:ButtonPadding,
                   "&:hover": {
                     backgroundColor: Dark,
                     color: "white",
@@ -303,7 +303,7 @@ export const UploadFile = () => {
                     mt: 3,
                     backgroundColor: "#26255f",
                     color: "white",
-                    
+                    padding:ButtonPadding,
 
                     "&:hover": {
                       backgroundColor: Dark,
@@ -336,7 +336,7 @@ export const UploadFile = () => {
         onClose={() => setReportOpen(false)}
         // TransitionComponent={Transition}
       >
-        <WholeReportDialog/>
+        <WholeReportDialog close={()=> setReportOpen(false)}/>
       </Dialog>
     </Layout>
   );

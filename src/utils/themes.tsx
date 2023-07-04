@@ -22,11 +22,14 @@ export const H3 = styled(Typography)({
 });
 export const ContainerPadding = "1.6rem 1.2rem";
 export const ButtonPadding = {
-  xl: "16px 20px",
-  lg: "14px 18px",
-  md: "12px 16px ",
-  sm: "10px  14px",
-  xs: "8px 12px",
+  xl: "8px 20px",
+  lg: "6px 18px",
+  md: "6px 16px ",
+  sm: "6px  14px",
+  xs: "4px 12px",
 };
 
+export const ButtonHover = {
+  color:Dark 
+}
 
