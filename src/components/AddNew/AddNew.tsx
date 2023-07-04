@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Box, Container, Button } from "@mui/material";
-import { Dark, Secondary, foundationReader, wallReader } from "../../utils";
+import { Dark, Secondary, wallReader } from "../../utils";
+import { foundationReader } from "../../utils";
 import * as xlsx from "xlsx";
 
 import { useEffect, useState } from "react";

@@ -15,5 +15,11 @@ export const ur = {
   "Whole Report": "پوری رپورٹ",
   New: "نئی",
   "Search input": "ان پٹ تلاش کریں۔",
-  "Customers Data": 'صارفین کا ڈیٹا'
+  "Customers Data": 'صارفین کا ڈیٹا',
+  'S.No':"سیریل نمبر",
+  'Description':"تفصیل",
+  'Unit':"یونٹ",
+  'Quantity':"مقدار",
+  'Rate':"شرح",
+  'Amount':"رقم"
 };
