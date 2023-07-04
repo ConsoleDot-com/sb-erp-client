@@ -14,6 +14,7 @@ import { WholeReportDialog } from "../WholeReportDialog";
 
 export const UploadFile = () => {
   const [isFileUploaded, setIsFileUploaded] = useState<any>(false);
+  const [deleteIndex, setDeleteIndex] = useState<number>(-1);
   console.log(isFileUploaded, "file");
   const { t } = useTranslation();
   const [reportOpen, setReportOpen] = useState(false);
@@ -23,13 +24,16 @@ export const UploadFile = () => {
   const [currIndex, setCurrIndex] = useState<number>(0);
   const [displayIndex, setDisplayIndex] = useState<number>(0);
   // calling function onDelete and splicing it with 1
-  const onDelete = (index: number) => {
-    const newState = [...addComponent];
+  // const onDelete = (index: number) => {
+  //   const newState = [...addComponent];
+  //   newState.splice(index, 1);
+  //   setAddComponent(newState);
 
-    newState.splice(index, 1);
-
-    setAddComponent(newState);
-  };
+  //   const newData = [...myDataArr];
+  //   newData.splice(index+1, 1);
+  //   console.log(newData, "sss");
+  //   setMyDataArr(newData);
+  // };
   const [myDataArr, setMyDataArr] = useState<any[]>([]);
   const setDataValue = (index: number, data: any) => {
     let temp: any[];
@@ -45,22 +49,32 @@ export const UploadFile = () => {
     }
     setMyDataArr([...temp]);
     setCurrIndex(currIndex + 1);
-    
   };
-  let finalBrick : any = 0;
-  let finalSand : any = 0;
-  let finalCement : any = 0;
-  let finalBajar : any = 0;
-    [...myDataArr].map((i) => {
-      finalBrick += i.bricks;
-      finalSand += i.sand;
-      finalCement += i.cement;
-      finalBajar += i.bajar;
-    })
-    console.log(finalBrick,"finalBrick");
-    console.log(finalSand,"finalSand");
-    console.log(finalCement,"finalCement");
-    console.log(finalBajar,"finalBajar");
+  let finalBrick: any = 0;
+  let finalSand: any = 0;
+  let finalCement: any = 0;
+  let finalBajar: any = 0;
+  [...myDataArr].map((i) => {
+    finalBrick += i.bricks;
+    finalSand += i.sand;
+    finalCement += i.cement;
+    finalBajar += i.bajar;
+  });
+  console.log(finalBrick, "finalBrick");
+  console.log(finalSand, "finalSand");
+  console.log(finalCement, "finalCement");
+  console.log(finalBajar, "finalBajar");
+  if (deleteIndex >= 0) {
+    const newComponents = [...addComponent];
+    newComponents.splice(deleteIndex, 1);
+    setAddComponent(newComponents);
+  
+    const newData = [...myDataArr];
+    newData.splice(deleteIndex+1, 1);
+    setMyDataArr(newData);
+    console.log(newData, "new data")
+    setDeleteIndex(-1);
+  }
   const addNewComponent = () => {
     // every time on click to add adding a component to the state and displaying it using map in template
     const temp = [...addComponent];
@@ -86,7 +100,7 @@ export const UploadFile = () => {
   // ) {
   //   return <Slide direction="up" ref={ref} {...props} />;
   // });
-  const navigate= useNavigate();
+  const navigate = useNavigate();
   return (
     <Layout>
       <Box>
@@ -258,7 +272,7 @@ export const UploadFile = () => {
                             bgcolor: Dark,
                           },
                         }}
-                        onClick={() => onDelete(index)}
+                        onClick={() => setDeleteIndex(index)}
                       >
                         {t("  Delete")}
                       </Button>
@@ -300,7 +314,7 @@ export const UploadFile = () => {
               {/* conditional rendring of button when user adds more than 1 files  */}
               {addComponent?.length > 0 && (
                 <Button
-                onClick={()=> navigate("/wholereport")}
+                  onClick={() => navigate("/wholereport")}
                   sx={{
                     mt: 3,
                     backgroundColor: "#26255f",
@@ -312,7 +326,7 @@ export const UploadFile = () => {
                       color: "white",
                     },
                   }}
-                onClickCapture={()=> setReportOpen(true)}
+                  onClickCapture={() => setReportOpen(true)}
                 >
                   {t("Whole Report")}
                 </Button>
@@ -338,7 +352,7 @@ export const UploadFile = () => {
         onClose={() => setReportOpen(false)}
         // TransitionComponent={Transition}
       >
-        <WholeReportDialog close={()=> setReportOpen(false)}/>
+        <WholeReportDialog/>
       </Dialog>
     </Layout>
   );
