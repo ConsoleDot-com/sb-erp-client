@@ -80,6 +80,7 @@ export const NavBar = () => {
                   sm: "30px",
                   xs: "18px",
                 },
+                
               }}
             >
               Syed Brothers(BOQ)

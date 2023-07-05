@@ -52,33 +52,6 @@ export const UploadFile = () => {
     setMyDataArr([...temp]);
     setCurrIndex(currIndex + 1);
   };
-<<<<<<< Updated upstream
-  let finalBrick: any = 0;
-  let finalSand: any = 0;
-  let finalCement: any = 0;
-  let finalBajar: any = 0;
-  [...myDataArr].map((i) => {
-    finalBrick += i.bricks;
-    finalSand += i.sand;
-    finalCement += i.cement;
-    finalBajar += i.bajar;
-  });
-  console.log(finalBrick, "finalBrick");
-  console.log(finalSand, "finalSand");
-  console.log(finalCement, "finalCement");
-  console.log(finalBajar, "finalBajar");
-  if (deleteIndex >= 0) {
-    const newComponents = [...addComponent];
-    newComponents.splice(deleteIndex, 1);
-    setAddComponent(newComponents);
-
-    const newData = [...myDataArr];
-    newData.splice(deleteIndex + 1, 1);
-    setMyDataArr(newData);
-    console.log(newData, "new data");
-    setDeleteIndex(-1);
-  }
-=======
 
   const finalValues = () => {
     let bricks = 0;
@@ -104,7 +77,6 @@ export const UploadFile = () => {
   // console.log(finalSand, "finalSand");
   // console.log(finalCement, "finalCement");
   // console.log(finalBajar, "finalBajar");
->>>>>>> Stashed changes
   const addNewComponent = () => {
     // every time on click to add adding a component to the state and displaying it using map in template
     const temp = [...addComponent];
@@ -338,13 +310,9 @@ export const UploadFile = () => {
               {/* conditional rendring of button when user adds more than 1 files  */}
               {addComponent?.length > 0 && (
                 <Button
-<<<<<<< Updated upstream
-                  onClick={() => setReportOpen(true)}
-=======
                   onClick={() => {
                     finalValues();
                   }}
->>>>>>> Stashed changes
                   sx={{
                     mt: 3,
                     backgroundColor: "#26255f",
@@ -370,23 +338,8 @@ export const UploadFile = () => {
           close={() => setOpen(false)}
         />
       </Dialog>
-<<<<<<< Updated upstream
-      <Dialog
-        fullScreen
-        open={reportOpen}
-        onClose={() => setReportOpen(false)}
-        // TransitionComponent={Transition}
-      >
-        <WholeReportDialog
-          close={() => {
-             setReportOpen(false);
-            console.log("HI");
-          }}
-        />
-=======
       <Dialog fullScreen open={reportOpen} onClose={() => setReportOpen(false)}>
         <WholeReportDialog finalData={finalData} />
->>>>>>> Stashed changes
       </Dialog>
     </Layout>
   );
