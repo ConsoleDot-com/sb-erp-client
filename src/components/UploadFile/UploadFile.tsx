@@ -1,20 +1,23 @@
 import { Box, Container, Button, Typography } from "@mui/material";
 import { AddNew } from "../AddNew";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dialog from "@mui/material/Dialog";
 import { ButtonPadding, Dark, H1, Secondary } from "../../utils";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../Layout/Layout";
 import { FileViewDialog } from "../FileViewDialog";
-import { TransitionProps } from "@mui/material/transitions";
-import React from "react";
-import Slide from "@mui/material/Slide";
 import { useNavigate } from "react-router-dom";
 import { WholeReportDialog } from "../WholeReportDialog";
+import React from "react";
 
 export const UploadFile = () => {
   const [isFileUploaded, setIsFileUploaded] = useState<any>(false);
-  const [deleteIndex, setDeleteIndex] = useState<number>(-1);
+  const [finalData, setFinalData] = useState<any>({
+    finalBrick: 0,
+    finalSand: 0,
+    finalCement: 0,
+    finalBajar: 0,
+  });
   console.log(isFileUploaded, "file");
   const { t } = useTranslation();
   const [reportOpen, setReportOpen] = useState(false);
@@ -24,16 +27,15 @@ export const UploadFile = () => {
   const [currIndex, setCurrIndex] = useState<number>(0);
   const [displayIndex, setDisplayIndex] = useState<number>(0);
   // calling function onDelete and splicing it with 1
-  // const onDelete = (index: number) => {
-  //   const newState = [...addComponent];
-  //   newState.splice(index, 1);
-  //   setAddComponent(newState);
+  const onDelete = (index: number) => {
+    const newState = [...addComponent];
+    newState.splice(index, 1);
+    setAddComponent([...newState]);
 
-  //   const newData = [...myDataArr];
-  //   newData.splice(index+1, 1);
-  //   console.log(newData, "sss");
-  //   setMyDataArr(newData);
-  // };
+    const newData = [...myDataArr];
+    newData.splice(index + 1, 1);
+    setMyDataArr(newData);
+  };
   const [myDataArr, setMyDataArr] = useState<any[]>([]);
   const setDataValue = (index: number, data: any) => {
     let temp: any[];
@@ -50,6 +52,7 @@ export const UploadFile = () => {
     setMyDataArr([...temp]);
     setCurrIndex(currIndex + 1);
   };
+<<<<<<< Updated upstream
   let finalBrick: any = 0;
   let finalSand: any = 0;
   let finalCement: any = 0;
@@ -75,6 +78,33 @@ export const UploadFile = () => {
     console.log(newData, "new data");
     setDeleteIndex(-1);
   }
+=======
+
+  const finalValues = () => {
+    let bricks = 0;
+    let sand = 0;
+    let cement = 0;
+    let bajar = 0;
+    [...myDataArr].map((i) => {
+      setFinalData({
+        ...finalData,
+        finalBrick: bricks + i.bricks,
+        finalSand: sand + i.sand,
+        finalCement: cement + i.cement,
+        finalBajar: bajar + i.bajar,
+      });
+      bricks += i.bricks;
+      sand += i.sand;
+      cement += i.cement;
+      bajar += i.bajar;
+    });
+  };
+
+  // console.log(finalBrick, "finalBrick");
+  // console.log(finalSand, "finalSand");
+  // console.log(finalCement, "finalCement");
+  // console.log(finalBajar, "finalBajar");
+>>>>>>> Stashed changes
   const addNewComponent = () => {
     // every time on click to add adding a component to the state and displaying it using map in template
     const temp = [...addComponent];
@@ -91,15 +121,6 @@ export const UploadFile = () => {
     //   <AddNew setData={setData} setIsFileUploaded={setIsFileUploaded}/>,
     // ]);
   };
-
-  // const Transition = React.forwardRef(function Transition(
-  //   props: TransitionProps & {
-  //     children: React.ReactElement;
-  //   },
-  //   ref: React.Ref<unknown>
-  // ) {
-  //   return <Slide direction="up" ref={ref} {...props} />;
-  // });
   const navigate = useNavigate();
   return (
     <Layout>
@@ -200,7 +221,7 @@ export const UploadFile = () => {
             </Box>
             {/* compnents are being maped here */}
             {addComponent.map((component: any, index: number) => (
-              <>
+              <React.Fragment key={index.toString()}>
                 <Box
                   sx={{
                     display: "flex",
@@ -275,14 +296,14 @@ export const UploadFile = () => {
                             bgcolor: Dark,
                           },
                         }}
-                        onClick={() => setDeleteIndex(index)}
+                        onClick={() => onDelete(index)}
                       >
                         {t("  Delete")}
                       </Button>
                     )}
                   </Box>
                 </Box>
-              </>
+              </React.Fragment>
             ))}
             <Box
               sx={{
@@ -317,7 +338,13 @@ export const UploadFile = () => {
               {/* conditional rendring of button when user adds more than 1 files  */}
               {addComponent?.length > 0 && (
                 <Button
+<<<<<<< Updated upstream
                   onClick={() => setReportOpen(true)}
+=======
+                  onClick={() => {
+                    finalValues();
+                  }}
+>>>>>>> Stashed changes
                   sx={{
                     mt: 3,
                     backgroundColor: "#26255f",
@@ -337,17 +364,13 @@ export const UploadFile = () => {
           </Box>
         </Container>
       </Box>
-      <Dialog
-        fullScreen
-        open={open}
-        onClose={() => setOpen(false)}
-        // TransitionComponent={Transition}
-      >
+      <Dialog fullScreen open={open} onClose={() => setOpen(false)}>
         <FileViewDialog
           data={myDataArr[displayIndex]}
           close={() => setOpen(false)}
         />
       </Dialog>
+<<<<<<< Updated upstream
       <Dialog
         fullScreen
         open={reportOpen}
@@ -360,6 +383,10 @@ export const UploadFile = () => {
             console.log("HI");
           }}
         />
+=======
+      <Dialog fullScreen open={reportOpen} onClose={() => setReportOpen(false)}>
+        <WholeReportDialog finalData={finalData} />
+>>>>>>> Stashed changes
       </Dialog>
     </Layout>
   );

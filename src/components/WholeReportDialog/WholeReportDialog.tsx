@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { styled, Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+<<<<<<< Updated upstream
 import { useTranslation } from "react-i18next";
 import { ButtonHover, ButtonPadding, Dark } from "../../utils";
 import { Logins } from "../../assets";
@@ -16,6 +17,13 @@ import { useEffect } from "react";
 export const WholeReportDialog = ({ close }: any) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+=======
+import { Dark } from "../../utils";
+import { useEffect, useState } from "react";
+
+export const WholeReportDialog = ({ finalData }: any) => {
+  const navigate = useNavigate();
+>>>>>>> Stashed changes
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: Dark,
@@ -40,13 +48,18 @@ export const WholeReportDialog = ({ close }: any) => {
     id: number,
     description: string,
     unit: string,
+<<<<<<< Updated upstream
     quantity: number,
+=======
+    quantity: any,
+>>>>>>> Stashed changes
     rate: number,
     amount: number
   ) {
     return { id, description, unit, quantity, rate, amount };
   }
 
+<<<<<<< Updated upstream
   const rows = [
     createData(1, t("Bricks"), t("No's"), 0, 24, 4.0),
     createData(1, t("Sand"), t("CFT"), 0, 37, 4.3),
@@ -60,10 +73,63 @@ export const WholeReportDialog = ({ close }: any) => {
   useEffect(() => {
     console.log(typeof close);
   });
+=======
+  console.log(finalData?.finalBrick, "finalBrick");
+  console.log(finalData?.finalSand, "finalSand");
+  console.log(finalData?.finalCement, "finalCement");
+  console.log(finalData?.finalBajar, "finalBajar");
+  const [rows, setRows] = useState<any[]>([]);
+  function generateData() {
+    setRows([
+      createData(
+        1,
+        "Bricks",
+        "No's",
+        Math.ceil(finalData?.finalBrick) || 0,
+        24,
+        4.0
+      ),
+      createData(
+        1,
+        "Sand",
+        "No's",
+        Math.ceil(finalData?.finalSand) || 0,
+        37,
+        4.3
+      ),
+      createData(
+        1,
+        "Cement",
+        "No's",
+        Math.ceil(finalData?.finalCement) || 0,
+        24,
+        6.0
+      ),
+      createData(1, "Crush", "No's", 3.7, 67, 4.3),
+      createData(
+        1,
+        "Bajar",
+        "No's",
+        Math.ceil(finalData?.finalBajar) || 0,
+        49,
+        3.9
+      ),
+      createData(1, "Ghausa", "No's", 16.0, 49, 3.9),
+      createData(1, "Steel", "No's", 16.0, 49, 3.9),
+      createData(1, "Membrane Sheet", "No's", 16.0, 49, 3.9),
+    ]);
+  }
+  useEffect(() => {
+    setRows([]);
+    generateData();
+    console.log(finalData, "debug")
+  }, [finalData]);
+>>>>>>> Stashed changes
   return (
     <>
       <div>
         <TableContainer component={Paper}>
+<<<<<<< Updated upstream
           <Box
             sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
           >
@@ -92,10 +158,25 @@ export const WholeReportDialog = ({ close }: any) => {
               {t("Complete Report")}
             </Typography>
           </Box>
+=======
+          <Typography
+            sx={{
+              fontSize: "36px",
+              textAlign: "center",
+              fontWeight: "bold",
+              padding: "10px 0",
+              letterSpacing: "5px",
+              color: Dark,
+            }}
+          >
+            Complete Report
+          </Typography>
+>>>>>>> Stashed changes
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
                 <StyledTableCell>S.No</StyledTableCell>
+<<<<<<< Updated upstream
                 <StyledTableCell align="left">
                   {t("Description")}
                 </StyledTableCell>
@@ -103,6 +184,13 @@ export const WholeReportDialog = ({ close }: any) => {
                 <StyledTableCell align="left">{t("Quantity")}</StyledTableCell>
                 <StyledTableCell align="left">{t("Rate")}</StyledTableCell>
                 <StyledTableCell align="left">{t("Amount")}</StyledTableCell>
+=======
+                <StyledTableCell align="left">Description</StyledTableCell>
+                <StyledTableCell align="left">Unit</StyledTableCell>
+                <StyledTableCell align="left">Quantity</StyledTableCell>
+                <StyledTableCell align="left">Rate</StyledTableCell>
+                <StyledTableCell align="left">Amount</StyledTableCell>
+>>>>>>> Stashed changes
               </TableRow>
             </TableHead>
             <TableBody>
@@ -132,6 +220,7 @@ export const WholeReportDialog = ({ close }: any) => {
               justifyContent: "space-around",
             }}
           >
+<<<<<<< Updated upstream
             <Button
               onClick={close}
               variant="outlined"
@@ -155,6 +244,12 @@ export const WholeReportDialog = ({ close }: any) => {
             >
               {t("EXPORT")}
             </Button>
+=======
+            <Button onClick={() => navigate("/uploadData")} variant="outlined">
+              Back{" "}
+            </Button>
+            <Button variant="outlined">Export</Button>
+>>>>>>> Stashed changes
           </Box>
         </TableContainer>
       </div>
