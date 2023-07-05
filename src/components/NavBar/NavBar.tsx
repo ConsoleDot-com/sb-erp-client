@@ -1,6 +1,6 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
@@ -18,6 +18,7 @@ import { Dark } from "../../utils";
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export const NavBar = () => {
+  const navigate = useNavigate();
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
@@ -47,7 +48,9 @@ export const NavBar = () => {
               display: "flex",
               justifyContent: "flex-start",
               alignItems: "center",
+              cursor:"pointer"
             }}
+            onClick={()=> navigate("/customerData")}
           >
             <SideNav role={"user"} />
 
@@ -70,7 +73,13 @@ export const NavBar = () => {
                 color: Dark,
                 letterSpacing: { lg: "4px", xl: "4px", md: "3px", sm: "0px" },
                 fontFamily: "Monospace",
-                fontSize: { lg: "40px", xl: "40px", md: "32px", sm: "30px", xs:"18px" }
+                fontSize: {
+                  lg: "40px",
+                  xl: "40px",
+                  md: "32px",
+                  sm: "30px",
+                  xs: "18px",
+                },
               }}
             >
               Syed Brothers(BOQ)
