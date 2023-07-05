@@ -13,10 +13,7 @@ function App() {
 
         <Route path="/uploadData" element={<UploadFile />} />
         <Route path="/customerData" element={<CustomerData />} />
-<<<<<<< Updated upstream
-=======
         {/* <Route path="/wholereport" element={<WholeReportDialog/>}/> */}
->>>>>>> Stashed changes
         <Route path="/login" element={<Login />} />
       </Routes>
     </>
