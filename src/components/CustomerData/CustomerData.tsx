@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
-import { Dark, H1, Primary, Secondary } from "../../utils";
+import { ButtonPadding, Dark, H1, Primary, Secondary } from "../../utils";
 import { Layout } from "../Layout/Layout";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -187,7 +187,6 @@ export const CustomerData = () => {
                     }}
                     sx={{
                       color: "white",
-
                       height: "2rem",
                       display: "flex",
                       justifyContent: "flex-start",
@@ -202,8 +201,8 @@ export const CustomerData = () => {
               sx={{
                 backgroundColor: "#26255f",
                 color: "white",
-                padding: "10px 0px",
                 width: "30%",
+                height:"3rem",
                 fontSize: "14px",
                 "&:hover": {
                   bgcolor: Dark,
@@ -235,7 +234,7 @@ export const CustomerData = () => {
                     paginationModel: { page: 0, pageSize: 5 },
                   },
                 }}
-                pageSizeOptions={[5, 10]}
+                pageSizeOptions={[5, 10 , 15, 20 ,25]}
                 checkboxSelection
               />
             </div>
