@@ -163,6 +163,10 @@ const handleAddData = () => {
     alert(error)
     return;
   }
+  if (selectedValue === "auto" && !fileUploaded) {
+    setError("Please upload a file.");
+    return;
+  }
   initialRows.push(newRow)
   console.log(newRow,'rows')
   setFormData({
@@ -174,6 +178,7 @@ const handleAddData = () => {
   });
   handleClose();
 };
+const [fileUploaded, setFileUploaded] = useState(false);
 
   const [selectedValue, setSelectedValue] = useState<string>("");
   const navigate = useNavigate();
