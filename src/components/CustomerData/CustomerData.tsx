@@ -139,7 +139,12 @@ const CssTextField = styled(TextField)({
     },
   },
 });
+
+
 export const CustomerData = () => {
+
+
+  const navigate =useNavigate();
   const [formData, setFormData] = useState({
     houseNo: "",
     clientName: "",
@@ -152,12 +157,13 @@ export const CustomerData = () => {
       ...prevData,
       [e.target.id]: e.target.value,
     }));
+    setIsFormComplete(checkFormComplete());
   };
   console.log(initialRows, "initial");
 
   const [error, setError] = useState("");
   const handleAddData = () => {
-    const newId = initialRows.length + 1;
+   
     const newRow = {
       houseNo: formData.houseNo,
       name: formData.clientName,
@@ -169,17 +175,16 @@ export const CustomerData = () => {
       formData.houseNo.trim() === "" ||
       formData.clientName.trim() === "" ||
       formData.address.trim() === "" ||
-      formData.city.trim() === ""
+      formData.city.trim() === "" ||
+      formData.levels.trim()=== ""
     ) {
       setError("Please fill missing fields.");
       alert(error);
       return;
     }
-    if (selectedValue === "auto" && !fileUploaded) {
-      setError("Please upload a file.");
-      return;
-    }
+   
     initialRows.push(newRow);
+    initialRows.reverse();
     console.log(newRow, "rows");
     setFormData({
       houseNo: "",
@@ -190,22 +195,33 @@ export const CustomerData = () => {
     });
     handleClose();
   };
+  const [isFormComplete, setIsFormComplete] = useState(false);
+  
+    const checkFormComplete = () => {
+    return(
+      formData.houseNo.trim() !== "" &&
+      formData.clientName.trim() !== "" &&
+      formData.address.trim() !== "" &&
+      formData.city.trim() !== "" &&
+      formData.levels.trim() !== "" 
+    )
+    };
   const [fileUploaded, setFileUploaded] = useState(false);
 
-  const [selectedValue, setSelectedValue] = useState<string>("");
-  const navigate = useNavigate();
-  // setting the state with the selected option
-  const handleSelectChange = (event: any) => {
-    const selectedOption = event.target.value;
-    setSelectedValue(selectedOption);
-    // Navigate to the desired page based on the selected option
-    if (selectedOption === "auto") {
-      navigate("/uploadData");
-    }
-    if (selectedOption === "manual") {
-      window.location.href = "https://boq-client.vercel.app/";
-    }
-  };
+  // const [selectedValue, setSelectedValue] = useState<string>("");
+  // const navigate = useNavigate();
+  // // setting the state with the selected option
+  // const handleSelectChange = (event: any) => {
+  //   const selectedOption = event.target.value;
+  //   setSelectedValue(selectedOption);
+  //   // Navigate to the desired page based on the selected option
+  //   if (selectedOption === "auto") {
+  //     navigate("/uploadData");
+  //   }
+  //   if (selectedOption === "manual") {
+  //     window.location.href = "https://boq-client.vercel.app/";
+  //   }
+  // };
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
@@ -215,6 +231,7 @@ export const CustomerData = () => {
 
   const handleClose = () => {
     setOpen(false);
+    
   };
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     // [`&.${tableCellClasses.head}`]: {
@@ -235,17 +252,9 @@ export const CustomerData = () => {
     //   border: 0,
     // },
   }));
-  const rowsPerPage = 10; // Number of rows to display per page
+  
 
-  const [page, setPage] = useState(1);
-
-  const handleChangePage = (event: any, newPage: any) => {
-    setPage(newPage);
-  };
-
-  const startIndex = (page - 1) * rowsPerPage;
-  const endIndex = startIndex + rowsPerPage;
-  const rowsToDisplay = initialRows.slice(startIndex, endIndex);
+  const data = initialRows.reverse();
   return (
     <>
       <Layout>
@@ -352,7 +361,7 @@ export const CustomerData = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {initialRows.map((row) => (
+                      {data.map((row) => (
                         <TableRow
                           key={row.name}
                           sx={{
@@ -369,12 +378,7 @@ export const CustomerData = () => {
                     </TableBody>
                   </Table>
                 </TableContainer>
-                <Pagination
-                  count={Math.ceil(initialRows.length / rowsPerPage)}
-                  page={page}
-                  onChange={handleChangePage}
-                  color="primary"
-                />
+                
               </div>
             </Box>
             <Dialog open={open} onClose={handleClose}>
@@ -452,9 +456,10 @@ export const CustomerData = () => {
                       bgcolor: Dark,
                     },
                   }}
-                  onClick={handleClickOpen}
+                  onClick={()=> navigate('/UploadData')}
+                  disabled={!isFormComplete}
                 >
-                  <Select
+                  {/* <Select
                     value={selectedValue}
                     onChange={handleSelectChange}
                     style={{
@@ -468,7 +473,8 @@ export const CustomerData = () => {
                     </option>
                     <option value="auto">{t("Auto")}</option>
                     <option value="manual">{t("Manual")}</option>
-                  </Select>
+                  </Select> */}
+                  Add Drawings
                 </Button>
               </DialogContent>
               <DialogActions>
