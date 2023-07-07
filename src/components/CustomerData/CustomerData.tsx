@@ -5,7 +5,10 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import EditIcon from '@mui/icons-material/Edit';
 import Pagination from "@mui/material/Pagination";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import SearchIcon from '@mui/icons-material/Search';
@@ -34,6 +37,9 @@ const initialRows = [
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
+    edit: <EditIcon  sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "2",
@@ -41,6 +47,9 @@ const initialRows = [
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
+    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "3",
@@ -48,6 +57,9 @@ const initialRows = [
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
+    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "4",
@@ -55,6 +67,9 @@ const initialRows = [
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
+    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "5",
@@ -62,6 +77,9 @@ const initialRows = [
     address: "valancia",
     city: "Lahore",
     levels: "4",
+    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "6",
@@ -69,6 +87,9 @@ const initialRows = [
     address: "'V'alancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
+    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "7",
@@ -76,6 +97,9 @@ const initialRows = [
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
+    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "8",
@@ -83,6 +107,9 @@ const initialRows = [
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
+    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "9",
@@ -90,6 +117,9 @@ const initialRows = [
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
+    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
+    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
 ];
 
@@ -295,6 +325,9 @@ export const CustomerData = () => {
                         <TableCell align="left">Address</TableCell>
                         <TableCell align="left">City</TableCell>
                         <TableCell align="left">Floors</TableCell>
+                        <TableCell align="left">Edit</TableCell>
+                        <TableCell align="left">Delete</TableCell>
+                        <TableCell align="left">View</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -309,7 +342,10 @@ export const CustomerData = () => {
                           <TableCell align="left">{row.name}</TableCell>
                           <TableCell align="left">{row.address}</TableCell>
                           <TableCell align="left">{row.city}</TableCell>
-                          <TableCell align="left">{row.levels}</TableCell>
+                          <TableCell align="left" >{row.levels}</TableCell>
+                          <TableCell align="left">{row.edit}</TableCell>
+                          <TableCell align="left">{row.delete}</TableCell>
+                          <TableCell align="left">{row.view}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
