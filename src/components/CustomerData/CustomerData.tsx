@@ -1,13 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  Container,
-  Box,
-  Button,
-  Table,
-  TableBody,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import { Container, Box, Button, Table, TableBody, IconButton ,Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -16,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Pagination from "@mui/material/Pagination";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import SearchIcon from "@mui/icons-material/Search";
+import SearchIcon from '@mui/icons-material/Search';
 import Autocomplete from "@mui/material/Autocomplete";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import {
@@ -33,6 +25,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import { AddClientForm } from "../AddClientForm";
+
 
 const initialRows = [
   {
@@ -146,7 +139,10 @@ const CssTextField = styled(TextField)({
   },
 });
 
+
 export const CustomerData = () => {
+
+
   const [fileUploaded, setFileUploaded] = useState(false);
 
   // const [selectedValue, setSelectedValue] = useState<string>("");
@@ -172,6 +168,7 @@ export const CustomerData = () => {
 
   const handleClose = () => {
     setOpen(false);
+    
   };
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     // [`&.${tableCellClasses.head}`]: {
@@ -192,22 +189,21 @@ export const CustomerData = () => {
     //   border: 0,
     // },
   }));
+  
 
-  const [searchQuerry, setSearchQuerry] = useState("");
-  const handleSearch = (e: any) => {
-    setSearchQuerry(e.target.value);
-  };
+  const [searchQuerry, setSearchQuerry]=useState('');
+  const handleSearch=(e:any)=>{
+       setSearchQuerry(e.target.value)
+  }
 
   const data = initialRows.reverse();
-  const filterData = initialRows.filter((row) =>
-    row.name.toLowerCase().includes(searchQuerry.toLowerCase())
-  );
-  console.log(filterData, searchQuerry, "filter");
-  const [isClick, setIsClick] = useState(false);
-  const isSearchButtonClick = () => {
+  const filterData= initialRows.filter((row)=> row.name.toLowerCase().includes(searchQuerry.toLowerCase()))
+  console.log(filterData,searchQuerry,'filter')
+  const[isClick, setIsClick]=useState(false);
+  const isSearchButtonClick=()=>{
     setIsClick(true);
-  };
-  return (
+  }
+    return (
     <>
       <Layout>
         <Box>
@@ -225,53 +221,50 @@ export const CustomerData = () => {
               }}
             >
               <Stack spacing={2} sx={{ width: "80%", mt: 3, mb: 2 }}>
-                <Autocomplete
-                  freeSolo
-                  id="free-solo-2-demo"
-                  disableClearable
-                  options={initialRows.map((option) => option.name)}
-                  renderInput={(params) => (
-                    <TextField
-                      onChange={handleSearch}
-                      value={searchQuerry}
-                      {...params}
-                      label={t("Search input")}
-                      InputLabelProps={{
-                        style: {
-                          color: "black",
-                        },
-                      }}
-                      InputProps={{
-                        ...params.InputProps,
-                        type: "search",
-                        style: {
-                          color: "black",
-                          backgroundColor: "white",
-                        },
-                        endAdornment: (
-                          <Button
-                            onClick={isSearchButtonClick}
-                            sx={{
-                              border: " 1px solid #ddd",
-                              textTransform: "capitalize",
-                            }}
-                          >
-                            <SearchIcon />
-                            search
-                          </Button>
-                        ),
-                      }}
-                      sx={{
-                        color: "white",
-                        height: "2rem",
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        alignItems: "center",
-                      }}
-                    />
-                  )}
-                />
-              </Stack>
+  <Autocomplete
+    freeSolo
+    id="free-solo-2-demo"
+    disableClearable
+    options={initialRows.map((option) => option.name)}
+    renderInput={(params) => (
+      <TextField
+      onChange={handleSearch}
+      value={searchQuerry}
+        {...params}
+        label={t("Search input")}
+        InputLabelProps={{
+          style: {
+            color: "black",
+          },
+        }}
+        InputProps={{
+          ...params.InputProps,
+          type: "search",
+          style: {
+            color: "black",
+            backgroundColor: "white",
+          },
+          endAdornment: (
+            <Button
+              onClick={isSearchButtonClick}
+              sx={{border:" 1px solid #ddd", textTransform:"capitalize"}}
+            > 
+              <SearchIcon />
+            search
+            </Button>
+          ),
+        }}
+        sx={{
+          color: "white",
+          height: "2rem",
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+        }}
+      />
+    )}
+  />
+</Stack>
 
               <Button
                 sx={{
@@ -286,11 +279,13 @@ export const CustomerData = () => {
                 }}
                 onClick={handleClickOpen}
               >
+               
                 Add New
               </Button>
             </Box>
             <Box mt={5}>
               <div style={{ height: 400, width: "100%" }}>
+                
                 <TableContainer component={Paper}>
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
@@ -320,10 +315,11 @@ export const CustomerData = () => {
                     </TableBody>
                   </Table>
                 </TableContainer>
+                
               </div>
             </Box>
             <Dialog open={open} onClose={handleClose}>
-              <AddClientForm initialRows={initialRows} />
+              <AddClientForm initialRows={initialRows} close={handleClose}/>
             </Dialog>
           </Container>
         </Box>

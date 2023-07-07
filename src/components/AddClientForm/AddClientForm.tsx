@@ -7,8 +7,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Dark } from "../../utils";
 
-
-export const AddClientForm=(initialRows:any)=>{
+type AddClientFormProps = {
+    initialRows: {
+      houseNo: string;
+      name: string;
+      address: string;
+      city: string;
+      levels: string;
+    }[];
+    close:any
+  };
+  
+export const AddClientForm=({initialRows, close}:AddClientFormProps)=>{
     const [formData, setFormData] = useState({
         houseNo: "",
         clientName: "",
@@ -83,6 +93,7 @@ export const AddClientForm=(initialRows:any)=>{
           };
     return(
         <div>
+            
         <DialogTitle>ADD CLIENT</DialogTitle>
               <DialogContent>
                 <TextField
@@ -179,8 +190,8 @@ export const AddClientForm=(initialRows:any)=>{
                 </Button>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
-                <Button onClick={handleAddData}>Add</Button>
+                <Button onClick={close}>Cancel</Button>
+                <Button onClick={()=>{handleAddData(); close();}}>Add</Button>
               </DialogActions>
               </div>
     )
