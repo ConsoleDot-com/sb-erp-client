@@ -170,7 +170,6 @@ export const CustomerData = () => {
     setOpen(false);
     
   };
-  console.log(handleClose);
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     // [`&.${tableCellClasses.head}`]: {
     //   backgroundColor: Dark,
