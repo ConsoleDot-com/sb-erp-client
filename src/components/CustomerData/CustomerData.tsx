@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Container, Box, Button, Table, TableBody } from "@mui/material";
+import { Container, Box, Button, Table, TableBody, IconButton ,Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Pagination from "@mui/material/Pagination";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
+import SearchIcon from '@mui/icons-material/Search';
 import Autocomplete from "@mui/material/Autocomplete";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import {
@@ -254,8 +255,19 @@ export const CustomerData = () => {
   }));
   
 
+  const [searchQuerry, setSearchQuerry]=useState('');
+  const handleSearch=(e:any)=>{
+       setSearchQuerry(e.target.value)
+  }
+
   const data = initialRows.reverse();
-  return (
+  const filterData= initialRows.filter((row)=> row.name.toLowerCase().includes(searchQuerry.toLowerCase()))
+  console.log(filterData,searchQuerry,'filter')
+  const[isClick, setIsClick]=useState(false);
+  const isSearchButtonClick=()=>{
+    setIsClick(true);
+  }
+    return (
     <>
       <Layout>
         <Box>
@@ -273,40 +285,50 @@ export const CustomerData = () => {
               }}
             >
               <Stack spacing={2} sx={{ width: "80%", mt: 3, mb: 2 }}>
-                <Autocomplete
-                  freeSolo
-                  id="free-solo-2-demo"
-                  disableClearable
-                  options={initialRows.map((option) => option.name)}
-                  renderInput={(params) => (
-                    <CssTextField
-                      {...params}
-                      label={t("Search input")}
-                      InputLabelProps={{
-                        style: {
-                          color: "black",
-                        },
-                      }}
-                      InputProps={{
-                        ...params.InputProps,
-                        type: "search",
-                        style: {
-                          color: "black",
-                          backgroundColor: "white",
-                          // height: "2.5rem",
-                        },
-                      }}
-                      sx={{
-                        color: "white",
-                        height: "2rem",
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        alignItems: "center",
-                      }}
-                    />
-                  )}
-                />
-              </Stack>
+  <Autocomplete
+    freeSolo
+    id="free-solo-2-demo"
+    disableClearable
+    options={initialRows.map((option) => option.name)}
+    renderInput={(params) => (
+      <TextField
+      onChange={handleSearch}
+      value={searchQuerry}
+        {...params}
+        label={t("Search input")}
+        InputLabelProps={{
+          style: {
+            color: "black",
+          },
+        }}
+        InputProps={{
+          ...params.InputProps,
+          type: "search",
+          style: {
+            color: "black",
+            backgroundColor: "white",
+          },
+          endAdornment: (
+            <Button
+              onClick={isSearchButtonClick}
+              sx={{border:" 1px solid #ddd", textTransform:"capitalize"}}
+            > 
+              <SearchIcon />
+            search
+            </Button>
+          ),
+        }}
+        sx={{
+          color: "white",
+          height: "2rem",
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+        }}
+      />
+    )}
+  />
+</Stack>
 
               <Button
                 sx={{
