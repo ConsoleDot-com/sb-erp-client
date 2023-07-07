@@ -1,5 +1,13 @@
 import styled from "@emotion/styled";
-import { Container, Box, Button, Table, TableBody, IconButton ,Typography } from "@mui/material";
+import {
+  Container,
+  Box,
+  Button,
+  Table,
+  TableBody,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
@@ -8,7 +16,7 @@ import TableRow from "@mui/material/TableRow";
 import Pagination from "@mui/material/Pagination";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import Autocomplete from "@mui/material/Autocomplete";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import {
@@ -24,10 +32,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import { AddClientForm } from "../AddClientForm";
 
 const initialRows = [
   {
@@ -141,72 +146,7 @@ const CssTextField = styled(TextField)({
   },
 });
 
-
 export const CustomerData = () => {
-
-
-  const navigate =useNavigate();
-  const [formData, setFormData] = useState({
-    houseNo: "",
-    clientName: "",
-    address: "",
-    city: "",
-    levels: "",
-  });
-  const handlechange = (e: any) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [e.target.id]: e.target.value,
-    }));
-    setIsFormComplete(checkFormComplete());
-  };
-  console.log(initialRows, "initial");
-
-  const [error, setError] = useState("");
-  const handleAddData = () => {
-   
-    const newRow = {
-      houseNo: formData.houseNo,
-      name: formData.clientName,
-      address: formData.address,
-      city: formData.city,
-      levels: formData.levels,
-    };
-    if (
-      formData.houseNo.trim() === "" ||
-      formData.clientName.trim() === "" ||
-      formData.address.trim() === "" ||
-      formData.city.trim() === "" ||
-      formData.levels.trim()=== ""
-    ) {
-      setError("Please fill missing fields.");
-      alert(error);
-      return;
-    }
-   
-    initialRows.push(newRow);
-    initialRows.reverse();
-    console.log(newRow, "rows");
-    setFormData({
-      houseNo: "",
-      clientName: "",
-      address: "",
-      city: "",
-      levels: "",
-    });
-    handleClose();
-  };
-  const [isFormComplete, setIsFormComplete] = useState(false);
-  
-    const checkFormComplete = () => {
-    return(
-      formData.houseNo.trim() !== "" &&
-      formData.clientName.trim() !== "" &&
-      formData.address.trim() !== "" &&
-      formData.city.trim() !== "" &&
-      formData.levels.trim() !== "" 
-    )
-    };
   const [fileUploaded, setFileUploaded] = useState(false);
 
   // const [selectedValue, setSelectedValue] = useState<string>("");
@@ -232,7 +172,6 @@ export const CustomerData = () => {
 
   const handleClose = () => {
     setOpen(false);
-    
   };
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     // [`&.${tableCellClasses.head}`]: {
@@ -253,21 +192,22 @@ export const CustomerData = () => {
     //   border: 0,
     // },
   }));
-  
 
-  const [searchQuerry, setSearchQuerry]=useState('');
-  const handleSearch=(e:any)=>{
-       setSearchQuerry(e.target.value)
-  }
+  const [searchQuerry, setSearchQuerry] = useState("");
+  const handleSearch = (e: any) => {
+    setSearchQuerry(e.target.value);
+  };
 
   const data = initialRows.reverse();
-  const filterData= initialRows.filter((row)=> row.name.toLowerCase().includes(searchQuerry.toLowerCase()))
-  console.log(filterData,searchQuerry,'filter')
-  const[isClick, setIsClick]=useState(false);
-  const isSearchButtonClick=()=>{
+  const filterData = initialRows.filter((row) =>
+    row.name.toLowerCase().includes(searchQuerry.toLowerCase())
+  );
+  console.log(filterData, searchQuerry, "filter");
+  const [isClick, setIsClick] = useState(false);
+  const isSearchButtonClick = () => {
     setIsClick(true);
-  }
-    return (
+  };
+  return (
     <>
       <Layout>
         <Box>
@@ -285,50 +225,53 @@ export const CustomerData = () => {
               }}
             >
               <Stack spacing={2} sx={{ width: "80%", mt: 3, mb: 2 }}>
-  <Autocomplete
-    freeSolo
-    id="free-solo-2-demo"
-    disableClearable
-    options={initialRows.map((option) => option.name)}
-    renderInput={(params) => (
-      <TextField
-      onChange={handleSearch}
-      value={searchQuerry}
-        {...params}
-        label={t("Search input")}
-        InputLabelProps={{
-          style: {
-            color: "black",
-          },
-        }}
-        InputProps={{
-          ...params.InputProps,
-          type: "search",
-          style: {
-            color: "black",
-            backgroundColor: "white",
-          },
-          endAdornment: (
-            <Button
-              onClick={isSearchButtonClick}
-              sx={{border:" 1px solid #ddd", textTransform:"capitalize"}}
-            > 
-              <SearchIcon />
-            search
-            </Button>
-          ),
-        }}
-        sx={{
-          color: "white",
-          height: "2rem",
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "center",
-        }}
-      />
-    )}
-  />
-</Stack>
+                <Autocomplete
+                  freeSolo
+                  id="free-solo-2-demo"
+                  disableClearable
+                  options={initialRows.map((option) => option.name)}
+                  renderInput={(params) => (
+                    <TextField
+                      onChange={handleSearch}
+                      value={searchQuerry}
+                      {...params}
+                      label={t("Search input")}
+                      InputLabelProps={{
+                        style: {
+                          color: "black",
+                        },
+                      }}
+                      InputProps={{
+                        ...params.InputProps,
+                        type: "search",
+                        style: {
+                          color: "black",
+                          backgroundColor: "white",
+                        },
+                        endAdornment: (
+                          <Button
+                            onClick={isSearchButtonClick}
+                            sx={{
+                              border: " 1px solid #ddd",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <SearchIcon />
+                            search
+                          </Button>
+                        ),
+                      }}
+                      sx={{
+                        color: "white",
+                        height: "2rem",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        alignItems: "center",
+                      }}
+                    />
+                  )}
+                />
+              </Stack>
 
               <Button
                 sx={{
@@ -343,34 +286,11 @@ export const CustomerData = () => {
                 }}
                 onClick={handleClickOpen}
               >
-                {/* <Select
-                value={selectedValue}
-                onChange={handleSelectChange}
-                style={{ width: "100%",fontSize:"16px", padding:"4px 10px", alignItems:"center" }}
-              >
-                <option value="volvo" selected >
-                  {t("Add New")}
-                </option>
-                <option value="auto" >{t("Auto")}</option>
-                <option value="manual">{t("Manual")}</option>
-              </Select> */}
                 Add New
               </Button>
             </Box>
             <Box mt={5}>
               <div style={{ height: 400, width: "100%" }}>
-                {/* <DataGrid
-                sx={{ border: "1px solid black" ,}}
-                rows={rows}
-                columns={columns}
-                initialState={{
-                  pagination: {
-                    paginationModel: { page: 0, pageSize: 5 },
-                  },
-                }}
-                pageSizeOptions={[5, 10 , 15, 20 ,25]}
-                checkboxSelection
-              /> */}
                 <TableContainer component={Paper}>
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
@@ -400,109 +320,10 @@ export const CustomerData = () => {
                     </TableBody>
                   </Table>
                 </TableContainer>
-                
               </div>
             </Box>
             <Dialog open={open} onClose={handleClose}>
-              <DialogTitle>ADD CLIENT</DialogTitle>
-              <DialogContent>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="houseNo"
-                  label="House No"
-                  type="text"
-                  value={formData.houseNo}
-                  onChange={handlechange}
-                  fullWidth
-                  required
-                  variant="standard"
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="clientName"
-                  label="Client Name"
-                  type="text"
-                  value={formData.clientName}
-                  onChange={handlechange}
-                  fullWidth
-                  required
-                  variant="standard"
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="address"
-                  label="Address"
-                  type="text"
-                  value={formData.address}
-                  onChange={handlechange}
-                  fullWidth
-                  required
-                  variant="standard"
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="city"
-                  label="City"
-                  type="text"
-                  value={formData.city}
-                  onChange={handlechange}
-                  fullWidth
-                  required
-                  variant="standard"
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="levels"
-                  label="Floor Levels"
-                  type="number"
-                  value={formData.levels}
-                  onChange={handlechange}
-                  fullWidth
-                  required
-                  variant="standard"
-                  inputProps={{ min: "0" }}
-                />
-                <Button
-                  sx={{
-                    backgroundColor: "#26255f",
-                    color: "white",
-                    mt: 3,
-                    height: "3rem",
-                    fontSize: "14px",
-                    "&:hover": {
-                      bgcolor: Dark,
-                    },
-                  }}
-                  onClick={()=> navigate('/UploadData')}
-                  disabled={!isFormComplete}
-                >
-                  {/* <Select
-                    value={selectedValue}
-                    onChange={handleSelectChange}
-                    style={{
-                      fontSize: "16px",
-                      padding: "4px 10px",
-                      alignItems: "center",
-                    }}
-                  >
-                    <option value="volvo" selected>
-                      {t("Add Maps")}
-                    </option>
-                    <option value="auto">{t("Auto")}</option>
-                    <option value="manual">{t("Manual")}</option>
-                  </Select> */}
-                  Add Drawings
-                </Button>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
-                <Button onClick={handleAddData}>Add</Button>
-              </DialogActions>
+              <AddClientForm initialRows={initialRows} />
             </Dialog>
           </Container>
         </Box>
