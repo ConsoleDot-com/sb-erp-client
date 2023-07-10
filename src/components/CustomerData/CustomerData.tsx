@@ -198,28 +198,37 @@ export const CustomerData = () => {
     // },
   }));
 
-  const [searchQuerry, setSearchQuerry] = useState("");
-  const handleSearch = (e: any) => {
-    setSearchQuerry(e.target.value);
-  };
-
   const reverseRows = initialRows.reverse();
   const [data, setData] = useState<any>(reverseRows);
-  const filterData = initialRows.filter((row) =>
-    row.name.toLowerCase().includes(searchQuerry.toLowerCase())
-  );
-  console.log(filterData, searchQuerry, "filter");
-  const [isClick, setIsClick] = useState(false);
-  const isSearchButtonClick = () => {
-    setIsClick(true);
+
+  const [searchQuerry, setSearchQuerry] = useState("");
+  const [searchData, setSearchData] = useState(initialRows);
+  const [tableFilter, setTableFilter] = useState<any>([]);
+
+  const filterData = (e: any) => {
+    if (e.target.value != "") {
+      setSearchQuerry(e.target.value);
+      const filterTable = initialRows.filter((o: any) =>
+        Object.keys(o).some((k: any) =>
+          String(o[k]).toLowerCase().includes(e.target.value.toLowerCase())
+        )
+      );
+      setTableFilter([...filterTable]);
+    } else {
+      setSearchQuerry(e.target.value);
+      setSearchData([...searchData]);
+    }
   };
 
   const handleDelete = (id: any) => {
-    const confirmDelete= window.confirm("Are you sure ! You want to delete this client? ")
-   if (confirmDelete){
-    const deleteRow = data.filter((_: any, i: any) => i != id);
-    setData(deleteRow);
-  }};
+    const confirmDelete = window.confirm(
+      "Are you sure ! You want to delete this client? "
+    );
+    if (confirmDelete) {
+      const deleteRow = data.filter((_: any, i: any) => i != id);
+      setData(deleteRow);
+    }
+  };
   const [openViewDialog, setOpenViewDialog] = useState(false);
   const handleViewDialogOpen = () => {
     setOpenViewDialog(true);
@@ -287,7 +296,7 @@ export const CustomerData = () => {
                   options={initialRows.map((option) => option.name)}
                   renderInput={(params) => (
                     <TextField
-                      onChange={handleSearch}
+                      onChange={filterData}
                       value={searchQuerry}
                       {...params}
                       label={t("Search input")}
@@ -303,18 +312,6 @@ export const CustomerData = () => {
                           color: "black",
                           backgroundColor: "white",
                         },
-                        endAdornment: (
-                          <Button
-                            onClick={isSearchButtonClick}
-                            sx={{
-                              border: " 1px solid #ddd",
-                              textTransform: "capitalize",
-                            }}
-                          >
-                            <SearchIcon />
-                            search
-                          </Button>
-                        ),
                       }}
                       sx={{
                         color: "white",
@@ -359,34 +356,67 @@ export const CustomerData = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {data.map((row: any, index: any) => (
-                        <TableRow
-                          key={row.index}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                        >
-                          <TableCell align="left">{row.houseNo}</TableCell>
-                          <TableCell align="left">{row.name}</TableCell>
-                          <TableCell align="left">{row.address}</TableCell>
-                          <TableCell align="left">{row.city}</TableCell>
-                          <TableCell align="left">{row.levels}</TableCell>
-                          <TableCell align="left">
-                            <EditIcon
-                              sx={{ mr: 1, cursor: "pointer" }}
-                              onClick={() => isOpenEditDialog(index)}
-                            />{" "}
-                            <DeleteOutlineIcon
-                              sx={{ mr: 1, cursor: "pointer" }}
-                              onClick={() => handleDelete(index)}
-                            />
-                            <VisibilityIcon
-                              sx={{ cursor: "pointer" }}
-                              onClick={() => handleClickView()}
-                            />
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                      {searchQuerry.length > 0
+                        ? tableFilter.map((row: any, index:any) => (
+                          <TableRow
+                            key={index}
+                            sx={{
+                              "&:last-child td, &:last-child th": {
+                                border: 0,
+                              },
+                            }}
+                          >
+                            <TableCell align="left">{row.houseNo}</TableCell>
+                            <TableCell align="left">{row.name}</TableCell>
+                            <TableCell align="left">{row.address}</TableCell>
+                            <TableCell align="left">{row.city}</TableCell>
+                            <TableCell align="left">{row.levels}</TableCell>
+                            <TableCell align="left">
+                              <EditIcon
+                                sx={{ mr: 1, cursor: "pointer" }}
+                                onClick={() => isOpenEditDialog(index)}
+                              />{" "}
+                              <DeleteOutlineIcon
+                                sx={{ mr: 1, cursor: "pointer" }}
+                                onClick={() => handleDelete(index)}
+                              />
+                              <VisibilityIcon
+                                sx={{ cursor: "pointer" }}
+                                onClick={() => handleClickView()}
+                              />
+                            </TableCell>
+                          </TableRow>
+                          ))
+                        : data.map((row: any, index:any) => (
+                            <TableRow
+                              key={index}
+                              sx={{
+                                "&:last-child td, &:last-child th": {
+                                  border: 0,
+                                },
+                              }}
+                            >
+                              <TableCell align="left">{row.houseNo}</TableCell>
+                              <TableCell align="left">{row.name}</TableCell>
+                              <TableCell align="left">{row.address}</TableCell>
+                              <TableCell align="left">{row.city}</TableCell>
+                              <TableCell align="left">{row.levels}</TableCell>
+                              <TableCell align="left">
+                                <EditIcon
+                                  sx={{ mr: 1, cursor: "pointer" }}
+                                  onClick={() => isOpenEditDialog(index)}
+                                />{" "}
+                                <DeleteOutlineIcon
+                                  sx={{ mr: 1, cursor: "pointer" }}
+                                  onClick={() => handleDelete(index)}
+                                />
+                                <VisibilityIcon
+                                  sx={{ cursor: "pointer" }}
+                                  onClick={() => handleClickView()}
+                                />
+                              </TableCell>
+                            </TableRow>
+                          ))}
                     </TableBody>
                   </Table>
                 </TableContainer>
@@ -398,8 +428,12 @@ export const CustomerData = () => {
                 close={() => setOpen(false)}
               />
             </Dialog>
-            <Dialog open={openViewDialog} onClose={handleViewDialogClose} fullScreen>
-              <ViewClientData close={()=> setOpenViewDialog(false)}/>
+            <Dialog
+              open={openViewDialog}
+              onClose={handleViewDialogClose}
+              fullScreen
+            >
+              <ViewClientData close={() => setOpenViewDialog(false)} />
             </Dialog>
             <Dialog open={openEditDialog} onClose={closeEditDialog}>
               <DialogTitle>Edit Row</DialogTitle>
