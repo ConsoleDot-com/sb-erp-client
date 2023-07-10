@@ -82,6 +82,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
     );
   };
 
+  
   return (
     <div>
       <DialogTitle>ADD CLIENT</DialogTitle>

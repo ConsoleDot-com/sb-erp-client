@@ -1,17 +1,29 @@
 import styled from "@emotion/styled";
-import { Container, Box, Button, Table, TableBody, IconButton ,Typography } from "@mui/material";
+import {
+  Container,
+  Box,
+  Button,
+  Table,
+  TableBody,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import EditIcon from '@mui/icons-material/Edit';
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import EditIcon from "@mui/icons-material/Edit";
 import Pagination from "@mui/material/Pagination";
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import Autocomplete from "@mui/material/Autocomplete";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import {
@@ -28,7 +40,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import { AddClientForm } from "../AddClientForm";
-
+import { ViewClientData } from "../ViewClientData";
 
 const initialRows = [
   {
@@ -37,9 +49,6 @@ const initialRows = [
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
-    edit: <EditIcon  sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "2",
@@ -47,9 +56,6 @@ const initialRows = [
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
-    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "3",
@@ -57,9 +63,6 @@ const initialRows = [
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
-    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "4",
@@ -67,9 +70,6 @@ const initialRows = [
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
-    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "5",
@@ -77,9 +77,6 @@ const initialRows = [
     address: "valancia",
     city: "Lahore",
     levels: "4",
-    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "6",
@@ -87,9 +84,6 @@ const initialRows = [
     address: "'V'alancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
-    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "7",
@@ -97,9 +91,6 @@ const initialRows = [
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
-    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "8",
@@ -107,9 +98,6 @@ const initialRows = [
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
-    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
   {
     houseNo: "9",
@@ -117,9 +105,6 @@ const initialRows = [
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
-    edit: <EditIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    delete:<DeleteOutlineIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>,
-    view:<VisibilityIcon sx={{fontSize:"22px", "&:hover":{fontSize:"24px"}, transition: 'transform 0.5s ease',}}/>
   },
 ];
 
@@ -169,10 +154,7 @@ const CssTextField = styled(TextField)({
   },
 });
 
-
 export const CustomerData = () => {
-
-
   const [fileUploaded, setFileUploaded] = useState(false);
 
   // const [selectedValue, setSelectedValue] = useState<string>("");
@@ -196,10 +178,6 @@ export const CustomerData = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-    
-  };
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     // [`&.${tableCellClasses.head}`]: {
     //   backgroundColor: Dark,
@@ -219,21 +197,72 @@ export const CustomerData = () => {
     //   border: 0,
     // },
   }));
-  
 
-  const [searchQuerry, setSearchQuerry]=useState('');
-  const handleSearch=(e:any)=>{
-       setSearchQuerry(e.target.value)
-  }
+  const [searchQuerry, setSearchQuerry] = useState("");
+  const handleSearch = (e: any) => {
+    setSearchQuerry(e.target.value);
+  };
 
-  const data = initialRows.reverse();
-  const filterData= initialRows.filter((row)=> row.name.toLowerCase().includes(searchQuerry.toLowerCase()))
-  console.log(filterData,searchQuerry,'filter')
-  const[isClick, setIsClick]=useState(false);
-  const isSearchButtonClick=()=>{
+  const reverseRows = initialRows.reverse();
+  const [data, setData] = useState<any>(reverseRows);
+  const filterData = initialRows.filter((row) =>
+    row.name.toLowerCase().includes(searchQuerry.toLowerCase())
+  );
+  console.log(filterData, searchQuerry, "filter");
+  const [isClick, setIsClick] = useState(false);
+  const isSearchButtonClick = () => {
     setIsClick(true);
-  }
-    return (
+  };
+
+  const handleDelete = (id: any) => {
+    const confirmDelete= window.confirm("Are you sure ! You want to delete this client? ")
+   if (confirmDelete){
+    const deleteRow = data.filter((_: any, i: any) => i != id);
+    setData(deleteRow);
+  }};
+  const [openViewDialog, setOpenViewDialog] = useState(false);
+  const handleViewDialogOpen = () => {
+    setOpenViewDialog(true);
+  };
+  const handleViewDialogClose = () => {
+    setOpenViewDialog(false);
+  };
+  const handleClickView = () => {
+    handleViewDialogOpen();
+  };
+
+  const [editIndex, setEditIndex] = useState(-1);
+  const handleEdit = (index: any) => {
+    setEditIndex(index);
+  };
+  const [editedRow, setEditedRow] = useState({});
+  const [openEditDialog, setOpenEditDialog] = useState(false);
+  const isOpenEditDialog = (index: any) => {
+    setEditedRow(data[index]);
+    setEditIndex(index);
+    setOpenEditDialog(true);
+  };
+  const handleEditField = (e: any, field: any) => {
+    setEditedRow((prevRow) => ({
+      ...prevRow,
+      [field]: e.target.value,
+    }));
+  };
+  const saveEdit = () => {
+    const updatedData = [...data];
+    updatedData[editIndex] = editedRow;
+    setData(updatedData);
+    setEditIndex(-1);
+    setEditedRow({});
+    setOpenEditDialog(false);
+  };
+  const closeEditDialog = () => {
+    setEditIndex(-1);
+    setEditedRow({});
+    setOpenEditDialog(false);
+  };
+
+  return (
     <>
       <Layout>
         <Box>
@@ -251,50 +280,53 @@ export const CustomerData = () => {
               }}
             >
               <Stack spacing={2} sx={{ width: "80%", mt: 3, mb: 2 }}>
-  <Autocomplete
-    freeSolo
-    id="free-solo-2-demo"
-    disableClearable
-    options={initialRows.map((option) => option.name)}
-    renderInput={(params) => (
-      <TextField
-      onChange={handleSearch}
-      value={searchQuerry}
-        {...params}
-        label={t("Search input")}
-        InputLabelProps={{
-          style: {
-            color: "black",
-          },
-        }}
-        InputProps={{
-          ...params.InputProps,
-          type: "search",
-          style: {
-            color: "black",
-            backgroundColor: "white",
-          },
-          endAdornment: (
-            <Button
-              onClick={isSearchButtonClick}
-              sx={{border:" 1px solid #ddd", textTransform:"capitalize"}}
-            > 
-              <SearchIcon />
-            search
-            </Button>
-          ),
-        }}
-        sx={{
-          color: "white",
-          height: "2rem",
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "center",
-        }}
-      />
-    )}
-  />
-</Stack>
+                <Autocomplete
+                  freeSolo
+                  id="free-solo-2-demo"
+                  disableClearable
+                  options={initialRows.map((option) => option.name)}
+                  renderInput={(params) => (
+                    <TextField
+                      onChange={handleSearch}
+                      value={searchQuerry}
+                      {...params}
+                      label={t("Search input")}
+                      InputLabelProps={{
+                        style: {
+                          color: "black",
+                        },
+                      }}
+                      InputProps={{
+                        ...params.InputProps,
+                        type: "search",
+                        style: {
+                          color: "black",
+                          backgroundColor: "white",
+                        },
+                        endAdornment: (
+                          <Button
+                            onClick={isSearchButtonClick}
+                            sx={{
+                              border: " 1px solid #ddd",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <SearchIcon />
+                            search
+                          </Button>
+                        ),
+                      }}
+                      sx={{
+                        color: "white",
+                        height: "2rem",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        alignItems: "center",
+                      }}
+                    />
+                  )}
+                />
+              </Stack>
 
               <Button
                 sx={{
@@ -309,13 +341,11 @@ export const CustomerData = () => {
                 }}
                 onClick={handleClickOpen}
               >
-               
                 Add New
               </Button>
             </Box>
             <Box mt={5}>
               <div style={{ height: 400, width: "100%" }}>
-                
                 <TableContainer component={Paper}>
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
@@ -326,14 +356,12 @@ export const CustomerData = () => {
                         <TableCell align="left">City</TableCell>
                         <TableCell align="left">Floors</TableCell>
                         <TableCell align="left">Edit</TableCell>
-                        <TableCell align="left">Delete</TableCell>
-                        <TableCell align="left">View</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {data.map((row) => (
+                      {data.map((row: any, index: any) => (
                         <TableRow
-                          key={row.name}
+                          key={row.index}
                           sx={{
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
@@ -342,20 +370,120 @@ export const CustomerData = () => {
                           <TableCell align="left">{row.name}</TableCell>
                           <TableCell align="left">{row.address}</TableCell>
                           <TableCell align="left">{row.city}</TableCell>
-                          <TableCell align="left" >{row.levels}</TableCell>
-                          <TableCell align="left">{row.edit}</TableCell>
-                          <TableCell align="left">{row.delete}</TableCell>
-                          <TableCell align="left">{row.view}</TableCell>
+                          <TableCell align="left">{row.levels}</TableCell>
+                          <TableCell align="left">
+                            <EditIcon
+                              sx={{ mr: 1, cursor: "pointer" }}
+                              onClick={() => isOpenEditDialog(index)}
+                            />{" "}
+                            <DeleteOutlineIcon
+                              sx={{ mr: 1, cursor: "pointer" }}
+                              onClick={() => handleDelete(index)}
+                            />
+                            <VisibilityIcon
+                              sx={{ cursor: "pointer" }}
+                              onClick={() => handleClickView()}
+                            />
+                          </TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
                   </Table>
                 </TableContainer>
-                
               </div>
             </Box>
-            <Dialog open={open} onClose={handleClose}>
-              <AddClientForm initialRows={initialRows} close={handleClose}/>
+            <Dialog open={open} onClose={() => setOpen(false)}>
+              <AddClientForm
+                initialRows={initialRows}
+                close={() => setOpen(false)}
+              />
+            </Dialog>
+            <Dialog open={openViewDialog} onClose={handleViewDialogClose} fullScreen>
+              <ViewClientData close={()=> setOpenViewDialog(false)}/>
+            </Dialog>
+            <Dialog open={openEditDialog} onClose={closeEditDialog}>
+              <DialogTitle>Edit Row</DialogTitle>
+              <DialogContent>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="houseNo"
+                  label="House No"
+                  type="text"
+                  value={data.houseNo}
+                  onChange={(e) => handleEditField(e, "houseNo")}
+                  fullWidth
+                  required
+                  variant="standard"
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="clientName"
+                  label="Client Name"
+                  type="text"
+                  value={data.clientName}
+                  onChange={(e) => handleEditField(e, "clientName")}
+                  fullWidth
+                  required
+                  variant="standard"
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="levels"
+                  label="Floor Levels"
+                  type="number"
+                  value={data.levels}
+                  onChange={(e) => handleEditField(e, "levels")}
+                  fullWidth
+                  required
+                  variant="standard"
+                  inputProps={{ min: "0" }}
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="address"
+                  label="Address"
+                  type="text"
+                  value={data.address}
+                  onChange={(e) => handleEditField(e, "address")}
+                  fullWidth
+                  required
+                  variant="standard"
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="city"
+                  label="City"
+                  type="text"
+                  value={data.city}
+                  onChange={(e) => handleEditField(e, "city")}
+                  fullWidth
+                  required
+                  variant="standard"
+                />
+                <Button
+                  sx={{
+                    backgroundColor: "#26255f",
+                    color: "white",
+                    mt: 3,
+                    height: "3rem",
+                    fontSize: "14px",
+                    "&:hover": {
+                      bgcolor: Dark,
+                    },
+                  }}
+                >
+                  Edit Drawings
+                </Button>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={saveEdit}>Save</Button>
+                <Button onClick={closeEditDialog}>Cancel</Button>
+              </DialogActions>
             </Dialog>
           </Container>
         </Box>
