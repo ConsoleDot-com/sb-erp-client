@@ -5,39 +5,55 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import DialogActions from "@mui/material/DialogActions";
 import { ButtonPadding, Dark, Primary, Secondary } from "../../utils";
+import {Grid} from "@mui/material"
 export const ViewClientData = ({ close }: any) => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <DialogTitle sx={{ textAlign: "center" }}>Hassaan Mujtaba</DialogTitle>
+      <DialogTitle sx={{ textAlign: "center", fontWeight:"bold"}}>Hassaan Mujtaba</DialogTitle>
       <DialogContent>
-        <Box>
-          <Box
+        <Grid container spacing={2} >
+          <Grid item xs={6}
             sx={{ display: "flex", alignItems: "center", columnGap: "10px" }}
           >
-            <h2>House No : </h2>
-            <span> 2</span>
-          </Box>
-          <Box
+            <h3>House No : </h3>
+            <span> 73</span>
+          </Grid>
+          <Grid item xs={6}
+            sx={{ display: "flex", alignItems: "center", columnGap: "10px"  }}
+          >
+            <h3>Address:</h3>
+            <span>Mohalla Siras Wala, Kallur kot.</span>
+          </Grid>
+          
+          <Grid item xs={6}
             sx={{ display: "flex", alignItems: "center", columnGap: "10px" }}
           >
-            <h2>Address : </h2>
+            <h3>City : </h3>
+            <span>Bhakkar</span>
+          </Grid>
+          <Grid item xs={6}
+            sx={{ display: "flex", alignItems: "center", columnGap: "10px" }}
+          >
+            <h3>Floor Levels : </h3>
             <span>2</span>
+          </Grid>
+          </Grid>
+          <h3>Files</h3>
+          <Box>
+            <Button>Floor 1 File</Button>
           </Box>
-          <Box
-            sx={{ display: "flex", alignItems: "center", columnGap: "10px" }}
-          >
-            <h2>City : </h2>
-            <span>2</span>
+          <Box>
+            <Button>Floor 2 File</Button>
           </Box>
-          <Box
-            sx={{ display: "flex", alignItems: "center", columnGap: "10px" }}
-          >
-            <h2>Floor Levels : </h2>
-            <span>2</span>
+          <Box>
+            <Button>Floor 3 File</Button>
           </Box>
-        </Box>
+          <Box>
+            <Button>Floor 4 File</Button>
+          </Box>
+        
       </DialogContent>
       <DialogActions>
         <Button
