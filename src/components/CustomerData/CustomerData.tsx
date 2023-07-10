@@ -219,6 +219,7 @@ export const CustomerData = () => {
       setSearchData([...searchData]);
     }
   };
+  console.log("name");
 
   const handleDelete = (id: any) => {
     const confirmDelete = window.confirm(
