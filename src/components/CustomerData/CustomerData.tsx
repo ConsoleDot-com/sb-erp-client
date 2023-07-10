@@ -203,24 +203,8 @@ export const CustomerData = () => {
   const [data, setData] = useState<any>(reverseRows);
 
   const [searchQuerry, setSearchQuerry] = useState("");
-  const [searchData, setSearchData] = useState(initialRows);
-  const [tableFilter, setTableFilter] = useState<any>([]);
 
-  const filterData = (e: any) => {
-    if (e.target.value != "") {
-      setSearchQuerry(e.target.value);
-      const filterTable = initialRows.filter((o: any) =>
-        Object.keys(o).some((k: any) =>
-          String(o[k]).toLowerCase().includes(e.target.value.toLowerCase())
-        )
-  );
-      setTableFilter([...filterTable]);
-    } else {
-      setSearchQuerry(e.target.value);
-      setSearchData([...searchData]);
-    }
-  };
-  console.log("name");
+  
 
   const handleDelete = (id: any) => {
     const confirmDelete = window.confirm(
@@ -300,7 +284,7 @@ export const CustomerData = () => {
                   options={initialRows.map((option) => option.name)}
                   renderInput={(params) => (
                     <TextField
-                      onChange={filterData}
+                      onChange={(e) => setSearchQuerry(e.target.value)}
                       value={searchQuerry}
                       {...params}
                       label={t("Search input")}
@@ -360,11 +344,18 @@ export const CustomerData = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {searchQuerry.length > 0
-                        ? tableFilter.map((row: any, index:any) => (
-                        <TableRow
+                    {data
+                        .filter((item: any) => {
+                          return searchQuerry.toLowerCase() === ""
+                            ? item
+                            : item.name
+                                .toLowerCase()
+                                .includes(searchQuerry);
+                        })
+                        .map((row: any, index: any) => (
+                          <TableRow
                             key={index}
-                          sx={{
+                            sx={{
                               "&:last-child td, &:last-child th": {
                                 border: 0,
                               },
@@ -390,37 +381,7 @@ export const CustomerData = () => {
                               />
                             </TableCell>
                           </TableRow>
-                          ))
-                        : data.map((row: any, index:any) => (
-                            <TableRow
-                              key={index}
-                              sx={{
-                                "&:last-child td, &:last-child th": {
-                                  border: 0,
-                                },
-                          }}
-                        >
-                          <TableCell align="left">{row.houseNo}</TableCell>
-                          <TableCell align="left">{row.name}</TableCell>
-                          <TableCell align="left">{row.address}</TableCell>
-                          <TableCell align="left">{row.city}</TableCell>
-                          <TableCell align="left">{row.levels}</TableCell>
-                          <TableCell align="left">
-                            <EditIcon
-                              sx={{ mr: 1, cursor: "pointer" }}
-                              onClick={() => isOpenEditDialog(index)}
-                            />{" "}
-                            <DeleteOutlineIcon
-                              sx={{ mr: 1, cursor: "pointer" }}
-                              onClick={() => handleDelete(index)}
-                            />
-                            <VisibilityIcon
-                              sx={{ cursor: "pointer" }}
-                              onClick={() => handleClickView()}
-                            />
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                        ))}
                     </TableBody>
                   </Table>
                 </TableContainer>
