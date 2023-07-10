@@ -53,13 +53,11 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
       formData.city.trim() === "" ||
       formData.levels.trim() === ""
     ) {
-      setError("Please fill missing fields.");
-      alert(error);
+      setError("Please fill in all the fields.");
       return;
     }
 
     initialRows.push(newRow);
-    initialRows.reverse();
     console.log(newRow, "rows");
     setFormData({
       houseNo: "",
@@ -68,11 +66,11 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
       city: "",
       levels: "",
     });
-    setOpen(false);
+    close();
   };
   const [isFormComplete, setIsFormComplete] = useState(false);
 
-  const checkFormComplete = (data : any) => {
+  const checkFormComplete = (data: any) => {
     return (
       data.houseNo.trim() !== "" &&
       data.clientName.trim() !== "" &&
@@ -82,7 +80,6 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
     );
   };
 
-  
   return (
     <div>
       <DialogTitle>ADD CLIENT</DialogTitle>
@@ -111,19 +108,19 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           required
           variant="standard"
         />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="levels"
-            label="Floor Levels"
-            type="number"
-            value={formData.levels}
-            onChange={handlechange}
-            fullWidth
-            required
-            variant="standard"
-            inputProps={{ min: "0" }}
-          />
+        <TextField
+          autoFocus
+          margin="dense"
+          id="levels"
+          label="Floor Levels"
+          type="number"
+          value={formData.levels}
+          onChange={handlechange}
+          fullWidth
+          required
+          variant="standard"
+          inputProps={{ min: "0" }}
+        />
         <TextField
           autoFocus
           margin="dense"
@@ -162,21 +159,6 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           onClick={() => navigate("/UploadData")}
           disabled={!isFormComplete}
         >
-          {/* <Select
-                    value={selectedValue}
-                    onChange={handleSelectChange}
-                    style={{
-                      fontSize: "16px",
-                      padding: "4px 10px",
-                      alignItems: "center",
-                    }}
-                  >
-                    <option value="volvo" selected>
-                      {t("Add Maps")}
-                    </option>
-                    <option value="auto">{t("Auto")}</option>
-                    <option value="manual">{t("Manual")}</option>
-                  </Select> */}
           Add Drawings
         </Button>
       </DialogContent>

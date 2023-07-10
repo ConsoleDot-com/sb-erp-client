@@ -44,68 +44,69 @@ import { ViewClientData } from "../ViewClientData";
 
 const initialRows = [
   {
-    houseNo: "1",
+    houseNo: "B-23",
     name: "Jon",
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
   },
   {
-    houseNo: "2",
+    houseNo: "A-02",
     name: "Cersei",
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
   },
   {
-    houseNo: "3",
+    houseNo: "P-53",
     name: "Jaime",
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
   },
   {
-    houseNo: "4",
+    houseNo: "I-09",
     name: "Arya",
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
   },
   {
-    houseNo: "5",
+    houseNo: "G-65",
     name: "Daenerys",
     address: "valancia",
     city: "Lahore",
     levels: "4",
   },
   {
-    houseNo: "6",
+    houseNo: "G-67",
     name: "dvd",
     address: "'V'alancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
   },
   {
-    houseNo: "7",
+    houseNo: "H-12",
     name: "Ferrara",
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
   },
   {
-    houseNo: "8",
+    houseNo: "H-65",
     name: "Rossini",
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
   },
   {
-    houseNo: "9",
+    houseNo: "H-55",
     name: "Harvey",
     address: "Valancia Town Lahore Block H",
     city: "Lahore",
     levels: "3",
   },
+  
 ];
 
 export const Td = styled("td")({
@@ -212,7 +213,7 @@ export const CustomerData = () => {
         Object.keys(o).some((k: any) =>
           String(o[k]).toLowerCase().includes(e.target.value.toLowerCase())
         )
-      );
+  );
       setTableFilter([...filterTable]);
     } else {
       setSearchQuerry(e.target.value);
@@ -226,9 +227,11 @@ export const CustomerData = () => {
       "Are you sure ! You want to delete this client? "
     );
     if (confirmDelete) {
-      const deleteRow = data.filter((_: any, i: any) => i != id);
-      setData(deleteRow);
+    const deleteRow = data.filter((_: any, i: any) => i != id);
+    setData(deleteRow);
+    console.log(deleteRow, 'del');
     }
+    
   };
   const [openViewDialog, setOpenViewDialog] = useState(false);
   const handleViewDialogOpen = () => {
@@ -359,9 +362,9 @@ export const CustomerData = () => {
                     <TableBody>
                       {searchQuerry.length > 0
                         ? tableFilter.map((row: any, index:any) => (
-                          <TableRow
+                        <TableRow
                             key={index}
-                            sx={{
+                          sx={{
                               "&:last-child td, &:last-child th": {
                                 border: 0,
                               },
@@ -395,29 +398,29 @@ export const CustomerData = () => {
                                 "&:last-child td, &:last-child th": {
                                   border: 0,
                                 },
-                              }}
-                            >
-                              <TableCell align="left">{row.houseNo}</TableCell>
-                              <TableCell align="left">{row.name}</TableCell>
-                              <TableCell align="left">{row.address}</TableCell>
-                              <TableCell align="left">{row.city}</TableCell>
-                              <TableCell align="left">{row.levels}</TableCell>
-                              <TableCell align="left">
-                                <EditIcon
-                                  sx={{ mr: 1, cursor: "pointer" }}
-                                  onClick={() => isOpenEditDialog(index)}
-                                />{" "}
-                                <DeleteOutlineIcon
-                                  sx={{ mr: 1, cursor: "pointer" }}
-                                  onClick={() => handleDelete(index)}
-                                />
-                                <VisibilityIcon
-                                  sx={{ cursor: "pointer" }}
-                                  onClick={() => handleClickView()}
-                                />
-                              </TableCell>
-                            </TableRow>
-                          ))}
+                          }}
+                        >
+                          <TableCell align="left">{row.houseNo}</TableCell>
+                          <TableCell align="left">{row.name}</TableCell>
+                          <TableCell align="left">{row.address}</TableCell>
+                          <TableCell align="left">{row.city}</TableCell>
+                          <TableCell align="left">{row.levels}</TableCell>
+                          <TableCell align="left">
+                            <EditIcon
+                              sx={{ mr: 1, cursor: "pointer" }}
+                              onClick={() => isOpenEditDialog(index)}
+                            />{" "}
+                            <DeleteOutlineIcon
+                              sx={{ mr: 1, cursor: "pointer" }}
+                              onClick={() => handleDelete(index)}
+                            />
+                            <VisibilityIcon
+                              sx={{ cursor: "pointer" }}
+                              onClick={() => handleClickView()}
+                            />
+                          </TableCell>
+                        </TableRow>
+                      ))}
                     </TableBody>
                   </Table>
                 </TableContainer>
@@ -432,7 +435,7 @@ export const CustomerData = () => {
             <Dialog
               open={openViewDialog}
               onClose={handleViewDialogClose}
-              fullScreen
+              
             >
               <ViewClientData close={() => setOpenViewDialog(false)} />
             </Dialog>
@@ -448,7 +451,6 @@ export const CustomerData = () => {
                   value={data.houseNo}
                   onChange={(e) => handleEditField(e, "houseNo")}
                   fullWidth
-                  required
                   variant="standard"
                 />
                 <TextField
@@ -460,7 +462,6 @@ export const CustomerData = () => {
                   value={data.clientName}
                   onChange={(e) => handleEditField(e, "clientName")}
                   fullWidth
-                  required
                   variant="standard"
                 />
                 <TextField
@@ -472,7 +473,6 @@ export const CustomerData = () => {
                   value={data.levels}
                   onChange={(e) => handleEditField(e, "levels")}
                   fullWidth
-                  required
                   variant="standard"
                   inputProps={{ min: "0" }}
                 />
@@ -485,7 +485,6 @@ export const CustomerData = () => {
                   value={data.address}
                   onChange={(e) => handleEditField(e, "address")}
                   fullWidth
-                  required
                   variant="standard"
                 />
                 <TextField
@@ -497,7 +496,7 @@ export const CustomerData = () => {
                   value={data.city}
                   onChange={(e) => handleEditField(e, "city")}
                   fullWidth
-                  required
+                  
                   variant="standard"
                 />
                 <Button
@@ -516,7 +515,7 @@ export const CustomerData = () => {
                 </Button>
               </DialogContent>
               <DialogActions>
-                <Button onClick={saveEdit}>Save</Button>
+                <Button onClick={saveEdit}>Edit</Button>
                 <Button onClick={closeEditDialog}>Cancel</Button>
               </DialogActions>
             </Dialog>
