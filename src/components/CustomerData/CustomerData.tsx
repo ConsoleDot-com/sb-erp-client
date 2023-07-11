@@ -118,20 +118,7 @@ const initialRows = [
 export const CustomerData = () => {
   const [fileUploaded, setFileUploaded] = useState(false);
 
-  // const [selectedValue, setSelectedValue] = useState<string>("");
-  // const navigate = useNavigate();
-  // // setting the state with the selected option
-  // const handleSelectChange = (event: any) => {
-  //   const selectedOption = event.target.value;
-  //   setSelectedValue(selectedOption);
-  //   // Navigate to the desired page based on the selected option
-  //   if (selectedOption === "auto") {
-  //     navigate("/uploadData");
-  //   }
-  //   if (selectedOption === "manual") {
-  //     window.location.href = "https://boq-client.vercel.app/";
-  //   }
-  // };
+  
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
@@ -181,7 +168,7 @@ export const CustomerData = () => {
       [field]: e.target.value,
     }));
   };
-  // ...
+
 
   const [editedRow, setEditedRow] = useState<CustomerData>({
     houseNo: "",
@@ -191,7 +178,7 @@ export const CustomerData = () => {
     levels: "",
   });
 
-  // ...
+
 
   const saveEdit = () => {
     const updatedData = [...data];
