@@ -75,3 +75,25 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
   //   border: 0,
   // },
 }));
+
+export const Select = styled.select`
+  border: none;
+  background-color: transparent;
+  color: white;
+  padding: ButtonPadding,
+  width: 5rem;
+  outline: none;
+  position: relative;
+  & option {
+    color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+`;
+
+export const Td = styled("td")({
+  width: "10rem",
+  textAlign: "center",
+});

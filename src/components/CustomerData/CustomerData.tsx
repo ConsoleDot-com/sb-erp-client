@@ -113,33 +113,7 @@ const initialRows = [
     city: "Lahore",
     levels: "3",
   },
-  
 ];
-
-export const Td = styled("td")({
-  width: "10rem",
-  textAlign: "center",
-});
-
-const Select = styled.select`
-  border: none;
-  background-color: transparent;
-  color: white;
-  padding: ButtonPadding,
-  width: 5rem;
-  outline: none;
-  position: relative;
-  & option {
-    color: black;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
-`;
-
-// this is how text fields of mui is styled
-
 
 export const CustomerData = () => {
   const [fileUploaded, setFileUploaded] = useState(false);
@@ -165,25 +139,20 @@ export const CustomerData = () => {
     setOpen(true);
   };
 
-  
-
   const reverseRows = initialRows.reverse();
   const [data, setData] = useState<any>(reverseRows);
 
   const [searchQuerry, setSearchQuerry] = useState("");
-
-  
 
   const handleDelete = (id: any) => {
     const confirmDelete = window.confirm(
       "Are you sure ! You want to delete this client? "
     );
     if (confirmDelete) {
-    const deleteRow = data.filter((_: any, i: any) => i != id);
-    setData(deleteRow);
-    console.log(deleteRow, 'del');
+      const deleteRow = data.filter((_: any, i: any) => i != id);
+      setData(deleteRow);
+      console.log(deleteRow, "del");
     }
-    
   };
   const [openViewDialog, setOpenViewDialog] = useState(false);
   const handleViewDialogOpen = () => {
@@ -214,46 +183,43 @@ export const CustomerData = () => {
   };
   // ...
 
-const [editedRow, setEditedRow] = useState<CustomerData>({
-  houseNo: '',
-  name: '',
-  address: '',
-  city: '',
-  levels: '',
-});
-
-// ...
-
-const saveEdit = () => {
-  const updatedData = [...data];
-  updatedData[editIndex] = editedRow;
-  setData(updatedData);
-  setEditIndex(-1);
-  setEditedRow({
-    houseNo: '',
-    name: '',
-    address: '',
-    city: '',
-    levels: '',
+  const [editedRow, setEditedRow] = useState<CustomerData>({
+    houseNo: "",
+    name: "",
+    address: "",
+    city: "",
+    levels: "",
   });
-  setOpenEditDialog(false);
-};
 
-const closeEditDialog = () => {
-  setEditIndex(-1);
-  setEditedRow({
-    houseNo: '',
-    name: '',
-    address: '',
-    city: '',
-    levels: '',
-  });
-  setOpenEditDialog(false);
-};
+  // ...
 
-// ...
+  const saveEdit = () => {
+    const updatedData = [...data];
+    updatedData[editIndex] = editedRow;
+    setData(updatedData);
+    setEditIndex(-1);
+    setEditedRow({
+      houseNo: "",
+      name: "",
+      address: "",
+      city: "",
+      levels: "",
+    });
+    setOpenEditDialog(false);
+  };
 
-  
+  const closeEditDialog = () => {
+    setEditIndex(-1);
+    setEditedRow({
+      houseNo: "",
+      name: "",
+      address: "",
+      city: "",
+      levels: "",
+    });
+    setOpenEditDialog(false);
+  };
+
   return (
     <>
       <Layout>
@@ -339,13 +305,11 @@ const closeEditDialog = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                    {data
+                      {data
                         .filter((item: any) => {
                           return searchQuerry.toLowerCase() === ""
                             ? item
-                            : item.name
-                                .toLowerCase()
-                                .includes(searchQuerry);
+                            : item.name.toLowerCase().includes(searchQuerry);
                         })
                         .map((row: any, index: any) => (
                           <TableRow
@@ -388,11 +352,7 @@ const closeEditDialog = () => {
                 close={() => setOpen(false)}
               />
             </Dialog>
-            <Dialog
-              open={openViewDialog}
-              onClose={handleViewDialogClose}
-              
-            >
+            <Dialog open={openViewDialog} onClose={handleViewDialogClose}>
               <ViewClientData close={() => setOpenViewDialog(false)} />
             </Dialog>
             <Dialog open={openEditDialog} onClose={closeEditDialog}>
@@ -404,7 +364,7 @@ const closeEditDialog = () => {
                   id="houseNo"
                   label="House No"
                   type="text"
-                  value={editedRow.houseNo || ''}
+                  value={editedRow.houseNo || ""}
                   onChange={(e) => handleEditField(e, "houseNo")}
                   fullWidth
                   variant="standard"
@@ -415,7 +375,7 @@ const closeEditDialog = () => {
                   id="clientName"
                   label="Client Name"
                   type="text"
-                  value={editedRow.name || ''}
+                  value={editedRow.name || ""}
                   onChange={(e) => handleEditField(e, "clientName")}
                   fullWidth
                   variant="standard"
@@ -426,7 +386,7 @@ const closeEditDialog = () => {
                   id="levels"
                   label="Floor Levels"
                   type="number"
-                  value={editedRow.levels || ''}
+                  value={editedRow.levels || ""}
                   onChange={(e) => handleEditField(e, "levels")}
                   fullWidth
                   variant="standard"
@@ -438,7 +398,7 @@ const closeEditDialog = () => {
                   id="address"
                   label="Address"
                   type="text"
-                  value={editedRow.address || ''}
+                  value={editedRow.address || ""}
                   onChange={(e) => handleEditField(e, "address")}
                   fullWidth
                   variant="standard"
@@ -449,10 +409,9 @@ const closeEditDialog = () => {
                   id="city"
                   label="City"
                   type="text"
-                  value={editedRow.city || ''}
+                  value={editedRow.city || ""}
                   onChange={(e) => handleEditField(e, "city")}
                   fullWidth
-                  
                   variant="standard"
                 />
                 <Button
