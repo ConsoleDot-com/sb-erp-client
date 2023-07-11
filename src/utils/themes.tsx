@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Typography } from "@mui/material";
+import { TableCell, TableRow, TextField, Typography, tableCellClasses } from "@mui/material";
 
 export const Body = "#f3f9fb";
 export const Primary = "#87c0cd";
@@ -33,3 +33,45 @@ export const ButtonHover = {
   color:Dark 
 }
 
+export const CssTextField = styled(TextField)({
+  "& label.Mui-focused": {
+    color: "white",
+  },
+  "& .MuiInput-underline:after": {
+    borderBottomColor: "#26255f",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#26255f",
+    },
+    "&:hover fieldset": {
+      borderColor: "#26255f",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: Dark,
+    },
+    "& label": {
+      color: "white",
+    },
+  },
+});
+
+export const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  // [`&.${tableCellClasses.head}`]: {
+  //   backgroundColor: Dark,
+  //   color: theme.palette.common.white,
+  // },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+export const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  // "&:nth-of-type(odd)": {
+  //   backgroundColor: theme.palette.action.hover,
+  // },
+  // hide last border
+  // "&:last-child td, &:last-child th": {
+  //   border: 0,
+  // },
+}));

@@ -42,6 +42,13 @@ import Dialog from "@mui/material/Dialog";
 import { AddClientForm } from "../AddClientForm";
 import { ViewClientData } from "../ViewClientData";
 
+interface CustomerData {
+  houseNo: string;
+  name: string;
+  address: string;
+  city: string;
+  levels: string;
+}
 const initialRows = [
   {
     houseNo: "B-23",
@@ -132,28 +139,7 @@ const Select = styled.select`
 `;
 
 // this is how text fields of mui is styled
-const CssTextField = styled(TextField)({
-  "& label.Mui-focused": {
-    color: "white",
-  },
-  "& .MuiInput-underline:after": {
-    borderBottomColor: "#26255f",
-  },
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: "#26255f",
-    },
-    "&:hover fieldset": {
-      borderColor: "#26255f",
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: Dark,
-    },
-    "& label": {
-      color: "white",
-    },
-  },
-});
+
 
 export const CustomerData = () => {
   const [fileUploaded, setFileUploaded] = useState(false);
@@ -179,25 +165,7 @@ export const CustomerData = () => {
     setOpen(true);
   };
 
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    // [`&.${tableCellClasses.head}`]: {
-    //   backgroundColor: Dark,
-    //   color: theme.palette.common.white,
-    // },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
-
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    // "&:nth-of-type(odd)": {
-    //   backgroundColor: theme.palette.action.hover,
-    // },
-    // hide last border
-    // "&:last-child td, &:last-child th": {
-    //   border: 0,
-    // },
-  }));
+  
 
   const reverseRows = initialRows.reverse();
   const [data, setData] = useState<any>(reverseRows);
@@ -232,7 +200,6 @@ export const CustomerData = () => {
   const handleEdit = (index: any) => {
     setEditIndex(index);
   };
-  const [editedRow, setEditedRow] = useState({});
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const isOpenEditDialog = (index: any) => {
     setEditedRow(data[index]);
@@ -245,20 +212,48 @@ export const CustomerData = () => {
       [field]: e.target.value,
     }));
   };
-  const saveEdit = () => {
-    const updatedData = [...data];
-    updatedData[editIndex] = editedRow;
-    setData(updatedData);
-    setEditIndex(-1);
-    setEditedRow({});
-    setOpenEditDialog(false);
-  };
-  const closeEditDialog = () => {
-    setEditIndex(-1);
-    setEditedRow({});
-    setOpenEditDialog(false);
-  };
+  // ...
 
+const [editedRow, setEditedRow] = useState<CustomerData>({
+  houseNo: '',
+  name: '',
+  address: '',
+  city: '',
+  levels: '',
+});
+
+// ...
+
+const saveEdit = () => {
+  const updatedData = [...data];
+  updatedData[editIndex] = editedRow;
+  setData(updatedData);
+  setEditIndex(-1);
+  setEditedRow({
+    houseNo: '',
+    name: '',
+    address: '',
+    city: '',
+    levels: '',
+  });
+  setOpenEditDialog(false);
+};
+
+const closeEditDialog = () => {
+  setEditIndex(-1);
+  setEditedRow({
+    houseNo: '',
+    name: '',
+    address: '',
+    city: '',
+    levels: '',
+  });
+  setOpenEditDialog(false);
+};
+
+// ...
+
+  
   return (
     <>
       <Layout>
@@ -409,7 +404,7 @@ export const CustomerData = () => {
                   id="houseNo"
                   label="House No"
                   type="text"
-                  value={data.houseNo}
+                  value={editedRow.houseNo || ''}
                   onChange={(e) => handleEditField(e, "houseNo")}
                   fullWidth
                   variant="standard"
@@ -420,7 +415,7 @@ export const CustomerData = () => {
                   id="clientName"
                   label="Client Name"
                   type="text"
-                  value={data.clientName}
+                  value={editedRow.name || ''}
                   onChange={(e) => handleEditField(e, "clientName")}
                   fullWidth
                   variant="standard"
@@ -431,7 +426,7 @@ export const CustomerData = () => {
                   id="levels"
                   label="Floor Levels"
                   type="number"
-                  value={data.levels}
+                  value={editedRow.levels || ''}
                   onChange={(e) => handleEditField(e, "levels")}
                   fullWidth
                   variant="standard"
@@ -443,7 +438,7 @@ export const CustomerData = () => {
                   id="address"
                   label="Address"
                   type="text"
-                  value={data.address}
+                  value={editedRow.address || ''}
                   onChange={(e) => handleEditField(e, "address")}
                   fullWidth
                   variant="standard"
@@ -454,7 +449,7 @@ export const CustomerData = () => {
                   id="city"
                   label="City"
                   type="text"
-                  value={data.city}
+                  value={editedRow.city || ''}
                   onChange={(e) => handleEditField(e, "city")}
                   fullWidth
                   
