@@ -23,7 +23,7 @@ export const Layout = ({ children }: DefaultLayoutProps) => {
           left: 0,
           width: "100%",
           minHeight: "100%",
-          background: "rgba(255,255,255,0.7)",
+          background: "rgba(255,255,255,0.81)",
           zIndex: -1,
         },
       }}
