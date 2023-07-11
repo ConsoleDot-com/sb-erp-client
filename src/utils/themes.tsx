@@ -4,7 +4,7 @@ import { TableCell, TableRow, TextField, Typography, tableCellClasses } from "@m
 export const Body = "#f3f9fb";
 export const Primary = "#87c0cd";
 export const Secondary = "#226597";
-export const Dark = "#113f67";
+export const Dark ="#26255f"     //#113f67";
 
 export const H1 = styled(Typography)({
   fontSize: "30px",

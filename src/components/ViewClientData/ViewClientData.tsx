@@ -6,6 +6,7 @@ import { useState } from "react";
 import DialogActions from "@mui/material/DialogActions";
 import { ButtonPadding, Dark, Primary, Secondary } from "../../utils";
 import {Grid} from "@mui/material"
+import { hover } from "@testing-library/user-event/dist/hover";
 export const ViewClientData = ({ close }: any) => {
   const [open, setOpen] = useState(false);
 
@@ -13,47 +14,44 @@ export const ViewClientData = ({ close }: any) => {
     <>
       <DialogTitle sx={{ textAlign: "center", fontWeight:"bold"}}>Hassaan Mujtaba</DialogTitle>
       <DialogContent>
-        <Grid container spacing={2} >
-          <Grid item xs={6}
-            sx={{ display: "flex", alignItems: "center", columnGap: "10px" }}
+        <Box sx={{display:'flex', flexDirection:'column', rowGap:'6px'}}>
+          <Box 
+            sx={{ display: "flex", alignItems: "center", columnGap: "50px" }}
           >
             <h3>House No : </h3>
             <span> 73</span>
-          </Grid>
-          <Grid item xs={6}
-            sx={{ display: "flex", alignItems: "center", columnGap: "10px"  }}
+          </Box>
+          <Box 
+            sx={{ display: "flex", alignItems: "center", columnGap: "50px"  }}
           >
             <h3>Address:</h3>
-            <span>Mohalla Siras Wala, Kallur kot.</span>
-          </Grid>
+            <span >Mohalla Siras Wala, Kallur kot.</span>
+          </Box>
           
-          <Grid item xs={6}
-            sx={{ display: "flex", alignItems: "center", columnGap: "10px" }}
+          <Box 
+            sx={{ display: "flex", alignItems: "center", columnGap: "50px" }}
           >
             <h3>City : </h3>
             <span>Bhakkar</span>
-          </Grid>
-          <Grid item xs={6}
-            sx={{ display: "flex", alignItems: "center", columnGap: "10px" }}
+          </Box>
+          <Box
+            sx={{ display: "flex", alignItems: "center", columnGap: "50px" }}
           >
             <h3>Floor Levels : </h3>
             <span>2</span>
-          </Grid>
-          </Grid>
+          </Box>
+          </Box>
           <h3>Files</h3>
-          <Box>
-            <Button>Floor 1 File</Button>
+          <Box sx={{display:'flex', flexDirection:'column', rowGap:'3px'}}>
+            <Button sx={{width:'100%', backgroundColor:Dark, color:'white', '&:hover':{backgroundColor:Secondary}}}>Floor 1 File</Button>
+
+            <Button sx={{width:'100%', backgroundColor:Dark, color:'white', '&:hover':{backgroundColor:Secondary}}}>Floor 2 File</Button>
+
+            <Button sx={{width:'100%', backgroundColor:Dark, color:'white', '&:hover':{backgroundColor:Secondary}}}>Floor 3 File</Button>
+
+            <Button sx={{width:'100%', backgroundColor:Dark, color:'white', '&:hover':{backgroundColor:Secondary}}}>Floor 4 File</Button>
+
           </Box>
-          <Box>
-            <Button>Floor 2 File</Button>
-          </Box>
-          <Box>
-            <Button>Floor 3 File</Button>
-          </Box>
-          <Box>
-            <Button>Floor 4 File</Button>
-          </Box>
-        
       </DialogContent>
       <DialogActions>
         <Button
@@ -62,7 +60,7 @@ export const ViewClientData = ({ close }: any) => {
             padding: ButtonPadding,
             backgroundColor: Dark,
             color: "white",
-            "&:hover": { color: "black", backgroundColor: Secondary },
+            "&:hover": { color:'white', backgroundColor: Secondary , },
           }}
         >
           Back
