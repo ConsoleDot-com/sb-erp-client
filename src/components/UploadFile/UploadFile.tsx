@@ -20,6 +20,11 @@ export const UploadFile = () => {
   });
   console.log(isFileUploaded, "file");
   const { t } = useTranslation();
+  const [levels, setLevels] = useState(
+    new Array(
+      parseInt(window.location.search.split("?").join("").split("=")[1])
+    ).fill("HI")
+  );
   const [reportOpen, setReportOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [addComponent, setAddComponent] = useState<any[]>([]);
@@ -71,6 +76,7 @@ export const UploadFile = () => {
       cement += i.cement;
       bajar += i.bajar;
     });
+    setReportOpen(true);
   };
 
   // console.log(finalBrick, "finalBrick");
@@ -107,7 +113,7 @@ export const UploadFile = () => {
                 "Upload only XLS files.Include accurate and complete tabular data.Use a single sheet with clear column headers.Avoid merged cells, special characters, and formulas.Check the file size (max 10 MB) and compress if needed.Remove sensitive information before uploading.Zip multiple XLS files into one, if applicable.Double-check the file's content for accuracy."
               )}
             </Typography>
-            <Box
+            {/* <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -190,9 +196,9 @@ export const UploadFile = () => {
                   </Button>
                 )}
               </Box>
-            </Box>
+            </Box> */}
             {/* compnents are being maped here */}
-            {addComponent.map((component: any, index: number) => (
+            {levels.map((i: any, index: number) => (
               <React.Fragment key={index.toString()}>
                 <Box
                   sx={{
@@ -222,7 +228,11 @@ export const UploadFile = () => {
                     }}
                     key={index}
                   >
-                    {component}
+                    <AddNew
+                      setDataValue={setDataValue}
+                      index={index}
+                      setIsFileUploaded={setIsFileUploaded}
+                    />
                   </Box>
                   <Box
                     sx={{
@@ -250,11 +260,11 @@ export const UploadFile = () => {
                           },
                         }}
                         onClick={() => {
-                          setDisplayIndex(index + 1);
+                          setDisplayIndex(index);
                           setOpen(true);
                         }}
                       >
-                        {t("    View")}
+                        {t("View")}
                       </Button>
                     )}
                     {isFileUploaded && (
@@ -308,26 +318,25 @@ export const UploadFile = () => {
                 {t("Add")}
               </Button>
               {/* conditional rendring of button when user adds more than 1 files  */}
-              {addComponent?.length > 0 && (
-                <Button
-                  onClick={() => {
-                    finalValues();
-                  }}
-                  sx={{
-                    mt: 3,
-                    backgroundColor: "#26255f",
-                    color: "white",
-                    padding: ButtonPadding,
 
-                    "&:hover": {
-                      backgroundColor: Dark,
-                      color: "white",
-                    },
-                  }}
-                >
-                  {t("Whole Report")}
-                </Button>
-              )}
+              <Button
+                onClick={() => {
+                  finalValues();
+                }}
+                sx={{
+                  mt: 3,
+                  backgroundColor: "#26255f",
+                  color: "white",
+                  padding: ButtonPadding,
+
+                  "&:hover": {
+                    backgroundColor: Dark,
+                    color: "white",
+                  },
+                }}
+              >
+                {t("Whole Report")}
+              </Button>
             </Box>
           </Box>
         </Container>
@@ -339,7 +348,7 @@ export const UploadFile = () => {
         />
       </Dialog>
       <Dialog fullScreen open={reportOpen} onClose={() => setReportOpen(false)}>
-        <WholeReportDialog finalData={finalData} />
+        <WholeReportDialog finalData={finalData} onClose={() => setReportOpen(false)} />
       </Dialog>
     </Layout>
   );
