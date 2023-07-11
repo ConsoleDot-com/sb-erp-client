@@ -1,11 +1,11 @@
-import { Button, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Dark } from "../../utils";
+import { ButtonPadding, Dark } from "../../utils";
 
 type AddClientFormProps = {
   initialRows: {
@@ -81,7 +81,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
   };
 
   return (
-    <div>
+    <Box>
       <DialogTitle>ADD CLIENT</DialogTitle>
       <DialogContent>
         <TextField
@@ -95,6 +95,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           fullWidth
           required
           variant="standard"
+          
         />
         <TextField
           autoFocus
@@ -107,6 +108,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           fullWidth
           required
           variant="standard"
+          
         />
         <TextField
           autoFocus
@@ -120,6 +122,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           required
           variant="standard"
           inputProps={{ min: "0" }}
+          
         />
         <TextField
           autoFocus
@@ -132,6 +135,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           fullWidth
           required
           variant="standard"
+          
         />
         <TextField
           autoFocus
@@ -144,12 +148,35 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           fullWidth
           required
           variant="standard"
+          
         />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={close} sx={{
+            backgroundColor: "#26255f",
+            color: "white",
+            mt: 3,
+            padding:ButtonPadding,
+            height: "3rem",
+            fontSize: "14px",
+            "&:hover": {
+              bgcolor: Dark,
+            },
+          }}>Cancel</Button>
+        {/* <Button
+          onClick={() => {
+            handleAddData();
+            close();
+          }}
+        >
+          Add
+        </Button> */}
         <Button
           sx={{
             backgroundColor: "#26255f",
             color: "white",
             mt: 3,
+            padding:ButtonPadding,
             height: "3rem",
             fontSize: "14px",
             "&:hover": {
@@ -161,18 +188,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
         >
           Add Drawings
         </Button>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={close}>Cancel</Button>
-        <Button
-          onClick={() => {
-            handleAddData();
-            close();
-          }}
-        >
-          Add
-        </Button>
       </DialogActions>
-    </div>
+    </Box>
   );
 };

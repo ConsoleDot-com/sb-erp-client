@@ -42,6 +42,8 @@ import Dialog from "@mui/material/Dialog";
 import { AddClientForm } from "../AddClientForm";
 import { ViewClientData } from "../ViewClientData";
 import { EditCustomerDataDialog } from "../EditCustomerDataDialog";
+import { url } from "inspector";
+import { bg } from "../../assets/jpg";
 
 export interface CustomerData {
   houseNo: string;
@@ -210,8 +212,8 @@ export const CustomerData = () => {
 
   return (
     <>
-      <Layout>
-        <Box>
+      <Layout >
+        <Box >
           <Container>
             <H1 mt={3} variant="h1" sx={{ color: Dark, textAlign: "center" }}>
               {t("Customers Data")}
@@ -279,17 +281,17 @@ export const CustomerData = () => {
               </Button>
             </Box>
             <Box mt={5}>
-              <div style={{ height: 400, width: "100%" }}>
+              <div style={{ height: '100%', width: "100%" }}>
                 <TableContainer component={Paper}>
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
-                      <TableRow>
-                        <TableCell>House No</TableCell>
-                        <TableCell align="left">Client Name</TableCell>
-                        <TableCell align="left">Address</TableCell>
-                        <TableCell align="left">City</TableCell>
-                        <TableCell align="left">Floors</TableCell>
-                        <TableCell align="left">Edit</TableCell>
+                      <TableRow sx={{backgroundColor:"whitesmoke",textTransform:'uppercase'}}>
+                        <TableCell sx={{fontWeight:"bold"}}>House No</TableCell>
+                        <TableCell align="left" sx={{fontWeight:"bold"}}>Client Name</TableCell>
+                        <TableCell align="left" sx={{fontWeight:"bold"}}>Address</TableCell>
+                        <TableCell align="left" sx={{fontWeight:"bold"}}>City</TableCell>
+                        <TableCell align="left" sx={{fontWeight:"bold"}}>Floors</TableCell>
+                        <TableCell align="left" sx={{fontWeight:"bold"}}></TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -314,17 +316,18 @@ export const CustomerData = () => {
                             <TableCell align="left">{row.city}</TableCell>
                             <TableCell align="left">{row.levels}</TableCell>
                             <TableCell align="left">
+                            <VisibilityIcon
+                                sx={{mr:1, cursor: "pointer" }}
+                                onClick={() => handleClickView()}
+                              />
                               <EditIcon
-                                sx={{ mr: 1, cursor: "pointer" }}
+                                sx={{ mr: 1, cursor: "pointer"}}
                                 onClick={() => isOpenEditDialog(index)}
                               />{" "}
+                              
                               <DeleteOutlineIcon
-                                sx={{ mr: 1, cursor: "pointer" }}
+                                sx={{cursor: "pointer" }}
                                 onClick={() => handleDelete(index)}
-                              />
-                              <VisibilityIcon
-                                sx={{ cursor: "pointer" }}
-                                onClick={() => handleClickView()}
                               />
                             </TableCell>
                           </TableRow>
@@ -334,7 +337,7 @@ export const CustomerData = () => {
                 </TableContainer>
               </div>
             </Box>
-            <Dialog open={open} onClose={() => setOpen(false)}>
+            <Dialog open={open} onClose={() => setOpen(false)} >
               <AddClientForm
                 initialRows={initialRows}
                 close={() => setOpen(false)}
