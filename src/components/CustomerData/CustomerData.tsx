@@ -41,8 +41,9 @@ import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import { AddClientForm } from "../AddClientForm";
 import { ViewClientData } from "../ViewClientData";
+import { EditCustomerDataDialog } from "../EditCustomerDataDialog";
 
-interface CustomerData {
+export interface CustomerData {
   houseNo: string;
   name: string;
   address: string;
@@ -269,7 +270,7 @@ export const CustomerData = () => {
                   width: "20%",
                   fontSize: "14px",
                   "&:hover": {
-                    bgcolor: Dark,
+                    bgcolor: Secondary,
                   },
                 }}
                 onClick={handleClickOpen}
@@ -343,83 +344,7 @@ export const CustomerData = () => {
               <ViewClientData close={() => setOpenViewDialog(false)} />
             </Dialog>
             <Dialog open={openEditDialog} onClose={closeEditDialog}>
-              <DialogTitle>Edit Row</DialogTitle>
-              <DialogContent>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="houseNo"
-                  label="House No"
-                  type="text"
-                  value={editedRow.houseNo || ""}
-                  onChange={(e) => handleEditField(e, "houseNo")}
-                  fullWidth
-                  variant="standard"
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="clientName"
-                  label="Client Name"
-                  type="text"
-                  value={editedRow.name || ""}
-                  onChange={(e) => handleEditField(e, "clientName")}
-                  fullWidth
-                  variant="standard"
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="levels"
-                  label="Floor Levels"
-                  type="number"
-                  value={editedRow.levels || ""}
-                  onChange={(e) => handleEditField(e, "levels")}
-                  fullWidth
-                  variant="standard"
-                  inputProps={{ min: "0" }}
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="address"
-                  label="Address"
-                  type="text"
-                  value={editedRow.address || ""}
-                  onChange={(e) => handleEditField(e, "address")}
-                  fullWidth
-                  variant="standard"
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="city"
-                  label="City"
-                  type="text"
-                  value={editedRow.city || ""}
-                  onChange={(e) => handleEditField(e, "city")}
-                  fullWidth
-                  variant="standard"
-                />
-                <Button
-                  sx={{
-                    backgroundColor: "#26255f",
-                    color: "white",
-                    mt: 3,
-                    height: "3rem",
-                    fontSize: "14px",
-                    "&:hover": {
-                      bgcolor: Dark,
-                    },
-                  }}
-                >
-                  Edit Drawings
-                </Button>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={saveEdit}>Edit</Button>
-                <Button onClick={closeEditDialog}>Cancel</Button>
-              </DialogActions>
+              <EditCustomerDataDialog editedRow={editedRow}  handleEditField={handleEditField} saveEdit={saveEdit} closeEditDialog={closeEditDialog}/>
             </Dialog>
           </Container>
         </Box>
