@@ -95,7 +95,6 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           fullWidth
           required
           variant="standard"
-          
         />
         <TextField
           autoFocus
@@ -108,7 +107,6 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           fullWidth
           required
           variant="standard"
-          
         />
         <TextField
           autoFocus
@@ -122,7 +120,6 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           required
           variant="standard"
           inputProps={{ min: "0" }}
-          
         />
         <TextField
           autoFocus
@@ -135,7 +132,6 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           fullWidth
           required
           variant="standard"
-          
         />
         <TextField
           autoFocus
@@ -148,21 +144,25 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           fullWidth
           required
           variant="standard"
-          
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={close} sx={{
+        <Button
+          onClick={close}
+          sx={{
             backgroundColor: "#26255f",
             color: "white",
             mt: 3,
-            padding:ButtonPadding,
+            padding: ButtonPadding,
             height: "3rem",
             fontSize: "14px",
             "&:hover": {
               bgcolor: Dark,
             },
-          }}>Cancel</Button>
+          }}
+        >
+          Cancel
+        </Button>
         {/* <Button
           onClick={() => {
             handleAddData();
@@ -176,14 +176,17 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
             backgroundColor: "#26255f",
             color: "white",
             mt: 3,
-            padding:ButtonPadding,
+            padding: ButtonPadding,
             height: "3rem",
             fontSize: "14px",
             "&:hover": {
               bgcolor: Dark,
             },
           }}
-          onClick={() => navigate("/UploadData")}
+          onClick={() => {
+            localStorage.setItem("@client_info", JSON.stringify(formData));
+            navigate(`/UploadData?levels=${formData?.levels}`);
+          }}
           disabled={!isFormComplete}
         >
           Add Drawings

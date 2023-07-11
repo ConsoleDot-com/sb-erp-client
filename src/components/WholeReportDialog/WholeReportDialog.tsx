@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { Dark } from "../../utils";
 import { useEffect, useState } from "react";
 
-export const WholeReportDialog = ({ finalData }: any) => {
+export const WholeReportDialog = ({ finalData, onClose }: any) => {
   const navigate = useNavigate();
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -92,7 +92,7 @@ export const WholeReportDialog = ({ finalData }: any) => {
   useEffect(() => {
     setRows([]);
     generateData();
-    console.log(finalData, "debug")
+    console.log(finalData, "debug");
   }, [finalData]);
   return (
     <>
@@ -148,7 +148,7 @@ export const WholeReportDialog = ({ finalData }: any) => {
               justifyContent: "space-around",
             }}
           >
-            <Button onClick={() => navigate("/uploadData")} variant="outlined">
+            <Button onClick={onClose} variant="outlined">
               Back{" "}
             </Button>
             <Button variant="outlined">Export</Button>
