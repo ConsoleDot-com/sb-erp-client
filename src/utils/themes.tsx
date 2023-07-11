@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { TableCell, TableRow, TextField, Typography, tableCellClasses } from "@mui/material";
+import { Box, TableCell, TableRow, TextField, Typography, tableCellClasses } from "@mui/material";
+import { bg } from "../assets/jpg";
 
 export const Body = "#f3f9fb";
 export const Primary = "#87c0cd";
@@ -97,3 +98,9 @@ export const Td = styled("td")({
   width: "10rem",
   textAlign: "center",
 });
+
+// export const BgImage=styled(Box)({
+//   backgroundImage:`url(${bg})`,
+//   height: '100px',
+//   width: '100px'
+// })
