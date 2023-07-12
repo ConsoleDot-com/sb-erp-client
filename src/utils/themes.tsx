@@ -99,8 +99,3 @@ export const Td = styled("td")({
   textAlign: "center",
 });
 
-// export const BgImage=styled(Box)({
-//   backgroundImage:`url(${bg})`,
-//   height: '100px',
-//   width: '100px'
-// })

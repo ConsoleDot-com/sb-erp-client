@@ -32,7 +32,7 @@ export const NavBar = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "white" }}>
+    <AppBar position="static" sx={{ backgroundColor: "white" ,}}>
       <Container maxWidth="xl">
         <Box
           sx={{

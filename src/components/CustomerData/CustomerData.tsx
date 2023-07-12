@@ -315,7 +315,7 @@ export const CustomerData = () => {
                             <TableCell align="left">{row.address}</TableCell>
                             <TableCell align="left">{row.city}</TableCell>
                             <TableCell align="left">{row.levels}</TableCell>
-                            <TableCell align="left">
+                            <TableCell align="left" sx={{display:'flex', flexDirection:{xl:'row', lg:'row', md:"column", sm:'column', xs:"column"}, rowGap:"4px"}}>
                             <VisibilityIcon
                                 sx={{mr:1, cursor: "pointer" }}
                                 onClick={() => handleClickView()}
