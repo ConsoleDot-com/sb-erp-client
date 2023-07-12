@@ -171,7 +171,12 @@ export const Login = () => {
               </Box>
             </Box>
           </Box>
-          <button onClick={() => i18n.changeLanguage("ur")}>{t("Urdu")}</button>
+          <button
+            onClick={() => i18n.changeLanguage("ur")}
+            style={{ margin: "8px" }}
+          >
+            {t("Urdu")}
+          </button>
           <button onClick={() => i18n.changeLanguage("en")}>English</button>
         </Container>
       </Box>
