@@ -102,16 +102,16 @@ export const UploadFile = () => {
   const navigate = useNavigate();
   return (
     <Layout>
-      <Box>
+      <Box sx={{height:'100vh'}}>
         <Container>
           <Box mt={3}>
-            <H1 sx={{ textAlign: "center", color: Dark }}>
+            <H1 sx={{ textAlign: "center", color: Dark ,fontWeight:'bold' }}>
               {t("Upload Your File")}
             </H1>
             <Typography sx={{ textAlign: "center" }}>
-              {t(
+             <i> {t(
                 "Upload only XLS files.Include accurate and complete tabular data.Use a single sheet with clear column headers.Avoid merged cells, special characters, and formulas.Check the file size (max 10 MB) and compress if needed.Remove sensitive information before uploading.Zip multiple XLS files into one, if applicable.Double-check the file's content for accuracy."
-              )}
+              )}</i>
             </Typography>
             {/* <Box
               sx={{
@@ -302,7 +302,7 @@ export const UploadFile = () => {
                 },
               }}
             >
-              <Button
+              {/* <Button
                 sx={{
                   mt: 3,
                   backgroundColor: "#26255f",
@@ -317,7 +317,7 @@ export const UploadFile = () => {
               >
                 {t("Add")}
               </Button>
-              {/* conditional rendring of button when user adds more than 1 files  */}
+              conditional rendring of button when user adds more than 1 files  */}
 
               <Button
                 onClick={() => {
@@ -325,6 +325,7 @@ export const UploadFile = () => {
                 }}
                 sx={{
                   mt: 3,
+                  mb:2,
                   backgroundColor: "#26255f",
                   color: "white",
                   padding: ButtonPadding,
