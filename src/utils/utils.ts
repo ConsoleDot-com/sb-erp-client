@@ -1,3 +1,5 @@
+import { Console } from "console";
+
 const formatToFeet = (val: string, cond: boolean): number => {
   if (val) {
     const newVal = cond ? val.split(" ") : val.split("-");
@@ -32,7 +34,7 @@ const calculateBricks = (wallcft: number): number => wallcft * 13.5;
 
 const dryMaterial = (totalcft: number): number => {
   const thirtyPercent = (30 / 100) * totalcft;
-  return totalcft + thirtyPercent;
+  return  thirtyPercent;
 };
 
 const calculateSandCft = (
@@ -51,7 +53,7 @@ const calculateCementBags = (
 ): number => {
   const totalPortion = sandPortion + cementPortion;
   const cementCft = (cementPortion / totalPortion) * drymaterial;
-  return cementCft * 1.25;
+  return cementCft / 1.25;
 };
 
 const calculateSandCft3 = (
@@ -307,8 +309,9 @@ const wallReader = (data: any[]): any => {
 
   const dryQuantity = dryMaterial(finalCft);
   const bricks = calculateBricks(finalCft);
-  const sand = calculateSandCft(1, 4, dryQuantity);
-  const cement = calculateCementBags(1, 4, dryQuantity);
+  const sand = calculateSandCft(4, 1, dryQuantity);
+  const cement = calculateCementBags(4, 1, dryQuantity);
+  console.log(finalCft,"final cft")
     return {
       bricks,
       sand,

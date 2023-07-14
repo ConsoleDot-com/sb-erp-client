@@ -46,14 +46,15 @@ export const FileViewDialog = ({ close, data }: any) => {
   }
 
   const rows = [
-    createData(1, t("Bricks"), t("No's"), Math.ceil(data?.bricks) || 0, 24, 4.0),
-    createData(1, t("Sand"), t("CFT"), Math.ceil(data?.sand) || 0, 37, 4.3),
-    createData(1, t("Cement"), t("Bags"), Math.ceil(data?.cement) || 0, 24, 6.0),
-    createData(1, t("Crush"), t("CFT"), 3.7, 67, 4.3),
-    createData(1, t("Bajar"), t("CFT"), Math.ceil(data?.bajar) || 0, 49, 3.9),
-    createData(1, t("Ghasu"), t("CFT"), 16.0, 49, 3.9),
-    createData(1, t("Steel"), t("Kg"), 16.0, 49, 3.9),
-    createData(1, t("Membrane Sheet"), t("Sft"), 16.0, 49, 3.9),
+    createData(1, t("Bricks"), t("No's"), data?.bricks || 0,16.5, 4.0),
+    createData(1, t("Sand"), t("CFT"), data?.sand || 0, 62, 4.3),
+    createData(1, t("Cement"), t("Bags"), data?.cement || 0, 1150, 6.0),
+    createData(1, t("Crush"), t("CFT"), 3.7, 133, 4.3),
+    createData(1, t("Bajar"), t("CFT"), data?.bajar || 0, 95, 3.9),
+    createData(1, t("Ghasu"), t("CFT"), 16.0, 28, 3.9),
+    createData(1, t("Steel"), t("Kg"), 16.0, 260, 3.9),
+    createData(1, t("Membrane Sheet"), t("Sft"), 16.0, 90, 3.9),
+    createData(1, t("Termite"), t("Sft"), 16.0, 11500, 3.9),
   ];
   return (
     <div>
