@@ -4,4 +4,5 @@ export * from './AddNew'
 export * from './UploadFile'
 export * from './FileViewDialog'
 export * from "./WholeReportDialog";
-export * from "./AddClientForm"
+export * from "./AddClientForm";
+export * from "./SlabSteelCalculator";
