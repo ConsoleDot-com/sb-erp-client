@@ -171,7 +171,21 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
         >
           Add
         </Button> */}
-        <Button
+        {!isFormComplete?<Button
+          sx={{
+            backgroundColor: "grey",
+            color: "#595959",
+            mt: 3,
+            padding: ButtonPadding,
+            height: "3rem",
+            fontSize: "14px",
+            "&:hover": {
+              bgcolor: "grey",
+            },
+          }}
+        >
+          Add Drawings
+        </Button>:<Button
           sx={{
             backgroundColor: "#26255f",
             color: "white",
@@ -187,10 +201,11 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
             localStorage.setItem("@client_info", JSON.stringify(formData));
             navigate(`/UploadData?levels=${formData?.levels}`);
           }}
-          disabled={!isFormComplete}
+          // disabled={!isFormComplete}
         >
           Add Drawings
         </Button>
+}
       </DialogActions>
     </Box>
   );
