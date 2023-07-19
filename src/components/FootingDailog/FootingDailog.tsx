@@ -1,4 +1,14 @@
-import { Box, Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
@@ -8,29 +18,29 @@ import { useNavigate } from "react-router-dom";
 import { ButtonPadding, Dark } from "../../utils";
 
 type AddClientFormProps = {
-  initialRows: {
+  footingData: {
     height: string;
     width: string;
     footingId: string;
     length: string;
     mainBars: string;
     distBars: string;
-    area:string;
+    area: string;
   }[];
   close: any;
 };
 
-export const FootingDailoge = ({ initialRows, close}: AddClientFormProps) => {
+export const FootingDailoge = ({ footingData, close }: AddClientFormProps) => {
   const [formData, setFormData] = useState({
-    height: '',
-    width: '',
-    footingId: '',
-    length: '',
-    mainBars: '',
-    distBars: '',
-    area:''
+    height: "",
+    width: "",
+    footingId: "",
+    length: "",
+    mainBars: "",
+    distBars: "",
+    area: "",
   });
-  
+
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const handlechange = (e: any) => {
@@ -40,7 +50,7 @@ export const FootingDailoge = ({ initialRows, close}: AddClientFormProps) => {
     }));
     setIsFormComplete(checkFormComplete(formData));
   };
-  console.log(initialRows, "initial");
+  console.log(footingData, "initial");
 
   const [error, setError] = useState("");
   const handleAddData = () => {
@@ -51,7 +61,7 @@ export const FootingDailoge = ({ initialRows, close}: AddClientFormProps) => {
       length: formData.length,
       mainBars: formData.mainBars,
       distBars: formData.distBars,
-      area: formData.area
+      area: formData.area,
     };
     if (
       formData.footingId.trim() === "" ||
@@ -60,22 +70,22 @@ export const FootingDailoge = ({ initialRows, close}: AddClientFormProps) => {
       formData.length.trim() === "" ||
       formData.mainBars.trim() === "" ||
       formData.distBars.trim() === "" ||
-      formData.area.trim()===""
+      formData.area.trim() === ""
     ) {
       setError("Please fill in all the fields.");
       return;
     }
 
-    initialRows.push(newRow);
+    footingData.push(newRow);
     console.log(newRow, "rows");
     setFormData({
       footingId: "",
-      height: '',
-      width: '',
+      height: "",
+      width: "",
       length: "",
       mainBars: "",
       distBars: "",
-      area:""
+      area: "",
     });
     close();
   };
@@ -85,21 +95,20 @@ export const FootingDailoge = ({ initialRows, close}: AddClientFormProps) => {
     return (
       data.footingId.trim() !== "" &&
       data.height.trim() === "" &&
-      data.width.trim() === ""  &&
+      data.width.trim() === "" &&
       data.length.trim() !== "" &&
       data.mainBars.trim() !== "" &&
       data.distBars.trim() !== "" &&
-      data.area.trim() !== "" 
+      data.area.trim() !== ""
     );
   };
-const[ basement, setBasement]=useState(false);
+  const [basement, setBasement] = useState(false);
 
-console.log(basement, 'basement')
+  console.log(basement, "basement");
   return (
     <Box>
       <DialogTitle>ADD FOOTING</DialogTitle>
       <DialogContent>
-       
         <TextField
           autoFocus
           margin="dense"
@@ -124,7 +133,7 @@ console.log(basement, 'basement')
           required
           variant="standard"
         />
-         <TextField
+        <TextField
           autoFocus
           margin="dense"
           id="width"
@@ -149,7 +158,7 @@ console.log(basement, 'basement')
           variant="standard"
           inputProps={{ min: "0" }}
         />
-<TextField
+        <TextField
           autoFocus
           margin="dense"
           id="mainBars"
@@ -175,11 +184,10 @@ console.log(basement, 'basement')
           variant="standard"
           inputProps={{ min: "0" }}
         />
-<FormControlLabel
-  label="Top & Bottom"
-  control={<Checkbox color="success" />}
-/>
-        
+        <FormControlLabel
+          label="Top & Bottom"
+          control={<Checkbox color="success" />}
+        />
       </DialogContent>
       <DialogActions>
         <Button
@@ -206,42 +214,44 @@ console.log(basement, 'basement')
         >
           Add
           </Button>  */}
-        {!isFormComplete?<Button
-          sx={{
-            backgroundColor: "grey",
-            color: "#595959",
-            mt: 3,
-            padding: ButtonPadding,
-            height: "3rem",
-            fontSize: "14px",
-            "&:hover": {
-              bgcolor: "grey",
-            },
-          }}
-        >
-          Add Drawings
-        </Button>:
-        <Button
-          sx={{
-            backgroundColor: "#26255f",
-            color: "white",
-            mt: 3,
-            padding: ButtonPadding,
-            height: "3rem",
-            fontSize: "14px",
-            "&:hover": {
-              bgcolor: Dark,
-            },
-          }}
-          onClick={() => {
-            localStorage.setItem("@client_info", JSON.stringify(formData));
-            navigate(`/UploadData`);
-          }}
-          // disabled={!isFormComplete}
-        >
-          Add Drawings
-        </Button>
- }
+        {!isFormComplete ? (
+          <Button
+            sx={{
+              backgroundColor: "grey",
+              color: "#595959",
+              mt: 3,
+              padding: ButtonPadding,
+              height: "3rem",
+              fontSize: "14px",
+              "&:hover": {
+                bgcolor: "grey",
+              },
+            }}
+          >
+            Add Drawings
+          </Button>
+        ) : (
+          <Button
+            sx={{
+              backgroundColor: "#26255f",
+              color: "white",
+              mt: 3,
+              padding: ButtonPadding,
+              height: "3rem",
+              fontSize: "14px",
+              "&:hover": {
+                bgcolor: Dark,
+              },
+            }}
+            onClick={() => {
+              localStorage.setItem("@client_info", JSON.stringify(formData));
+              navigate(`/UploadData`);
+            }}
+            // disabled={!isFormComplete}
+          >
+            Add Drawings
+          </Button>
+        )}
       </DialogActions>
     </Box>
   );
