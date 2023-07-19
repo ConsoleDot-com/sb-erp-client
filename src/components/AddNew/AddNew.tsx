@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Box, Container, Button } from "@mui/material";
-import { Dark, Secondary, slabReader, wallReader } from "../../utils";
+import { Dark, Secondary, wallReader } from "../../utils";
 import { foundationReader } from "../../utils";
 import * as xlsx from "xlsx";
 
@@ -62,11 +62,6 @@ export const AddNew = ({ index, setDataValue, setIsFileUploaded }: any) => {
           // setData({ ...foundationReader(floorData) });
           setDataValue(index, {
             ...foundationReader(floorData),
-          });
-        } else if (fileName.split(".")[0] == "Slab") {
-          // setData({ ...foundationReader(floorData) });
-          setDataValue(index, {
-            ...slabReader(floorData),
           });
         } else {
           alert("wrong input");

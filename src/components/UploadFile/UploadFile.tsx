@@ -438,6 +438,55 @@ export const UploadFile = () => {
                       </Button>
                     )}
                   </Box>
+                  <Box
+                    sx={{
+                      display: "block",
+                      gap: "1rem",
+                      width: {
+                        xl: "50%",
+                        lg: "50%",
+                        md: "50%",
+                        sm: "100%",
+                        xs: "100%",
+                      },
+                    }}
+                  >
+                    {isFileUploaded && (
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          backgroundColor: "#26255f",
+                          color: "white",
+                          padding: ButtonPadding,
+                          "&:hover": {
+                            bgcolor: Dark,
+                          },
+                        }}
+                        onClick={() => {
+                          setDisplayIndex(index);
+                          setOpen(true);
+                        }}
+                      >
+                        {t("BEAM")}
+                      </Button>
+                    )}
+                    {isFileUploaded && (
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          backgroundColor: "#26255f",
+                          color: "white",
+                          padding: ButtonPadding,
+                          "&:hover": {
+                            bgcolor: Dark,
+                          },
+                        }}
+                        onClick={() => onDelete(index)}
+                      >
+                        {t("  lINTELbEAM")}
+                      </Button>
+                    )}
+                  </Box>
                 </Box>
               </React.Fragment>
             ))}
