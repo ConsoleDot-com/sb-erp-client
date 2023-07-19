@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
+import { Box, Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
@@ -16,32 +6,29 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ButtonPadding, Dark } from "../../utils";
-import { UploadFile } from "../UploadFile";
 
 type AddClientFormProps = {
   initialRows: {
-    firstName: string;
-    lastName: string;
-    houseNo: string;
-    city: string;
-    province: string;
-    levels: string;
-    area: string;
+    height: string;
+    width: string;
+    columnId: string;
+    thickness: string;
+    bars: string;
+    ring: string;
   }[];
   close: any;
 };
 
-export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
+export const ColumnDailog = ({ initialRows, close}: AddClientFormProps) => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    houseNo: '',
-    city: '',
-    province: '',
-    levels: '',
-    area:'',
+    height: '',
+    width: '',
+    columnId: '',
+    thickness: '',
+    bars: '',
+    ring: '',
   });
-
+  
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const handlechange = (e: any) => {
@@ -56,22 +43,20 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
   const [error, setError] = useState("");
   const handleAddData = () => {
     const newRow = {
-      houseNo: formData.houseNo,
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      city: formData.city,
-      province: formData.province,
-      levels: formData.levels,
-      area: formData.area
+      columnId: formData.columnId,
+      height: formData.height,
+      width: formData.width,
+      thickness: formData.thickness,
+      bars: formData.bars,
+      ring: formData.ring,
     };
     if (
-      formData.houseNo.trim() === "" ||
-      formData.firstName.trim() === "" ||
-      formData.lastName.trim() === "" ||
-      formData.city.trim() === "" ||
-      formData.province.trim() === "" ||
-      formData.levels.trim() === "" ||
-      formData.area.trim()===""
+      formData.columnId.trim() === "" ||
+      formData.height.trim() === "" ||
+      formData.width.trim() === "" ||
+      formData.thickness.trim() === "" ||
+      formData.bars.trim() === "" ||
+      formData.ring.trim() === ""
     ) {
       setError("Please fill in all the fields.");
       return;
@@ -80,13 +65,12 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
     initialRows.push(newRow);
     console.log(newRow, "rows");
     setFormData({
-      houseNo: "",
-      firstName: "",
-      lastName: "",
-      city: "",
-      province: "",
-      levels: "",
-      area:""
+      columnId: "",
+      height: '',
+      width: '',
+      thickness: "",
+      bars: "",
+      ring: "",
     });
     close();
   };
@@ -94,29 +78,29 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
 
   const checkFormComplete = (data: any) => {
     return (
-      data.houseNo.trim() !== "" &&
-      formData.firstName.trim() === "" &&
-      formData.lastName.trim() === ""  &&
-      data.city.trim() !== "" &&
-      data.province.trim() !== "" &&
-      data.levels.trim() !== "" &&
-      data.area.trim() !== "" 
+      data.columnId.trim() !== "" &&
+      data.height.trim() === "" &&
+      data.width.trim() === ""  &&
+      data.thickness.trim() !== "" &&
+      data.bars.trim() !== "" &&
+      data.ring.trim() !== ""
     );
   };
-  const [basement, setBasement] = useState(false);
+const[ basement, setBasement]=useState(false);
 
-  console.log(basement, "basement");
+console.log(basement, 'basement')
   return (
     <Box>
-      <DialogTitle>ADD CLIENT</DialogTitle>
+      <DialogTitle>ADD COLUMN</DialogTitle>
       <DialogContent>
+       
         <TextField
           autoFocus
           margin="dense"
-          id="firstName"
-          label="First Name"
+          id="columnId"
+          label="Column ID"
           type="text"
-          value={formData.firstName}
+          value={formData.columnId}
           onChange={handlechange}
           fullWidth
           required
@@ -125,10 +109,22 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
         <TextField
           autoFocus
           margin="dense"
-          id="lastName"
-          label="Last Name"
+          id="height"
+          label="Height"
           type="text"
-          value={formData.lastName}
+          value={formData.height}
+          onChange={handlechange}
+          fullWidth
+          required
+          variant="standard"
+        />
+         <TextField
+          autoFocus
+          margin="dense"
+          id="width"
+          label="Width"
+          type="text"
+          value={formData.width}
           onChange={handlechange}
           fullWidth
           required
@@ -137,70 +133,36 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
         <TextField
           autoFocus
           margin="dense"
-          id="houseNo"
-          label="House No"
-          type="text"
-          value={formData.houseNo}
-          onChange={handlechange}
-          fullWidth
-          required
-          variant="standard"
-        />
-        <TextField
-          autoFocus
-          margin="dense"
-          id="levels"
-          label="Floor Levels"
+          id="thickness"
+          label="Thickness"
           type="number"
-          value={formData.levels}
+          value={formData.thickness}
           onChange={handlechange}
           fullWidth
           required
           variant="standard"
           inputProps={{ min: "0" }}
         />
-        <FormControl fullWidth sx={{mt:2}}>
-  <InputLabel id="demo-simple-select-label">Province</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={formData.province}
-    label="Province"
-    onChange={handlechange}
-    
-    
-  >
-    <MenuItem value={'punjab'}>Punjab</MenuItem>
-    <MenuItem value={'sindh'}>Sindh</MenuItem>
-    <MenuItem value={'kpk'}>Khyber Pakhtunkhwa</MenuItem>
-    <MenuItem value={'balochistan'}>Balochistan</MenuItem>
-  </Select>
-</FormControl>
-        
-<FormControl fullWidth sx={{mt:2}}>
-  <InputLabel id="demo-simple-select-label">City</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={formData.city}
-    label="City"
-    onChange={handlechange}
-    
-    
-  >
-    <MenuItem value={'punjab'}>Punjab</MenuItem>
-    <MenuItem value={'sindh'}>Sindh</MenuItem>
-    <MenuItem value={'kpk'}>Khyber Pakhtunkhwa</MenuItem>
-    <MenuItem value={'balochistan'}>Balochistan</MenuItem>
-  </Select>
-</FormControl>
 <TextField
           autoFocus
           margin="dense"
-          id="area"
-          label="Area"
+          id="bars"
+          label="Bars"
           type="text"
-          value={formData.area}
+          value={formData.bars}
+          onChange={handlechange}
+          fullWidth
+          required
+          variant="standard"
+          inputProps={{ min: "0" }}
+        />
+        <TextField
+          autoFocus
+          margin="dense"
+          id="ring"
+          label="Ring"
+          type="text"
+          value={formData.ring}
           onChange={handlechange}
           fullWidth
           required
@@ -208,11 +170,10 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           inputProps={{ min: "0" }}
         />
 <FormControlLabel
-  label="Basement"
+  label="Top & Bottom"
   control={<Checkbox color="success" />}
-  checked={basement}
-  onChange={() => setBasement((prevValue) => !prevValue)}
 />
+        
       </DialogContent>
       <DialogActions>
         <Button
@@ -252,7 +213,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
             },
           }}
         >
-          Add Drawings
+          Next
         </Button>:
         <Button
           sx={{
@@ -268,11 +229,11 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           }}
           onClick={() => {
             localStorage.setItem("@client_info", JSON.stringify(formData));
-            navigate(`/UploadData?levels=${formData?.levels}&basement=${basement}`);
+            navigate(`/UploadData`);
           }}
           // disabled={!isFormComplete}
         >
-          Add Drawings
+          Next
         </Button>
  }
       </DialogActions>

@@ -53,7 +53,7 @@ export interface CustomerData {
   city: string;
   province: string;
   levels: string;
-  area: string;
+  area:string
 }
 const initialRows = [
   {
@@ -63,7 +63,7 @@ const initialRows = [
     city: "Valancia Town Lahore Block H",
     province: "Lahore",
     levels: "3",
-    area: "Muslim Town",
+    area: "Muslim Town"
   },
   {
     houseNo: "A-02",
@@ -72,7 +72,7 @@ const initialRows = [
     city: "Valancia Town Lahore Block H",
     province: "Lahore",
     levels: "3",
-    area: "Muslim Town",
+    area: "Muslim Town"
   },
   {
     houseNo: "P-53",
@@ -81,7 +81,7 @@ const initialRows = [
     city: "Valancia Town Lahore Block H",
     province: "Lahore",
     levels: "3",
-    area: "Muslim Town",
+    area: "Muslim Town"
   },
   {
     houseNo: "I-09",
@@ -90,7 +90,7 @@ const initialRows = [
     city: "Valancia Town Lahore Block H",
     province: "Lahore",
     levels: "3",
-    area: "Muslim Town",
+    area: "Muslim Town"
   },
   {
     houseNo: "G-65",
@@ -99,7 +99,7 @@ const initialRows = [
     city: "valancia",
     province: "Lahore",
     levels: "4",
-    area: "Muslim Town",
+    area: "Muslim Town"
   },
   {
     houseNo: "G-67",
@@ -108,7 +108,7 @@ const initialRows = [
     city: "'V'alancia Town Lahore Block H",
     province: "Lahore",
     levels: "3",
-    area: "Muslim Town",
+    area: "Muslim Town"
   },
   {
     houseNo: "H-12",
@@ -117,7 +117,7 @@ const initialRows = [
     city: "Valancia Town Lahore Block H",
     province: "Lahore",
     levels: "3",
-    area: "Muslim Town",
+    area: "Muslim Town"
   },
   {
     houseNo: "H-65",
@@ -126,7 +126,7 @@ const initialRows = [
     city: "Valancia Town Lahore Block H",
     province: "Lahore",
     levels: "3",
-    area: "Muslim Town",
+    area: "Muslim Town"
   },
   {
     houseNo: "H-55",
@@ -135,7 +135,7 @@ const initialRows = [
     city: "Valancia Town Lahore Block H",
     province: "Lahore",
     levels: "3",
-    area: "Muslim Town",
+    area: "Muslim Town"
   },
 ];
 
@@ -199,7 +199,7 @@ export const CustomerData = () => {
     city: "",
     province: "",
     levels: "",
-    area: "",
+    area:""
   });
 
   const saveEdit = () => {
@@ -214,7 +214,7 @@ export const CustomerData = () => {
       city: "",
       province: "",
       levels: "",
-      area: "",
+      area:""
     });
     setOpenEditDialog(false);
   };
@@ -228,7 +228,7 @@ export const CustomerData = () => {
       city: "",
       province: "",
       levels: "",
-      area: "",
+      area:""
     });
     setOpenEditDialog(false);
   };

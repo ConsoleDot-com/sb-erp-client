@@ -278,6 +278,22 @@ export const UploadFile = () => {
                         {t("View")}
                       </Button>
                     )}
+                    {isFileUploaded && (
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          backgroundColor: "#26255f",
+                          color: "white",
+                          padding: ButtonPadding,
+                          "&:hover": {
+                            bgcolor: Dark,
+                          },
+                        }}
+                        onClick={() => onDelete(index)}
+                      >
+                        {t("  Delete")}
+                      </Button>
+                    )}
                   </Box>
                 </Box>
               </React.Fragment>
@@ -320,7 +336,7 @@ export const UploadFile = () => {
                 }}
                 sx={{
                   mt: 3,
-                  mb: 2,
+                  mb:2,
                   backgroundColor: "#26255f",
                   color: "white",
                   padding: ButtonPadding,
@@ -334,13 +350,46 @@ export const UploadFile = () => {
                 {t("Whole Report")}
               </Button>
             </Box>
-            <H1 sx={{ textAlign: "center", color: Dark, fontWeight: "bold" }}>
-              {t("Upload Slab File")}
-            </H1>
-            {levels
-              .slice(0, !basement ? levels.length - 1 : levels.length)
-              .map((i: any, index: number) => (
-                <React.Fragment key={index.toString()}>
+            <H1 sx={{ textAlign: "center", color: Dark ,fontWeight:'bold' }}>
+               {t("Upload Slab File")}
+             </H1>
+            {levels.slice(0, !basement?levels.length-1:levels.length).map((i: any, index: number) => (
+              <React.Fragment key={index.toString()}>
+               
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "100%",
+                    flexDirection: {
+                      xl: "row",
+                      lg: "row",
+                      md: "row",
+                      sm: "column",
+                      xs: "column",
+                    },
+                    rowGap: "16px",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: {
+                        xl: "50%",
+                        lg: "50%",
+                        md: "50%",
+                        sm: "100%",
+                        xs: "100%",
+                      },
+                    }}
+                    key={index}
+                  >
+                    <AddNew
+                      setDataValue={setDataValue}
+                      index={index}
+                      setIsFileUploaded={setIsFileUploaded}
+                    />
+                  </Box>
                   <Box
                     sx={{
                       display: "flex",
