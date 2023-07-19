@@ -42,6 +42,7 @@ export const UploadFile = () => {
     setMyDataArr(newData);
   };
   const [myDataArr, setMyDataArr] = useState<any[]>([]);
+  console.log(myDataArr)
   const setDataValue = (index: number, data: any) => {
     let temp: any[];
     if (index < myDataArr.length - 1) {
