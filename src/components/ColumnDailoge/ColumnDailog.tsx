@@ -11,24 +11,22 @@ type AddClientFormProps = {
   initialRows: {
     height: string;
     width: string;
-    footingId: string;
-    length: string;
-    mainBars: string;
-    distBars: string;
-    area:string;
+    columnId: string;
+    thickness: string;
+    bars: string;
+    ring: string;
   }[];
   close: any;
 };
 
-export const FootingDailoge = ({ initialRows, close}: AddClientFormProps) => {
+export const ColumnDailog = ({ initialRows, close}: AddClientFormProps) => {
   const [formData, setFormData] = useState({
     height: '',
     width: '',
-    footingId: '',
-    length: '',
-    mainBars: '',
-    distBars: '',
-    area:''
+    columnId: '',
+    thickness: '',
+    bars: '',
+    ring: '',
   });
   
   const [open, setOpen] = useState(false);
@@ -45,22 +43,20 @@ export const FootingDailoge = ({ initialRows, close}: AddClientFormProps) => {
   const [error, setError] = useState("");
   const handleAddData = () => {
     const newRow = {
-      footingId: formData.footingId,
+      columnId: formData.columnId,
       height: formData.height,
       width: formData.width,
-      length: formData.length,
-      mainBars: formData.mainBars,
-      distBars: formData.distBars,
-      area: formData.area
+      thickness: formData.thickness,
+      bars: formData.bars,
+      ring: formData.ring,
     };
     if (
-      formData.footingId.trim() === "" ||
+      formData.columnId.trim() === "" ||
       formData.height.trim() === "" ||
       formData.width.trim() === "" ||
-      formData.length.trim() === "" ||
-      formData.mainBars.trim() === "" ||
-      formData.distBars.trim() === "" ||
-      formData.area.trim()===""
+      formData.thickness.trim() === "" ||
+      formData.bars.trim() === "" ||
+      formData.ring.trim() === ""
     ) {
       setError("Please fill in all the fields.");
       return;
@@ -69,13 +65,12 @@ export const FootingDailoge = ({ initialRows, close}: AddClientFormProps) => {
     initialRows.push(newRow);
     console.log(newRow, "rows");
     setFormData({
-      footingId: "",
+      columnId: "",
       height: '',
       width: '',
-      length: "",
-      mainBars: "",
-      distBars: "",
-      area:""
+      thickness: "",
+      bars: "",
+      ring: "",
     });
     close();
   };
@@ -83,13 +78,12 @@ export const FootingDailoge = ({ initialRows, close}: AddClientFormProps) => {
 
   const checkFormComplete = (data: any) => {
     return (
-      data.footingId.trim() !== "" &&
+      data.columnId.trim() !== "" &&
       data.height.trim() === "" &&
       data.width.trim() === ""  &&
-      data.length.trim() !== "" &&
-      data.mainBars.trim() !== "" &&
-      data.distBars.trim() !== "" &&
-      data.area.trim() !== "" 
+      data.thickness.trim() !== "" &&
+      data.bars.trim() !== "" &&
+      data.ring.trim() !== ""
     );
   };
 const[ basement, setBasement]=useState(false);
@@ -97,16 +91,16 @@ const[ basement, setBasement]=useState(false);
 console.log(basement, 'basement')
   return (
     <Box>
-      <DialogTitle>ADD FOOTING</DialogTitle>
+      <DialogTitle>ADD COLUMN</DialogTitle>
       <DialogContent>
        
         <TextField
           autoFocus
           margin="dense"
-          id="footingId"
-          label="Footing ID"
+          id="columnId"
+          label="Column ID"
           type="text"
-          value={formData.footingId}
+          value={formData.columnId}
           onChange={handlechange}
           fullWidth
           required
@@ -139,10 +133,10 @@ console.log(basement, 'basement')
         <TextField
           autoFocus
           margin="dense"
-          id="length"
-          label="Length"
+          id="thickness"
+          label="Thickness"
           type="number"
-          value={formData.length}
+          value={formData.thickness}
           onChange={handlechange}
           fullWidth
           required
@@ -152,10 +146,10 @@ console.log(basement, 'basement')
 <TextField
           autoFocus
           margin="dense"
-          id="mainBars"
-          label="Main Bars"
+          id="bars"
+          label="Bars"
           type="text"
-          value={formData.mainBars}
+          value={formData.bars}
           onChange={handlechange}
           fullWidth
           required
@@ -165,10 +159,10 @@ console.log(basement, 'basement')
         <TextField
           autoFocus
           margin="dense"
-          id="distBars"
-          label="Dist. Bars"
+          id="ring"
+          label="Ring"
           type="text"
-          value={formData.distBars}
+          value={formData.ring}
           onChange={handlechange}
           fullWidth
           required
@@ -219,7 +213,7 @@ console.log(basement, 'basement')
             },
           }}
         >
-          Add Drawings
+          Next
         </Button>:
         <Button
           sx={{
@@ -239,7 +233,7 @@ console.log(basement, 'basement')
           }}
           // disabled={!isFormComplete}
         >
-          Add Drawings
+          Next
         </Button>
  }
       </DialogActions>
