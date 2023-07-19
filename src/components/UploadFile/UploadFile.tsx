@@ -47,6 +47,7 @@ export const UploadFile = () => {
     setMyDataArr(newData);
   };
   const [myDataArr, setMyDataArr] = useState<any[]>([]);
+  console.log(myDataArr)
   const setDataValue = (index: number, data: any) => {
     let temp: any[];
     if (index < myDataArr.length - 1) {
@@ -111,7 +112,7 @@ export const UploadFile = () => {
         <Container>
           <Box mt={3}>
             <H1 sx={{ textAlign: "center", color: Dark, fontWeight: "bold" }}>
-              {t("Upload Your File")}
+              {t("Upload Floor File")}
             </H1>
             <Typography sx={{ textAlign: "center" }}>
               <i>
@@ -333,7 +334,297 @@ export const UploadFile = () => {
                 }}
                 sx={{
                   mt: 3,
+                  mb:2,
+                  backgroundColor: "#26255f",
+                  color: "white",
+                  padding: ButtonPadding,
+
+                  "&:hover": {
+                    backgroundColor: Dark,
+                    color: "white",
+                  },
+                }}
+              >
+                {t("Whole Report")}
+              </Button>
+            </Box>
+            <H1 sx={{ textAlign: "center", color: Dark ,fontWeight:'bold' }}>
+               {t("Upload Slab File")}
+             </H1>
+            {levels.slice(0, levels.length - 1).map((i: any, index: number) => (
+              <React.Fragment key={index.toString()}>
+               
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "100%",
+                    flexDirection: {
+                      xl: "row",
+                      lg: "row",
+                      md: "row",
+                      sm: "column",
+                      xs: "column",
+                    },
+                    rowGap: "16px",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: {
+                        xl: "50%",
+                        lg: "50%",
+                        md: "50%",
+                        sm: "100%",
+                        xs: "100%",
+                      },
+                    }}
+                    key={index}
+                  >
+                    <AddNew
+                      setDataValue={setDataValue}
+                      index={index}
+                      setIsFileUploaded={setIsFileUploaded}
+                    />
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: "1rem",
+                      width: {
+                        xl: "50%",
+                        lg: "50%",
+                        md: "50%",
+                        sm: "100%",
+                        xs: "100%",
+                      },
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    {isFileUploaded && (
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          backgroundColor: "#26255f",
+                          color: "white",
+                          padding: ButtonPadding,
+                          "&:hover": {
+                            bgcolor: Dark,
+                          },
+                        }}
+                        onClick={() => {
+                          setDisplayIndex(index);
+                          setOpen(true);
+                        }}
+                      >
+                        {t("View")}
+                      </Button>
+                    )}
+                    {isFileUploaded && (
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          backgroundColor: "#26255f",
+                          color: "white",
+                          padding: ButtonPadding,
+                          "&:hover": {
+                            bgcolor: Dark,
+                          },
+                        }}
+                        onClick={() => onDelete(index)}
+                      >
+                        {t("  Delete")}
+                      </Button>
+                    )}
+                  </Box>
+                </Box>
+              </React.Fragment>
+            ))}
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                gap: "1rem",
+                marginBottom: "16px",
+                justifyContent: {
+                  xl: "flex-start",
+                  lg: "flex-start",
+                  md: "flex-start",
+                  sm: "center",
+                  xs: "center",
+                },
+              }}
+            >
+              {/* <Button
+                sx={{
+                  mt: 3,
+                  backgroundColor: "#26255f",
+                  color: "white",
+                  padding: ButtonPadding,
+                  "&:hover": {
+                    backgroundColor: Dark,
+                    color: "white",
+                  },
+                }}
+                onClick={() => addNewComponent()}
+              >
+                {t("Add")}
+              </Button>
+              conditional rendring of button when user adds more than 1 files  */}
+
+              <Button
+                onClick={() => {
+                  finalValues();
+                }}
+                sx={{
+                  mt: 3,
                   mb: 2,
+                  backgroundColor: "#26255f",
+                  color: "white",
+                  padding: ButtonPadding,
+
+                  "&:hover": {
+                    backgroundColor: Dark,
+                    color: "white",
+                  },
+                }}
+              >
+                {t("Whole Report")}
+              </Button>
+            </Box>
+            <H1 sx={{ textAlign: "center", color: Dark ,fontWeight:'bold' }}>
+               {t("Upload Slab File")}
+             </H1>
+            {levels.slice(0, levels.length - 1).map((i: any, index: number) => (
+              <React.Fragment key={index.toString()}>
+               
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "100%",
+                    flexDirection: {
+                      xl: "row",
+                      lg: "row",
+                      md: "row",
+                      sm: "column",
+                      xs: "column",
+                    },
+                    rowGap: "16px",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: {
+                        xl: "50%",
+                        lg: "50%",
+                        md: "50%",
+                        sm: "100%",
+                        xs: "100%",
+                      },
+                    }}
+                    key={index}
+                  >
+                    <AddNew
+                      setDataValue={setDataValue}
+                      index={index}
+                      setIsFileUploaded={setIsFileUploaded}
+                    />
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: "1rem",
+                      width: {
+                        xl: "50%",
+                        lg: "50%",
+                        md: "50%",
+                        sm: "100%",
+                        xs: "100%",
+                      },
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    {isFileUploaded && (
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          backgroundColor: "#26255f",
+                          color: "white",
+                          padding: ButtonPadding,
+                          "&:hover": {
+                            bgcolor: Dark,
+                          },
+                        }}
+                        onClick={() => {
+                          setDisplayIndex(index);
+                          setOpen(true);
+                        }}
+                      >
+                        {t("View")}
+                      </Button>
+                    )}
+                    {isFileUploaded && (
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          backgroundColor: "#26255f",
+                          color: "white",
+                          padding: ButtonPadding,
+                          "&:hover": {
+                            bgcolor: Dark,
+                          },
+                        }}
+                        onClick={() => onDelete(index)}
+                      >
+                        {t("  Delete")}
+                      </Button>
+                    )}
+                  </Box>
+                </Box>
+              </React.Fragment>
+            ))}
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                gap: "1rem",
+                marginBottom: "16px",
+                justifyContent: {
+                  xl: "flex-start",
+                  lg: "flex-start",
+                  md: "flex-start",
+                  sm: "center",
+                  xs: "center",
+                },
+              }}
+            >
+              {/* <Button
+                sx={{
+                  mt: 3,
+                  backgroundColor: "#26255f",
+                  color: "white",
+                  padding: ButtonPadding,
+                  "&:hover": {
+                    backgroundColor: Dark,
+                    color: "white",
+                  },
+                }}
+                onClick={() => addNewComponent()}
+              >
+                {t("Add")}
+              </Button>
+              conditional rendring of button when user adds more than 1 files  */}
+
+              <Button
+                onClick={() => {
+                  finalValues();
+                }}
+                sx={{
+                  mt: 3,
+                  mb:2,
                   backgroundColor: "#26255f",
                   color: "white",
                   padding: ButtonPadding,
