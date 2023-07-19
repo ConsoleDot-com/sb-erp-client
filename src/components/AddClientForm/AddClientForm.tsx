@@ -16,6 +16,7 @@ type AddClientFormProps = {
     city: string;
     province: string;
     levels: string;
+    area:string;
   }[];
   close: any;
 };
@@ -28,6 +29,7 @@ export const AddClientForm = ({ initialRows, close}: AddClientFormProps) => {
     city: '',
     province: '',
     levels: '',
+    area:''
   });
   
   const [open, setOpen] = useState(false);
@@ -50,14 +52,16 @@ export const AddClientForm = ({ initialRows, close}: AddClientFormProps) => {
       city: formData.city,
       province: formData.province,
       levels: formData.levels,
+      area: formData.area
     };
     if (
       formData.houseNo.trim() === "" ||
       formData.firstName.trim() === "" ||
       formData.lastName.trim() === "" ||
-      // formData.city.trim() === "" ||
-      // formData.province.trim() === "" ||
-      formData.levels.trim() === ""
+      formData.city.trim() === "" ||
+      formData.province.trim() === "" ||
+      formData.levels.trim() === "" ||
+      formData.area.trim()===""
     ) {
       setError("Please fill in all the fields.");
       return;
@@ -72,6 +76,7 @@ export const AddClientForm = ({ initialRows, close}: AddClientFormProps) => {
       city: "",
       province: "",
       levels: "",
+      area:""
     });
     close();
   };
@@ -82,9 +87,10 @@ export const AddClientForm = ({ initialRows, close}: AddClientFormProps) => {
       data.houseNo.trim() !== "" &&
       formData.firstName.trim() === "" &&
       formData.lastName.trim() === ""  &&
-      // data.city.trim() !== "" &&
-      // data.province.trim() !== "" &&
-      data.levels.trim() !== ""
+      data.city.trim() !== "" &&
+      data.province.trim() !== "" &&
+      data.levels.trim() !== "" &&
+      data.area.trim() !== "" 
     );
   };
 const[ basement, setBasement]=useState(false);
@@ -144,7 +150,7 @@ console.log(basement, 'basement')
           variant="standard"
           inputProps={{ min: "0" }}
         />
-        {/* <FormControl fullWidth sx={{mt:2}}>
+        <FormControl fullWidth sx={{mt:2}}>
   <InputLabel id="demo-simple-select-label">Province</InputLabel>
   <Select
     labelId="demo-simple-select-label"
@@ -182,16 +188,16 @@ console.log(basement, 'basement')
 <TextField
           autoFocus
           margin="dense"
-          id="levels"
-          label="Floor Levels"
-          type="number"
-          value={formData.levels}
+          id="area"
+          label="Area"
+          type="text"
+          value={formData.area}
           onChange={handlechange}
           fullWidth
           required
           variant="standard"
           inputProps={{ min: "0" }}
-        /> */}
+        />
 <FormControlLabel
   label="Basement"
   control={<Checkbox color="success" />}
@@ -224,8 +230,8 @@ console.log(basement, 'basement')
           }}
         >
           Add
-        </Button> */}
-        {/* {!isFormComplete?<Button
+          </Button>  */}
+        {!isFormComplete?<Button
           sx={{
             backgroundColor: "grey",
             color: "#595959",
@@ -239,7 +245,7 @@ console.log(basement, 'basement')
           }}
         >
           Add Drawings
-        </Button>: */}
+        </Button>:
         <Button
           sx={{
             backgroundColor: "#26255f",
@@ -260,7 +266,7 @@ console.log(basement, 'basement')
         >
           Add Drawings
         </Button>
-{/* } */}
+ }
       </DialogActions>
     </Box>
   );
