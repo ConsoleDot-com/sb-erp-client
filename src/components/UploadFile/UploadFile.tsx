@@ -9,8 +9,10 @@ import { FileViewDialog } from "../FileViewDialog";
 import { useNavigate } from "react-router-dom";
 import { WholeReportDialog } from "../WholeReportDialog";
 import React from "react";
+import { BeemDialog } from "../BeemDialog";
 
 export const UploadFile = () => {
+  const[openBeemDialog, setOpenBeemDialog]=useState(false);
   const [isFileUploaded, setIsFileUploaded] = useState<any>(false);
   const [finalData, setFinalData] = useState<any>({
     finalBrick: 0,
@@ -47,7 +49,7 @@ export const UploadFile = () => {
     setMyDataArr(newData);
   };
   const [myDataArr, setMyDataArr] = useState<any[]>([]);
-  console.log(myDataArr)
+  console.log(myDataArr);
   const setDataValue = (index: number, data: any) => {
     let temp: any[];
     if (index < myDataArr.length - 1) {
@@ -391,37 +393,111 @@ export const UploadFile = () => {
                   <Box
                     sx={{
                       display: "flex",
-                      gap: "1rem",
-                      width: {
-                        xl: "50%",
-                        lg: "50%",
-                        md: "50%",
-                        sm: "100%",
-                        xs: "100%",
+                      alignItems: "center",
+
+                      justifyContent: "center",
+                      width: "100%",
+                      flexDirection: {
+                        xl: "row",
+                        lg: "row",
+                        md: "row",
+                        sm: "column",
+                        xs: "column",
                       },
-                      justifyContent: "flex-end",
+                      rowGap: "16px",
                     }}
                   >
-                    {isFileUploaded && (
-                      <Button
-                        variant="outlined"
-                        sx={{
-                          backgroundColor: "#26255f",
-                          color: "white",
-                          padding: ButtonPadding,
-                          "&:hover": {
-                            bgcolor: Dark,
-                          },
-                        }}
-                        onClick={() => {
-                          setDisplayIndex(index);
-                          setOpen(true);
-                        }}
-                      >
-                        {t("View")}
-                      </Button>
-                    )}
-                    {isFileUploaded && (
+                    <Box
+                      sx={{
+                        width: {
+                          xl: "50%",
+                          lg: "50%",
+                          md: "50%",
+                          sm: "100%",
+                          xs: "100%",
+                        },
+                      }}
+                      key={index}
+                    >
+                      <AddNew
+                        setDataValue={setDataValue}
+                        index={index}
+                        setIsFileUploaded={setIsFileUploaded}
+                      />
+                    </Box>
+                    <Box></Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        gap: "1rem",
+                        width: {
+                          xl: "50%",
+                          lg: "50%",
+                          md: "50%",
+                          sm: "100%",
+                          xs: "100%",
+                        },
+                        justifyContent: "flex-end",
+                      }}
+                    >
+                      {isFileUploaded && (
+                        <Button
+                          variant="outlined"
+                          sx={{
+                            backgroundColor: "#26255f",
+                            color: "white",
+                            padding: ButtonPadding,
+                            "&:hover": {
+                              bgcolor: Dark,
+                            },
+                          }}
+                          onClick={() => {
+                            setDisplayIndex(index);
+                            setOpenBeemDialog(true);
+                          }}
+                        >
+                          {t("Beam")}
+                        </Button>
+                      )}
+                      {isFileUploaded && (
+                        <Button
+                          variant="outlined"
+                          sx={{
+                            backgroundColor: "#26255f",
+                            color: "white",
+                            padding: ButtonPadding,
+                            "&:hover": {
+                              bgcolor: Dark,
+                            },
+                          }}
+                          onClick={() => {
+                            setDisplayIndex(index);
+                            setOpen(true);
+                          }}
+                        >
+                          {t("Lintel Beam")}
+                        </Button>
+                      )}
+                      {isFileUploaded && (
+                        <Button
+                          variant="outlined"
+                          sx={{
+                            backgroundColor: "#26255f",
+                            color: "white",
+                            padding: ButtonPadding,
+                            "&:hover": {
+                              bgcolor: Dark,
+                            },
+                          }}
+                          onClick={() => {
+                            setDisplayIndex(index);
+                            setOpen(true);
+                          }}
+                        >
+                          {t("View")}
+                        </Button>
+                      )}
+                      {/* {isFileUploaded && (
                       <Button
                         variant="outlined"
                         sx={{
@@ -436,11 +512,11 @@ export const UploadFile = () => {
                       >
                         {t("  Delete")}
                       </Button>
-                    )}
+                    )} */}
+                    </Box>
                   </Box>
-                </Box>
-              </React.Fragment>
-            ))}
+                </React.Fragment>
+              ))}
             <Box
               sx={{
                 width: "100%",
@@ -479,7 +555,7 @@ export const UploadFile = () => {
                 }}
                 sx={{
                   mt: 3,
-                  mb:2,
+                  mb: 2,
                   backgroundColor: "#26255f",
                   color: "white",
                   padding: ButtonPadding,
@@ -507,6 +583,9 @@ export const UploadFile = () => {
           finalData={finalData}
           onClose={() => setReportOpen(false)}
         />
+      </Dialog>
+      <Dialog  open={openBeemDialog} onClose={() => setOpenBeemDialog(false)}>
+        <BeemDialog onClose={() => setOpenBeemDialog(false)}/>
       </Dialog>
     </Layout>
   );

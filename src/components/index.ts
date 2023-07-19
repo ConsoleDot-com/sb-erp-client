@@ -6,5 +6,6 @@ export * from './FileViewDialog'
 export * from "./WholeReportDialog";
 export * from "./AddClientForm";
 export * from "./SlabSteelCalculator";
+export * from "./BeemDialog"
 export * from "./FootingDailog";
 export * from "./ColumnDailoge";

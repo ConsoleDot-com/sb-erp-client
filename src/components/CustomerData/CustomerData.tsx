@@ -1,4 +1,3 @@
-
 import {
   styled,
   Container,
@@ -49,7 +48,7 @@ import { UploadFile } from "../UploadFile";
 
 export interface CustomerData {
   houseNo: string;
-  firstName:string;
+  firstName: string;
   lastName: string;
   city: string;
   province: string;
@@ -143,7 +142,6 @@ const initialRows = [
 export const CustomerData = () => {
   const [fileUploaded, setFileUploaded] = useState(false);
 
-  
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
@@ -194,18 +192,15 @@ export const CustomerData = () => {
     }));
   };
 
-
   const [editedRow, setEditedRow] = useState<CustomerData>({
     houseNo: "",
-    firstName:"",
-    lastName:"",
+    firstName: "",
+    lastName: "",
     city: "",
     province: "",
     levels: "",
     area:""
   });
-
-
 
   const saveEdit = () => {
     const updatedData = [...data];
@@ -214,8 +209,8 @@ export const CustomerData = () => {
     setEditIndex(-1);
     setEditedRow({
       houseNo: "",
-      firstName:"",
-      lastName:"",
+      firstName: "",
+      lastName: "",
       city: "",
       province: "",
       levels: "",
@@ -228,8 +223,8 @@ export const CustomerData = () => {
     setEditIndex(-1);
     setEditedRow({
       houseNo: "",
-      firstName:"",
-      lastName:"",
+      firstName: "",
+      lastName: "",
       city: "",
       province: "",
       levels: "",
@@ -240,8 +235,8 @@ export const CustomerData = () => {
 
   return (
     <>
-      <Layout >
-        <Box >
+      <Layout>
+        <Box>
           <Container>
             <H1 mt={3} variant="h1" sx={{ color: Dark, textAlign: "center" }}>
               {t("Customers Data")}
@@ -309,18 +304,35 @@ export const CustomerData = () => {
               </Button>
             </Box>
             <Box mt={5}>
-              <div style={{ height: '100%', width: "100%" }}>
+              <div style={{ height: "100%", width: "100%" }}>
                 <TableContainer component={Paper}>
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
-                      <TableRow sx={{backgroundColor:"whitesmoke",textTransform:'uppercase'}}>
-                        
-                        <TableCell align="left" sx={{fontWeight:"bold"}}>Client Name</TableCell>
-                        <TableCell align="left" sx={{fontWeight:"bold"}}>House NO </TableCell>
-                        <TableCell align="left" sx={{fontWeight:"bold"}}>City</TableCell>
-                        <TableCell sx={{fontWeight:"bold"}}>Address</TableCell>
-                        <TableCell align="left" sx={{fontWeight:"bold"}}>Floors</TableCell>
-                        <TableCell align="left" sx={{fontWeight:"bold"}}></TableCell>
+                      <TableRow
+                        sx={{
+                          backgroundColor: "whitesmoke",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        <TableCell align="left" sx={{ fontWeight: "bold" }}>
+                          Client Name
+                        </TableCell>
+                        <TableCell align="left" sx={{ fontWeight: "bold" }}>
+                          House NO{" "}
+                        </TableCell>
+                        <TableCell align="left" sx={{ fontWeight: "bold" }}>
+                          City
+                        </TableCell>
+                        <TableCell sx={{ fontWeight: "bold" }}>
+                          Address
+                        </TableCell>
+                        <TableCell align="left" sx={{ fontWeight: "bold" }}>
+                          Floors
+                        </TableCell>
+                        <TableCell
+                          align="left"
+                          sx={{ fontWeight: "bold" }}
+                        ></TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -339,24 +351,37 @@ export const CustomerData = () => {
                               },
                             }}
                           >
-                            
-                            <TableCell align="left">{row.firstName + row.lastName}</TableCell>
+                            <TableCell align="left">
+                              {row.firstName + row.lastName}
+                            </TableCell>
                             <TableCell align="left">{row.houseNo}</TableCell>
                             <TableCell align="left">{row.province}</TableCell>
                             <TableCell align="left">{row.city}</TableCell>
                             <TableCell align="left">{row.levels}</TableCell>
-                            <TableCell align="left" sx={{display:'flex', flexDirection:{xl:'row', lg:'row', md:"column", sm:'column', xs:"column"}, rowGap:"4px"}}>
-                            <VisibilityIcon
-                                sx={{mr:1, cursor: "pointer" }}
+                            <TableCell
+                              align="left"
+                              sx={{
+                                display: "flex",
+                                flexDirection: {
+                                  xl: "row",
+                                  lg: "row",
+                                  md: "column",
+                                  sm: "column",
+                                  xs: "column",
+                                },
+                                rowGap: "4px",
+                              }}
+                            >
+                              <VisibilityIcon
+                                sx={{ mr: 1, cursor: "pointer" }}
                                 onClick={() => handleClickView()}
                               />
                               <EditIcon
-                                sx={{ mr: 1, cursor: "pointer"}}
+                                sx={{ mr: 1, cursor: "pointer" }}
                                 onClick={() => isOpenEditDialog(index)}
                               />{" "}
-                              
                               <DeleteOutlineIcon
-                                sx={{cursor: "pointer" }}
+                                sx={{ cursor: "pointer" }}
                                 onClick={() => handleDelete(index)}
                               />
                             </TableCell>
@@ -367,7 +392,7 @@ export const CustomerData = () => {
                 </TableContainer>
               </div>
             </Box>
-            <Dialog open={open} onClose={() => setOpen(false)} >
+            <Dialog open={open} onClose={() => setOpen(false)}>
               <AddClientForm
                 initialRows={initialRows}
                 close={() => setOpen(false)}
@@ -377,12 +402,16 @@ export const CustomerData = () => {
               <ViewClientData close={() => setOpenViewDialog(false)} />
             </Dialog>
             <Dialog open={openEditDialog} onClose={closeEditDialog}>
-              <EditCustomerDataDialog editedRow={editedRow}  handleEditField={handleEditField} saveEdit={saveEdit} closeEditDialog={closeEditDialog}/>
+              <EditCustomerDataDialog
+                editedRow={editedRow}
+                handleEditField={handleEditField}
+                saveEdit={saveEdit}
+                closeEditDialog={closeEditDialog}
+              />
             </Dialog>
           </Container>
         </Box>
       </Layout>
-      
     </>
   );
 };

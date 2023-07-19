@@ -1,4 +1,14 @@
-import { Box, Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
@@ -16,12 +26,12 @@ type AddClientFormProps = {
     city: string;
     province: string;
     levels: string;
-    area:string;
+    area: string;
   }[];
   close: any;
 };
 
-export const AddClientForm = ({ initialRows, close}: AddClientFormProps) => {
+export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -29,9 +39,9 @@ export const AddClientForm = ({ initialRows, close}: AddClientFormProps) => {
     city: '',
     province: '',
     levels: '',
-    area:''
+    area:'',
   });
-  
+
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const handlechange = (e: any) => {
@@ -71,8 +81,8 @@ export const AddClientForm = ({ initialRows, close}: AddClientFormProps) => {
     console.log(newRow, "rows");
     setFormData({
       houseNo: "",
-      firstName: '',
-      lastName: '',
+      firstName: "",
+      lastName: "",
       city: "",
       province: "",
       levels: "",
@@ -93,14 +103,13 @@ export const AddClientForm = ({ initialRows, close}: AddClientFormProps) => {
       data.area.trim() !== "" 
     );
   };
-const[ basement, setBasement]=useState(false);
+  const [basement, setBasement] = useState(false);
 
-console.log(basement, 'basement')
+  console.log(basement, "basement");
   return (
     <Box>
       <DialogTitle>ADD CLIENT</DialogTitle>
       <DialogContent>
-       
         <TextField
           autoFocus
           margin="dense"
@@ -125,7 +134,7 @@ console.log(basement, 'basement')
           required
           variant="standard"
         />
-         <TextField
+        <TextField
           autoFocus
           margin="dense"
           id="houseNo"
@@ -204,7 +213,6 @@ console.log(basement, 'basement')
   checked={basement}
   onChange={() => setBasement((prevValue) => !prevValue)}
 />
-        
       </DialogContent>
       <DialogActions>
         <Button
