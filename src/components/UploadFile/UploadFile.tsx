@@ -28,7 +28,6 @@ export const UploadFile = () => {
   const [basement, setBasement] = useState(
     JSON.parse(window.location.search.split("?").join("").split("=")[2])
   );
-  console.log(typeof(basement), "debug")
   // const [basement, setBasement] = useState<boolean>(window.location.search.split("=")[1].split("=")[1]);
   const [reportOpen, setReportOpen] = useState(false);
   const [open, setOpen] = useState(false);
