@@ -32,11 +32,22 @@ export const EditCustomerDataDialog=({editedRow,handleEditField ,saveEdit ,close
                 <TextField
                   autoFocus
                   margin="dense"
-                  id="name"
-                  label="Client Name"
+                  id="firstName"
+                  label="First Name"
                   type="text"
-                  value={editedRow.name || ""}
-                  onChange={(e:any) => handleEditField(e, "name")}
+                  value={editedRow.firstName || ""}
+                  onChange={(e:any) => handleEditField(e, "firstName")}
+                  fullWidth
+                  variant="standard"
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="lastName"
+                  label="Last Name"
+                  type="text"
+                  value={editedRow.firstName || ""}
+                  onChange={(e:any) => handleEditField(e, "lastName")}
                   fullWidth
                   variant="standard"
                 />
@@ -55,22 +66,22 @@ export const EditCustomerDataDialog=({editedRow,handleEditField ,saveEdit ,close
                 <TextField
                   autoFocus
                   margin="dense"
-                  id="address"
-                  label="Address"
+                  id="city"
+                  label="City"
                   type="text"
-                  value={editedRow.address || ""}
-                  onChange={(e:any) => handleEditField(e, "address")}
+                  value={editedRow.city || ""}
+                  onChange={(e:any) => handleEditField(e, "city")}
                   fullWidth
                   variant="standard"
                 />
                 <TextField
                   autoFocus
                   margin="dense"
-                  id="city"
-                  label="City"
+                  id="province"
+                  label="Province"
                   type="text"
-                  value={editedRow.city || ""}
-                  onChange={(e :any) => handleEditField(e, "city")}
+                  value={editedRow.province || ""}
+                  onChange={(e :any) => handleEditField(e, "province")}
                   fullWidth
                   variant="standard"
                 />

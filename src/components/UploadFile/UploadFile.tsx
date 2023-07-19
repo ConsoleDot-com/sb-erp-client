@@ -25,12 +25,17 @@ export const UploadFile = () => {
       parseInt(window.location.search.split("?").join("").split("=")[1])
     ).fill("HI")
   );
+  const [basement, setBasement] = useState(
+    JSON.parse(window.location.search.split("?").join("").split("=")[2])
+  );
+  // const [basement, setBasement] = useState<boolean>(window.location.search.split("=")[1].split("=")[1]);
   const [reportOpen, setReportOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [addComponent, setAddComponent] = useState<any[]>([]);
   const [data, setData] = useState<any>({});
   const [currIndex, setCurrIndex] = useState<number>(0);
   const [displayIndex, setDisplayIndex] = useState<number>(0);
+
   // calling function onDelete and splicing it with 1
   const onDelete = (index: number) => {
     const newState = [...addComponent];
@@ -103,16 +108,19 @@ export const UploadFile = () => {
   const navigate = useNavigate();
   return (
     <Layout>
-      <Box sx={{height:'100vh'}}>
+      <Box sx={{ height: "100vh" }}>
         <Container>
           <Box mt={3}>
-            <H1 sx={{ textAlign: "center", color: Dark ,fontWeight:'bold' }}>
+            <H1 sx={{ textAlign: "center", color: Dark, fontWeight: "bold" }}>
               {t("Upload Floor File")}
             </H1>
             <Typography sx={{ textAlign: "center" }}>
-             <i> {t(
-                "Upload only XLS files.Include accurate and complete tabular data.Use a single sheet with clear column headers.Avoid merged cells, special characters, and formulas.Check the file size (max 10 MB) and compress if needed.Remove sensitive information before uploading.Zip multiple XLS files into one, if applicable.Double-check the file's content for accuracy."
-              )}</i>
+              <i>
+                {" "}
+                {t(
+                  "Upload only XLS files.Include accurate and complete tabular data.Use a single sheet with clear column headers.Avoid merged cells, special characters, and formulas.Check the file size (max 10 MB) and compress if needed.Remove sensitive information before uploading.Zip multiple XLS files into one, if applicable.Double-check the file's content for accuracy."
+                )}
+              </i>
             </Typography>
             {/* <Box
               sx={{
@@ -471,6 +479,151 @@ export const UploadFile = () => {
                 }}
                 sx={{
                   mt: 3,
+                  mb: 2,
+                  backgroundColor: "#26255f",
+                  color: "white",
+                  padding: ButtonPadding,
+
+                  "&:hover": {
+                    backgroundColor: Dark,
+                    color: "white",
+                  },
+                }}
+              >
+                {t("Whole Report")}
+              </Button>
+            </Box>
+            <H1 sx={{ textAlign: "center", color: Dark ,fontWeight:'bold' }}>
+               {t("Upload Slab File")}
+             </H1>
+            {levels.slice(0, levels.length - 1).map((i: any, index: number) => (
+              <React.Fragment key={index.toString()}>
+               
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "100%",
+                    flexDirection: {
+                      xl: "row",
+                      lg: "row",
+                      md: "row",
+                      sm: "column",
+                      xs: "column",
+                    },
+                    rowGap: "16px",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: {
+                        xl: "50%",
+                        lg: "50%",
+                        md: "50%",
+                        sm: "100%",
+                        xs: "100%",
+                      },
+                    }}
+                    key={index}
+                  >
+                    <AddNew
+                      setDataValue={setDataValue}
+                      index={index}
+                      setIsFileUploaded={setIsFileUploaded}
+                    />
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: "1rem",
+                      width: {
+                        xl: "50%",
+                        lg: "50%",
+                        md: "50%",
+                        sm: "100%",
+                        xs: "100%",
+                      },
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    {isFileUploaded && (
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          backgroundColor: "#26255f",
+                          color: "white",
+                          padding: ButtonPadding,
+                          "&:hover": {
+                            bgcolor: Dark,
+                          },
+                        }}
+                        onClick={() => {
+                          setDisplayIndex(index);
+                          setOpen(true);
+                        }}
+                      >
+                        {t("View")}
+                      </Button>
+                    )}
+                    {isFileUploaded && (
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          backgroundColor: "#26255f",
+                          color: "white",
+                          padding: ButtonPadding,
+                          "&:hover": {
+                            bgcolor: Dark,
+                          },
+                        }}
+                        onClick={() => onDelete(index)}
+                      >
+                        {t("  Delete")}
+                      </Button>
+                    )}
+                  </Box>
+                </Box>
+              </React.Fragment>
+            ))}
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                gap: "1rem",
+                marginBottom: "16px",
+                justifyContent: {
+                  xl: "flex-start",
+                  lg: "flex-start",
+                  md: "flex-start",
+                  sm: "center",
+                  xs: "center",
+                },
+              }}
+            >
+              {/* <Button
+                sx={{
+                  mt: 3,
+                  backgroundColor: "#26255f",
+                  color: "white",
+                  padding: ButtonPadding,
+                  "&:hover": {
+                    backgroundColor: Dark,
+                    color: "white",
+                  },
+                }}
+                onClick={() => addNewComponent()}
+              >
+                {t("Add")}
+              </Button>
+              conditional rendring of button when user adds more than 1 files  */}
+
+              <Button
+                onClick={() => {
+                  finalValues();
+                }}
+                sx={{
+                  mt: 3,
                   mb:2,
                   backgroundColor: "#26255f",
                   color: "white",
@@ -495,7 +648,10 @@ export const UploadFile = () => {
         />
       </Dialog>
       <Dialog fullScreen open={reportOpen} onClose={() => setReportOpen(false)}>
-        <WholeReportDialog finalData={finalData} onClose={() => setReportOpen(false)} />
+        <WholeReportDialog
+          finalData={finalData}
+          onClose={() => setReportOpen(false)}
+        />
       </Dialog>
     </Layout>
   );

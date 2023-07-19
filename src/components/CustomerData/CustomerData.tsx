@@ -45,76 +45,87 @@ import { ViewClientData } from "../ViewClientData";
 import { EditCustomerDataDialog } from "../EditCustomerDataDialog";
 import { url } from "inspector";
 import { bg } from "../../assets/jpg";
+import { UploadFile } from "../UploadFile";
 
 export interface CustomerData {
   houseNo: string;
-  name: string;
-  address: string;
+  firstName:string;
+  lastName: string;
   city: string;
+  province: string;
   levels: string;
 }
 const initialRows = [
   {
     houseNo: "B-23",
-    name: "Jon",
-    address: "Valancia Town Lahore Block H",
-    city: "Lahore",
+    firstName: "Jon",
+    lastName: "asd",
+    city: "Valancia Town Lahore Block H",
+    province: "Lahore",
     levels: "3",
   },
   {
     houseNo: "A-02",
-    name: "Cersei",
-    address: "Valancia Town Lahore Block H",
-    city: "Lahore",
+    firstName: "Cersei",
+    lastName: "asd",
+    city: "Valancia Town Lahore Block H",
+    province: "Lahore",
     levels: "3",
   },
   {
     houseNo: "P-53",
-    name: "Jaime",
-    address: "Valancia Town Lahore Block H",
-    city: "Lahore",
+    firstName: "Jaime",
+    lastName: "asd",
+    city: "Valancia Town Lahore Block H",
+    province: "Lahore",
     levels: "3",
   },
   {
     houseNo: "I-09",
-    name: "Arya",
-    address: "Valancia Town Lahore Block H",
-    city: "Lahore",
+    firstName: "Arya",
+    lastName: "asd",
+    city: "Valancia Town Lahore Block H",
+    province: "Lahore",
     levels: "3",
   },
   {
     houseNo: "G-65",
-    name: "Daenerys",
-    address: "valancia",
-    city: "Lahore",
+    firstName: "Daenerys",
+    lastName: "asd",
+    city: "valancia",
+    province: "Lahore",
     levels: "4",
   },
   {
     houseNo: "G-67",
-    name: "dvd",
-    address: "'V'alancia Town Lahore Block H",
-    city: "Lahore",
+    firstName: "dvd",
+    lastName: "asd",
+    city: "'V'alancia Town Lahore Block H",
+    province: "Lahore",
     levels: "3",
   },
   {
     houseNo: "H-12",
-    name: "Ferrara",
-    address: "Valancia Town Lahore Block H",
-    city: "Lahore",
+    firstName: "Ferrara",
+    lastName: "asd",
+    city: "Valancia Town Lahore Block H",
+    province: "Lahore",
     levels: "3",
   },
   {
     houseNo: "H-65",
-    name: "Rossini",
-    address: "Valancia Town Lahore Block H",
-    city: "Lahore",
+    firstName: "Rossini",
+    lastName: "asd",
+    city: "Valancia Town Lahore Block H",
+    province: "Lahore",
     levels: "3",
   },
   {
     houseNo: "H-55",
-    name: "Harvey",
-    address: "Valancia Town Lahore Block H",
-    city: "Lahore",
+    firstName: "Harvey",
+    lastName: "asd",
+    city: "Valancia Town Lahore Block H",
+    province: "Lahore",
     levels: "3",
   },
 ];
@@ -176,9 +187,10 @@ export const CustomerData = () => {
 
   const [editedRow, setEditedRow] = useState<CustomerData>({
     houseNo: "",
-    name: "",
-    address: "",
+    firstName:"",
+    lastName:"",
     city: "",
+    province: "",
     levels: "",
   });
 
@@ -191,9 +203,10 @@ export const CustomerData = () => {
     setEditIndex(-1);
     setEditedRow({
       houseNo: "",
-      name: "",
-      address: "",
+      firstName:"",
+      lastName:"",
       city: "",
+      province: "",
       levels: "",
     });
     setOpenEditDialog(false);
@@ -203,9 +216,10 @@ export const CustomerData = () => {
     setEditIndex(-1);
     setEditedRow({
       houseNo: "",
-      name: "",
-      address: "",
+      firstName:"",
+      lastName:"",
       city: "",
+      province: "",
       levels: "",
     });
     setOpenEditDialog(false);
@@ -233,7 +247,7 @@ export const CustomerData = () => {
                   freeSolo
                   id="free-solo-2-demo"
                   disableClearable
-                  options={initialRows.map((option) => option.name)}
+                  options={initialRows.map((option) => option.firstName)}
                   renderInput={(params) => (
                     <TextField
                       onChange={(e) => setSearchQuerry(e.target.value)}
@@ -287,10 +301,11 @@ export const CustomerData = () => {
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                       <TableRow sx={{backgroundColor:"whitesmoke",textTransform:'uppercase'}}>
-                        <TableCell sx={{fontWeight:"bold"}}>House No</TableCell>
+                        
                         <TableCell align="left" sx={{fontWeight:"bold"}}>Client Name</TableCell>
-                        <TableCell align="left" sx={{fontWeight:"bold"}}>Address</TableCell>
+                        <TableCell align="left" sx={{fontWeight:"bold"}}>House NO </TableCell>
                         <TableCell align="left" sx={{fontWeight:"bold"}}>City</TableCell>
+                        <TableCell sx={{fontWeight:"bold"}}>Address</TableCell>
                         <TableCell align="left" sx={{fontWeight:"bold"}}>Floors</TableCell>
                         <TableCell align="left" sx={{fontWeight:"bold"}}></TableCell>
                       </TableRow>
@@ -311,9 +326,10 @@ export const CustomerData = () => {
                               },
                             }}
                           >
+                            
+                            <TableCell align="left">{row.firstName + row.lastName}</TableCell>
                             <TableCell align="left">{row.houseNo}</TableCell>
-                            <TableCell align="left">{row.name}</TableCell>
-                            <TableCell align="left">{row.address}</TableCell>
+                            <TableCell align="left">{row.province}</TableCell>
                             <TableCell align="left">{row.city}</TableCell>
                             <TableCell align="left">{row.levels}</TableCell>
                             <TableCell align="left" sx={{display:'flex', flexDirection:{xl:'row', lg:'row', md:"column", sm:'column', xs:"column"}, rowGap:"4px"}}>
@@ -353,6 +369,7 @@ export const CustomerData = () => {
           </Container>
         </Box>
       </Layout>
+      
     </>
   );
 };
