@@ -319,4 +319,10 @@ const wallReader = (data: any[]): any => {
     };
 };
 
-export { wallReader, foundationReader };
+
+const slabReader =(data: any[]): any => {
+  console.log("system read the slab file");
+  console.log(data, "data")
+}
+
+export { wallReader, foundationReader, slabReader };
