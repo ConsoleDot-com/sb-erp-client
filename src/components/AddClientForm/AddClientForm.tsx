@@ -1,4 +1,14 @@
-import { Box, Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
@@ -16,22 +26,22 @@ type AddClientFormProps = {
     city: string;
     province: string;
     levels: string;
-    area:string;
+    area: string;
   }[];
   close: any;
 };
 
-export const AddClientForm = ({ initialRows, close}: AddClientFormProps) => {
+export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    houseNo: '',
-    city: '',
-    province: '',
-    levels: '',
-    area:''
+    firstName: "",
+    lastName: "",
+    houseNo: "",
+    city: "",
+    province: "",
+    levels: "",
+    area: "",
   });
-  
+
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const handlechange = (e: any) => {
@@ -52,7 +62,7 @@ export const AddClientForm = ({ initialRows, close}: AddClientFormProps) => {
       city: formData.city,
       province: formData.province,
       levels: formData.levels,
-      area: formData.area
+      area: formData.area,
     };
     if (
       formData.houseNo.trim() === "" ||
@@ -61,7 +71,7 @@ export const AddClientForm = ({ initialRows, close}: AddClientFormProps) => {
       formData.city.trim() === "" ||
       formData.province.trim() === "" ||
       formData.levels.trim() === "" ||
-      formData.area.trim()===""
+      formData.area.trim() === ""
     ) {
       setError("Please fill in all the fields.");
       return;
@@ -71,12 +81,12 @@ export const AddClientForm = ({ initialRows, close}: AddClientFormProps) => {
     console.log(newRow, "rows");
     setFormData({
       houseNo: "",
-      firstName: '',
-      lastName: '',
+      firstName: "",
+      lastName: "",
       city: "",
       province: "",
       levels: "",
-      area:""
+      area: "",
     });
     close();
   };
@@ -86,21 +96,20 @@ export const AddClientForm = ({ initialRows, close}: AddClientFormProps) => {
     return (
       data.houseNo.trim() !== "" &&
       formData.firstName.trim() === "" &&
-      formData.lastName.trim() === ""  &&
+      formData.lastName.trim() === "" &&
       data.city.trim() !== "" &&
       data.province.trim() !== "" &&
       data.levels.trim() !== "" &&
-      data.area.trim() !== "" 
+      data.area.trim() !== ""
     );
   };
-const[ basement, setBasement]=useState(false);
+  const [basement, setBasement] = useState(false);
 
-console.log(basement, 'basement')
+  console.log(basement, "basement");
   return (
     <Box>
       <DialogTitle>ADD CLIENT</DialogTitle>
       <DialogContent>
-       
         <TextField
           autoFocus
           margin="dense"
@@ -125,7 +134,7 @@ console.log(basement, 'basement')
           required
           variant="standard"
         />
-         <TextField
+        <TextField
           autoFocus
           margin="dense"
           id="houseNo"
@@ -150,42 +159,38 @@ console.log(basement, 'basement')
           variant="standard"
           inputProps={{ min: "0" }}
         />
-        <FormControl fullWidth sx={{mt:2}}>
-  <InputLabel id="demo-simple-select-label">Province</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={formData.province}
-    label="Province"
-    onChange={handlechange}
-    
-    
-  >
-    <MenuItem value={'punjab'}>Punjab</MenuItem>
-    <MenuItem value={'sindh'}>Sindh</MenuItem>
-    <MenuItem value={'kpk'}>Khyber Pakhtunkhwa</MenuItem>
-    <MenuItem value={'balochistan'}>Balochistan</MenuItem>
-  </Select>
-</FormControl>
-        
-<FormControl fullWidth sx={{mt:2}}>
-  <InputLabel id="demo-simple-select-label">City</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={formData.city}
-    label="City"
-    onChange={handlechange}
-    
-    
-  >
-    <MenuItem value={'punjab'}>Punjab</MenuItem>
-    <MenuItem value={'sindh'}>Sindh</MenuItem>
-    <MenuItem value={'kpk'}>Khyber Pakhtunkhwa</MenuItem>
-    <MenuItem value={'balochistan'}>Balochistan</MenuItem>
-  </Select>
-</FormControl>
-<TextField
+        <FormControl fullWidth sx={{ mt: 2 }}>
+          <InputLabel id="demo-simple-select-label">Province</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={formData.province}
+            label="Province"
+            onChange={handlechange}
+          >
+            <MenuItem value={"punjab"}>Punjab</MenuItem>
+            <MenuItem value={"sindh"}>Sindh</MenuItem>
+            <MenuItem value={"kpk"}>Khyber Pakhtunkhwa</MenuItem>
+            <MenuItem value={"balochistan"}>Balochistan</MenuItem>
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth sx={{ mt: 2 }}>
+          <InputLabel id="demo-simple-select-label">City</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={formData.city}
+            label="City"
+            onChange={handlechange}
+          >
+            <MenuItem value={"punjab"}>Punjab</MenuItem>
+            <MenuItem value={"sindh"}>Sindh</MenuItem>
+            <MenuItem value={"kpk"}>Khyber Pakhtunkhwa</MenuItem>
+            <MenuItem value={"balochistan"}>Balochistan</MenuItem>
+          </Select>
+        </FormControl>
+        <TextField
           autoFocus
           margin="dense"
           id="area"
@@ -198,13 +203,12 @@ console.log(basement, 'basement')
           variant="standard"
           inputProps={{ min: "0" }}
         />
-<FormControlLabel
-  label="Basement"
-  control={<Checkbox color="success" />}
-  checked={basement}
-  onChange={() => setBasement((prevValue) => !prevValue)}
-/>
-        
+        <FormControlLabel
+          label="Basement"
+          control={<Checkbox color="success" />}
+          checked={basement}
+          onChange={() => setBasement((prevValue) => !prevValue)}
+        />
       </DialogContent>
       <DialogActions>
         <Button
@@ -231,42 +235,46 @@ console.log(basement, 'basement')
         >
           Add
           </Button>  */}
-        {!isFormComplete?<Button
-          sx={{
-            backgroundColor: "grey",
-            color: "#595959",
-            mt: 3,
-            padding: ButtonPadding,
-            height: "3rem",
-            fontSize: "14px",
-            "&:hover": {
-              bgcolor: "grey",
-            },
-          }}
-        >
-          Add Drawings
-        </Button>:
-        <Button
-          sx={{
-            backgroundColor: "#26255f",
-            color: "white",
-            mt: 3,
-            padding: ButtonPadding,
-            height: "3rem",
-            fontSize: "14px",
-            "&:hover": {
-              bgcolor: Dark,
-            },
-          }}
-          onClick={() => {
-            localStorage.setItem("@client_info", JSON.stringify(formData));
-            navigate(`/UploadData?levels=${formData?.levels}&basement=${basement}`);
-          }}
-          // disabled={!isFormComplete}
-        >
-          Add Drawings
-        </Button>
- }
+        {isFormComplete ? (
+          <Button
+            sx={{
+              backgroundColor: "grey",
+              color: "#595959",
+              mt: 3,
+              padding: ButtonPadding,
+              height: "3rem",
+              fontSize: "14px",
+              "&:hover": {
+                bgcolor: "grey",
+              },
+            }}
+          >
+            Add Drawings
+          </Button>
+        ) : (
+          <Button
+            sx={{
+              backgroundColor: "#26255f",
+              color: "white",
+              mt: 3,
+              padding: ButtonPadding,
+              height: "3rem",
+              fontSize: "14px",
+              "&:hover": {
+                bgcolor: Dark,
+              },
+            }}
+            onClick={() => {
+              localStorage.setItem("@client_info", JSON.stringify(formData));
+              navigate(
+                `/UploadData?levels=${formData?.levels}&basement=${basement}`
+              );
+            }}
+            // disabled={!isFormComplete}
+          >
+            Add Drawings
+          </Button>
+        )}
       </DialogActions>
     </Box>
   );

@@ -57,7 +57,6 @@ export const AddNew = ({ index, setDataValue, setIsFileUploaded }: any) => {
           setDataValue(index, {
             ...wallReader(floorData),
           });
-
         } else if (fileName.split(".")[0] == "Foundation") {
           // setData({ ...foundationReader(floorData) });
           setDataValue(index, {
@@ -71,8 +70,8 @@ export const AddNew = ({ index, setDataValue, setIsFileUploaded }: any) => {
         } else {
           alert("wrong input");
         }
-        console.log(floorData.length, "floorData.length")
-        if(floorData.length>0){
+        console.log(floorData.length, "floorData.length");
+        if (floorData.length > 0) {
           setIsFileUploaded(true);
         }
       };
@@ -87,7 +86,6 @@ export const AddNew = ({ index, setDataValue, setIsFileUploaded }: any) => {
           style={{
             width: "100%",
             padding: "10px 10px",
-            
           }}
           type="file"
           // accept="image/*"
