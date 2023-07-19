@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
@@ -6,26 +6,30 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ButtonPadding, Dark } from "../../utils";
+import { UploadFile } from "../UploadFile";
 
 type AddClientFormProps = {
   initialRows: {
+    firstName: string;
+    lastName: string;
     houseNo: string;
-    name: string;
-    address: string;
     city: string;
+    province: string;
     levels: string;
   }[];
   close: any;
 };
 
-export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
+export const AddClientForm = ({ initialRows, close}: AddClientFormProps) => {
   const [formData, setFormData] = useState({
-    houseNo: "",
-    clientName: "",
-    address: "",
-    city: "",
-    levels: "",
+    firstName: '',
+    lastName: '',
+    houseNo: '',
+    city: '',
+    province: '',
+    levels: '',
   });
+  
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const handlechange = (e: any) => {
@@ -41,16 +45,18 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
   const handleAddData = () => {
     const newRow = {
       houseNo: formData.houseNo,
-      name: formData.clientName,
-      address: formData.address,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
       city: formData.city,
+      province: formData.province,
       levels: formData.levels,
     };
     if (
       formData.houseNo.trim() === "" ||
-      formData.clientName.trim() === "" ||
-      formData.address.trim() === "" ||
-      formData.city.trim() === "" ||
+      formData.firstName.trim() === "" ||
+      formData.lastName.trim() === "" ||
+      // formData.city.trim() === "" ||
+      // formData.province.trim() === "" ||
       formData.levels.trim() === ""
     ) {
       setError("Please fill in all the fields.");
@@ -61,9 +67,10 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
     console.log(newRow, "rows");
     setFormData({
       houseNo: "",
-      clientName: "",
-      address: "",
+      firstName: '',
+      lastName: '',
       city: "",
+      province: "",
       levels: "",
     });
     close();
@@ -73,24 +80,28 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
   const checkFormComplete = (data: any) => {
     return (
       data.houseNo.trim() !== "" &&
-      data.clientName.trim() !== "" &&
-      data.address.trim() !== "" &&
-      data.city.trim() !== "" &&
+      formData.firstName.trim() === "" &&
+      formData.lastName.trim() === ""  &&
+      // data.city.trim() !== "" &&
+      // data.province.trim() !== "" &&
       data.levels.trim() !== ""
     );
   };
+const[ basement, setBasement]=useState(false);
 
+console.log(basement, 'basement')
   return (
     <Box>
       <DialogTitle>ADD CLIENT</DialogTitle>
       <DialogContent>
+       
         <TextField
           autoFocus
           margin="dense"
-          id="houseNo"
-          label="House No"
+          id="firstName"
+          label="First Name"
           type="text"
-          value={formData.houseNo}
+          value={formData.firstName}
           onChange={handlechange}
           fullWidth
           required
@@ -99,10 +110,22 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
         <TextField
           autoFocus
           margin="dense"
-          id="clientName"
-          label="Client Name"
+          id="lastName"
+          label="Last Name"
           type="text"
-          value={formData.clientName}
+          value={formData.lastName}
+          onChange={handlechange}
+          fullWidth
+          required
+          variant="standard"
+        />
+         <TextField
+          autoFocus
+          margin="dense"
+          id="houseNo"
+          label="House No"
+          type="text"
+          value={formData.houseNo}
           onChange={handlechange}
           fullWidth
           required
@@ -121,30 +144,61 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           variant="standard"
           inputProps={{ min: "0" }}
         />
-        <TextField
+        {/* <FormControl fullWidth sx={{mt:2}}>
+  <InputLabel id="demo-simple-select-label">Province</InputLabel>
+  <Select
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
+    value={formData.province}
+    label="Province"
+    onChange={handlechange}
+    
+    
+  >
+    <MenuItem value={'punjab'}>Punjab</MenuItem>
+    <MenuItem value={'sindh'}>Sindh</MenuItem>
+    <MenuItem value={'kpk'}>Khyber Pakhtunkhwa</MenuItem>
+    <MenuItem value={'balochistan'}>Balochistan</MenuItem>
+  </Select>
+</FormControl>
+        
+<FormControl fullWidth sx={{mt:2}}>
+  <InputLabel id="demo-simple-select-label">City</InputLabel>
+  <Select
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
+    value={formData.city}
+    label="City"
+    onChange={handlechange}
+    
+    
+  >
+    <MenuItem value={'punjab'}>Punjab</MenuItem>
+    <MenuItem value={'sindh'}>Sindh</MenuItem>
+    <MenuItem value={'kpk'}>Khyber Pakhtunkhwa</MenuItem>
+    <MenuItem value={'balochistan'}>Balochistan</MenuItem>
+  </Select>
+</FormControl>
+<TextField
           autoFocus
           margin="dense"
-          id="address"
-          label="Address"
-          type="text"
-          value={formData.address}
+          id="levels"
+          label="Floor Levels"
+          type="number"
+          value={formData.levels}
           onChange={handlechange}
           fullWidth
           required
           variant="standard"
-        />
-        <TextField
-          autoFocus
-          margin="dense"
-          id="city"
-          label="City"
-          type="text"
-          value={formData.city}
-          onChange={handlechange}
-          fullWidth
-          required
-          variant="standard"
-        />
+          inputProps={{ min: "0" }}
+        /> */}
+<FormControlLabel
+  label="Basement"
+  control={<Checkbox color="success" />}
+  checked={basement}
+  onChange={() => setBasement((prevValue) => !prevValue)}
+/>
+        
       </DialogContent>
       <DialogActions>
         <Button
@@ -171,7 +225,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
         >
           Add
         </Button> */}
-        {!isFormComplete?<Button
+        {/* {!isFormComplete?<Button
           sx={{
             backgroundColor: "grey",
             color: "#595959",
@@ -185,7 +239,8 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           }}
         >
           Add Drawings
-        </Button>:<Button
+        </Button>: */}
+        <Button
           sx={{
             backgroundColor: "#26255f",
             color: "white",
@@ -199,13 +254,13 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           }}
           onClick={() => {
             localStorage.setItem("@client_info", JSON.stringify(formData));
-            navigate(`/UploadData?levels=${formData?.levels}`);
+            navigate(`/UploadData?levels=${formData?.levels}&basement=${basement}`);
           }}
           // disabled={!isFormComplete}
         >
           Add Drawings
         </Button>
-}
+{/* } */}
       </DialogActions>
     </Box>
   );
