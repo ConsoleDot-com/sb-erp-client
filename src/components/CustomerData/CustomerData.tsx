@@ -45,6 +45,7 @@ import { EditCustomerDataDialog } from "../EditCustomerDataDialog";
 import { url } from "inspector";
 import { bg } from "../../assets/jpg";
 import { UploadFile } from "../UploadFile";
+import { cities } from "../../constraints";
 
 export interface CustomerData {
   houseNo: string;
@@ -60,8 +61,8 @@ const initialRows = [
     houseNo: "B-23",
     firstName: "Jon",
     lastName: "asd",
-    city: "Valancia Town Lahore Block H",
-    province: "Lahore",
+    city: "Lahore",
+    province: "Punjab",
     levels: "3",
     area: "Muslim Town"
   },
@@ -69,8 +70,8 @@ const initialRows = [
     houseNo: "A-02",
     firstName: "Cersei",
     lastName: "asd",
-    city: "Valancia Town Lahore Block H",
-    province: "Lahore",
+    city: "Lahore",
+    province: "Punjab",
     levels: "3",
     area: "Muslim Town"
   },
@@ -78,8 +79,8 @@ const initialRows = [
     houseNo: "P-53",
     firstName: "Jaime",
     lastName: "asd",
-    city: "Valancia Town Lahore Block H",
-    province: "Lahore",
+    city: "Lahore",
+    province: "Punjab",
     levels: "3",
     area: "Muslim Town"
   },
@@ -87,8 +88,8 @@ const initialRows = [
     houseNo: "I-09",
     firstName: "Arya",
     lastName: "asd",
-    city: "Valancia Town Lahore Block H",
-    province: "Lahore",
+    city: "Lahore",
+    province: "Punjab",
     levels: "3",
     area: "Muslim Town"
   },
@@ -96,8 +97,8 @@ const initialRows = [
     houseNo: "G-65",
     firstName: "Daenerys",
     lastName: "asd",
-    city: "valancia",
-    province: "Lahore",
+    city: "Lahore",
+    province: "Punjab",
     levels: "4",
     area: "Muslim Town"
   },
@@ -105,8 +106,8 @@ const initialRows = [
     houseNo: "G-67",
     firstName: "dvd",
     lastName: "asd",
-    city: "'V'alancia Town Lahore Block H",
-    province: "Lahore",
+    city: "'Lahore",
+    province: "Punjab",
     levels: "3",
     area: "Muslim Town"
   },
@@ -114,8 +115,8 @@ const initialRows = [
     houseNo: "H-12",
     firstName: "Ferrara",
     lastName: "asd",
-    city: "Valancia Town Lahore Block H",
-    province: "Lahore",
+    city: "Lahore",
+    province: "Punjab",
     levels: "3",
     area: "Muslim Town"
   },
@@ -123,8 +124,8 @@ const initialRows = [
     houseNo: "H-65",
     firstName: "Rossini",
     lastName: "asd",
-    city: "Valancia Town Lahore Block H",
-    province: "Lahore",
+    city: "Lahore",
+    province: "Punjab",
     levels: "3",
     area: "Muslim Town"
   },
@@ -132,8 +133,8 @@ const initialRows = [
     houseNo: "H-55",
     firstName: "Harvey",
     lastName: "asd",
-    city: "Valancia Town Lahore Block H",
-    province: "Lahore",
+    city: "Lahore",
+    province: "Punjab",
     levels: "3",
     area: "Muslim Town"
   },
@@ -144,15 +145,21 @@ export const CustomerData = () => {
 
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
+  const [editIndex, setEditIndex] = useState(-1);
+  const [searchQuerry, setSearchQuerry] = useState("");
+  const [openViewDialog, setOpenViewDialog] = useState(false);
   const reverseRows = initialRows.reverse();
   const [data, setData] = useState<any>(reverseRows);
-
-  const [searchQuerry, setSearchQuerry] = useState("");
+  const [editedRow, setEditedRow] = useState<CustomerData>({
+    houseNo: "",
+    firstName: "",
+    lastName: "",
+    city: "",
+    province: "",
+    levels: "",
+    area:""
+  });
+  const [openEditDialog, setOpenEditDialog] = useState(false);
 
   const handleDelete = (id: any) => {
     const confirmDelete = window.confirm(
@@ -164,7 +171,7 @@ export const CustomerData = () => {
       console.log(deleteRow, "del");
     }
   };
-  const [openViewDialog, setOpenViewDialog] = useState(false);
+  
   const handleViewDialogOpen = () => {
     setOpenViewDialog(true);
   };
@@ -175,11 +182,11 @@ export const CustomerData = () => {
     handleViewDialogOpen();
   };
 
-  const [editIndex, setEditIndex] = useState(-1);
+  
   const handleEdit = (index: any) => {
     setEditIndex(index);
   };
-  const [openEditDialog, setOpenEditDialog] = useState(false);
+  
   const isOpenEditDialog = (index: any) => {
     setEditedRow(data[index]);
     setEditIndex(index);
@@ -191,16 +198,10 @@ export const CustomerData = () => {
       [field]: e.target.value,
     }));
   };
-
-  const [editedRow, setEditedRow] = useState<CustomerData>({
-    houseNo: "",
-    firstName: "",
-    lastName: "",
-    city: "",
-    province: "",
-    levels: "",
-    area:""
-  });
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  
 
   const saveEdit = () => {
     const updatedData = [...data];
@@ -350,13 +351,15 @@ export const CustomerData = () => {
                                 border: 0,
                               },
                             }}
+                            
                           >
+                            
                             <TableCell align="left">
-                              {row.firstName + row.lastName}
+                              {row.firstName +" "+ row.lastName}
                             </TableCell>
                             <TableCell align="left">{row.houseNo}</TableCell>
-                            <TableCell align="left">{row.province}</TableCell>
                             <TableCell align="left">{row.city}</TableCell>
+                            <TableCell align="left">{row.houseNo+", "+row.area+", "+row.city+", "+row.province}</TableCell>
                             <TableCell align="left">{row.levels}</TableCell>
                             <TableCell
                               align="left"
