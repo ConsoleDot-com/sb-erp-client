@@ -17,6 +17,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ButtonPadding, Dark } from "../../utils";
 import { UploadFile } from "../UploadFile";
+import { cities } from "../../constraints";
 
 type AddClientFormProps = {
   initialRows: {
@@ -33,13 +34,13 @@ type AddClientFormProps = {
 
 export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    houseNo: '',
-    city: '',
-    province: '',
-    levels: '',
-    area:'',
+    firstName: "",
+    lastName: "",
+    houseNo: "",
+    city: "",
+    province: "",
+    levels: "",
+    area: "",
   });
 
   const [open, setOpen] = useState(false);
@@ -62,7 +63,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
       city: formData.city,
       province: formData.province,
       levels: formData.levels,
-      area: formData.area
+      area: formData.area,
     };
     if (
       formData.houseNo.trim() === "" ||
@@ -71,7 +72,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
       formData.city.trim() === "" ||
       formData.province.trim() === "" ||
       formData.levels.trim() === "" ||
-      formData.area.trim()===""
+      formData.area.trim() === ""
     ) {
       setError("Please fill in all the fields.");
       return;
@@ -86,7 +87,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
       city: "",
       province: "",
       levels: "",
-      area:""
+      area: "",
     });
     close();
   };
@@ -95,17 +96,32 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
   const checkFormComplete = (data: any) => {
     return (
       data.houseNo.trim() !== "" &&
-      formData.firstName.trim() === "" &&
-      formData.lastName.trim() === ""  &&
+      data.firstName.trim() !== "" &&
+      data.lastName.trim() !== "" &&
       data.city.trim() !== "" &&
       data.province.trim() !== "" &&
       data.levels.trim() !== "" &&
-      data.area.trim() !== "" 
+      data.area.trim() !== ""
     );
   };
+ console.log(formData, 'form')
   const [basement, setBasement] = useState(false);
-
-  console.log(basement, "basement");
+  const handleProvinceChange = (e: any) => {
+    const selectedProvince = e.target.value as string;
+    setFormData((prevData) => ({
+      ...prevData,
+      province: selectedProvince,
+      city: "", 
+    }));
+  };
+  
+  
+  const handleCityChange = (e:any) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      city: e.target.value as string,
+    }));
+  };
   return (
     <Box>
       <DialogTitle>ADD CLIENT</DialogTitle>
@@ -159,42 +175,57 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           variant="standard"
           inputProps={{ min: "0" }}
         />
-        <FormControl fullWidth sx={{mt:2}}>
-  <InputLabel id="demo-simple-select-label">Province</InputLabel>
+        <FormControl fullWidth sx={{ mt: 2 }}>
+          <InputLabel id="demo-simple-select-label">Province</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="province"
+            value={formData.province}
+            label="Province"
+            onChange={handleProvinceChange}
+          >
+            <MenuItem value={"punjab"}>Punjab</MenuItem>
+            <MenuItem value={"sindh"}>Sindh</MenuItem>
+            <MenuItem value={"kpk"}>Khyber Pakhtunkhwa</MenuItem>
+            <MenuItem value={"balochistan"}>Balochistan</MenuItem>
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth sx={{ mt: 2 }}>
+  <InputLabel id="city-label">City</InputLabel>
   <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    value={formData.province}
-    label="Province"
-    onChange={handlechange}
-    
-    
-  >
-    <MenuItem value={'punjab'}>Punjab</MenuItem>
-    <MenuItem value={'sindh'}>Sindh</MenuItem>
-    <MenuItem value={'kpk'}>Khyber Pakhtunkhwa</MenuItem>
-    <MenuItem value={'balochistan'}>Balochistan</MenuItem>
-  </Select>
-</FormControl>
-        
-<FormControl fullWidth sx={{mt:2}}>
-  <InputLabel id="demo-simple-select-label">City</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
+    labelId="city-label"
+    id="city"
     value={formData.city}
     label="City"
-    onChange={handlechange}
-    
-    
+    onChange={handleCityChange}
+    disabled={!formData.province}
+    MenuProps={{
+      PaperProps: {
+        style: {
+          maxHeight: 200, 
+        },
+      },
+      anchorOrigin: {
+        vertical: "bottom",
+        horizontal: "left",
+      },
+      transformOrigin: {
+        vertical: "top",
+        horizontal: "left",
+      },
+      
+    }}
   >
-    <MenuItem value={'punjab'}>Punjab</MenuItem>
-    <MenuItem value={'sindh'}>Sindh</MenuItem>
-    <MenuItem value={'kpk'}>Khyber Pakhtunkhwa</MenuItem>
-    <MenuItem value={'balochistan'}>Balochistan</MenuItem>
+    {formData.province &&
+      cities[formData.province].map((city:any) => (
+        <MenuItem key={city} value={city}>
+          {city}
+        </MenuItem>
+      ))}
   </Select>
-</FormControl>
-<TextField
+        </FormControl>
+        <TextField
           autoFocus
           margin="dense"
           id="area"
@@ -207,12 +238,12 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           variant="standard"
           inputProps={{ min: "0" }}
         />
-<FormControlLabel
-  label="Basement"
-  control={<Checkbox color="success" />}
-  checked={basement}
-  onChange={() => setBasement((prevValue) => !prevValue)}
-/>
+        <FormControlLabel
+          label="Basement"
+          control={<Checkbox color="success" />}
+          checked={basement}
+          onChange={() => setBasement((prevValue) => !prevValue)}
+        />
       </DialogContent>
       <DialogActions>
         <Button
@@ -239,42 +270,46 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
         >
           Add
           </Button>  */}
-        {!isFormComplete?<Button
-          sx={{
-            backgroundColor: "grey",
-            color: "#595959",
-            mt: 3,
-            padding: ButtonPadding,
-            height: "3rem",
-            fontSize: "14px",
-            "&:hover": {
-              bgcolor: "grey",
-            },
-          }}
-        >
-          Add Drawings
-        </Button>:
-        <Button
-          sx={{
-            backgroundColor: "#26255f",
-            color: "white",
-            mt: 3,
-            padding: ButtonPadding,
-            height: "3rem",
-            fontSize: "14px",
-            "&:hover": {
-              bgcolor: Dark,
-            },
-          }}
-          onClick={() => {
-            localStorage.setItem("@client_info", JSON.stringify(formData));
-            navigate(`/UploadData?levels=${formData?.levels}&basement=${basement}`);
-          }}
-          // disabled={!isFormComplete}
-        >
-          Add Drawings
-        </Button>
- }
+        {!isFormComplete ? (
+          <Button
+            sx={{
+              backgroundColor: "grey",
+              color: "#595959",
+              mt: 3,
+              padding: ButtonPadding,
+              height: "3rem",
+              fontSize: "14px",
+              "&:hover": {
+                bgcolor: "grey",
+              },
+            }}
+          >
+            Add Drawings
+          </Button>
+        ) : (
+          <Button
+            sx={{
+              backgroundColor: "#26255f",
+              color: "white",
+              mt: 3,
+              padding: ButtonPadding,
+              height: "3rem",
+              fontSize: "14px",
+              "&:hover": {
+                bgcolor: Dark,
+              },
+            }}
+            onClick={() => {
+              localStorage.setItem("@client_info", JSON.stringify(formData));
+              navigate(
+                `/UploadData?levels=${formData?.levels}&basement=${basement}`
+              );
+            }}
+            // disabled={!isFormComplete}
+          >
+            Add Drawings
+          </Button>
+        )}
       </DialogActions>
     </Box>
   );

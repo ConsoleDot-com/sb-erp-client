@@ -425,7 +425,7 @@ export const UploadFile = () => {
                         setIsFileUploaded={setIsFileUploaded}
                       />
                     </Box>
-                    <Box></Box>
+                    
                     <Box
                       sx={{
                         display: "flex",
@@ -513,6 +513,7 @@ export const UploadFile = () => {
                         {t("  Delete")}
                       </Button>
                     )} */}
+                    </Box>
                     </Box>
                   </Box>
                 </React.Fragment>
