@@ -100,6 +100,7 @@ export const BeemDialog=({onClose}:any)=>{
       />
       
       )}
+      <Box>
       {barLayers >= 3 && (
       <TextField
           autoFocus
@@ -111,6 +112,7 @@ export const BeemDialog=({onClose}:any)=>{
           required
           variant="standard"
         />)}
+        </Box>
         </Box>
         <TextField
           autoFocus

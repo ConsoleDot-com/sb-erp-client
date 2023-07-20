@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import React, { ReactNode } from "react";
 import { NavBar } from "../NavBar";
 import { bg } from "../../assets/jpg";
+import { SideNav } from "../SideNav";
 type DefaultLayoutProps = {
   children: ReactNode;
 };
@@ -29,6 +30,7 @@ export const Layout = ({ children }: DefaultLayoutProps) => {
       // }}
     >
       <NavBar />
+      
       {children}
     </Box>
   );
