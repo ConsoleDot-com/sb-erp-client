@@ -7,73 +7,73 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ButtonPadding, Dark } from "../../utils";
 
-type AddClientFormProps = {
-  initialRows: {
-    height: string;
-    width: string;
-    columnId: string;
-    thickness: string;
-    bars: string;
-    ring: string;
-  }[];
-  close: any;
-};
+// type AddClientFormProps = {
+//   initialRows: {
+//     height: string;
+//     width: string;
+//     columnId: string;
+//     thickness: string;
+//     bars: string;
+//     ring: string;
+//   }[];
+//   onClose: any;
+// };
 
-export const ColumnDailog = ({ initialRows, close}: AddClientFormProps) => {
-  const [formData, setFormData] = useState({
-    height: '',
-    width: '',
-    columnId: '',
-    thickness: '',
-    bars: '',
-    ring: '',
-  });
+export const ColumnDailog = ( onClose: any) => {
+  // const [formData, setFormData] = useState({
+  //   height: '',
+  //   width: '',
+  //   columnId: '',
+  //   thickness: '',
+  //   bars: '',
+  //   ring: '',
+  // });
   
-  const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
-  const handlechange = (e: any) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [e.target.id]: e.target.value,
-    }));
-    setIsFormComplete(checkFormComplete(formData));
-  };
-  console.log(initialRows, "initial");
+  // const [open, setOpen] = useState(false);
+  // const navigate = useNavigate();
+  // const handlechange = (e: any) => {
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [e.target.id]: e.target.value,
+  //   }));
+  //   setIsFormComplete(checkFormComplete(formData));
+  // };
+  // console.log(initialRows, "initial");
 
-  const [error, setError] = useState("");
-  const handleAddData = () => {
-    const newRow = {
-      columnId: formData.columnId,
-      height: formData.height,
-      width: formData.width,
-      thickness: formData.thickness,
-      bars: formData.bars,
-      ring: formData.ring,
-    };
-    if (
-      formData.columnId.trim() === "" ||
-      formData.height.trim() === "" ||
-      formData.width.trim() === "" ||
-      formData.thickness.trim() === "" ||
-      formData.bars.trim() === "" ||
-      formData.ring.trim() === ""
-    ) {
-      setError("Please fill in all the fields.");
-      return;
-    }
+  // const [error, setError] = useState("");
+  // const handleAddData = () => {
+  //   const newRow = {
+  //     columnId: formData.columnId,
+  //     height: formData.height,
+  //     width: formData.width,
+  //     thickness: formData.thickness,
+  //     bars: formData.bars,
+  //     ring: formData.ring,
+  //   };
+  //   if (
+  //     formData.columnId.trim() === "" ||
+  //     formData.height.trim() === "" ||
+  //     formData.width.trim() === "" ||
+  //     formData.thickness.trim() === "" ||
+  //     formData.bars.trim() === "" ||
+  //     formData.ring.trim() === ""
+  //   ) {
+  //     setError("Please fill in all the fields.");
+  //     return;
+  //   }
 
-    initialRows.push(newRow);
-    console.log(newRow, "rows");
-    setFormData({
-      columnId: "",
-      height: '',
-      width: '',
-      thickness: "",
-      bars: "",
-      ring: "",
-    });
-    close();
-  };
+  //   initialRows.push(newRow);
+  //   console.log(newRow, "rows");
+  //   setFormData({
+  //     columnId: "",
+  //     height: '',
+  //     width: '',
+  //     thickness: "",
+  //     bars: "",
+  //     ring: "",
+  //   });
+  //   close();
+  // };
   const [isFormComplete, setIsFormComplete] = useState(false);
 
   const checkFormComplete = (data: any) => {
@@ -100,8 +100,8 @@ console.log(basement, 'basement')
           id="columnId"
           label="Column ID"
           type="text"
-          value={formData.columnId}
-          onChange={handlechange}
+          // value={formData.columnId}
+          // onChange={handlechange}
           fullWidth
           required
           variant="standard"
@@ -112,8 +112,8 @@ console.log(basement, 'basement')
           id="height"
           label="Height"
           type="text"
-          value={formData.height}
-          onChange={handlechange}
+          // value={formData.height}
+          // onChange={handlechange}
           fullWidth
           required
           variant="standard"
@@ -124,8 +124,8 @@ console.log(basement, 'basement')
           id="width"
           label="Width"
           type="text"
-          value={formData.width}
-          onChange={handlechange}
+          // value={formData.width}
+          // onChange={handlechange}
           fullWidth
           required
           variant="standard"
@@ -136,8 +136,8 @@ console.log(basement, 'basement')
           id="thickness"
           label="Thickness"
           type="number"
-          value={formData.thickness}
-          onChange={handlechange}
+          // value={formData.thickness}
+          // onChange={handlechange}
           fullWidth
           required
           variant="standard"
@@ -149,8 +149,8 @@ console.log(basement, 'basement')
           id="bars"
           label="Bars"
           type="text"
-          value={formData.bars}
-          onChange={handlechange}
+          // value={formData.bars}
+          // onChange={handlechange}
           fullWidth
           required
           variant="standard"
@@ -162,8 +162,8 @@ console.log(basement, 'basement')
           id="ring"
           label="Ring"
           type="text"
-          value={formData.ring}
-          onChange={handlechange}
+          // value={formData.ring}
+          // onChange={handlechange}
           fullWidth
           required
           variant="standard"
@@ -177,7 +177,7 @@ console.log(basement, 'basement')
       </DialogContent>
       <DialogActions>
         <Button
-          onClick={close}
+          onClick={onClose}
           sx={{
             backgroundColor: "#26255f",
             color: "white",
@@ -228,8 +228,8 @@ console.log(basement, 'basement')
             },
           }}
           onClick={() => {
-            localStorage.setItem("@client_info", JSON.stringify(formData));
-            navigate(`/UploadData`);
+            // localStorage.setItem("@client_info", JSON.stringify(formData));
+            // navigate(`/UploadData`);
           }}
           // disabled={!isFormComplete}
         >
