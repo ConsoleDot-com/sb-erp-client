@@ -2,7 +2,7 @@ import { Box, Container, Button, Typography } from "@mui/material";
 import { AddNew } from "../AddNew";
 import { useState, useEffect } from "react";
 import Dialog from "@mui/material/Dialog";
-import { ButtonPadding, Dark, H1, Secondary } from "../../utils";
+import { ButtonPadding, Dark, H1, H2, Secondary } from "../../utils";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../Layout/Layout";
 import { FileViewDialog } from "../FileViewDialog";
@@ -10,9 +10,11 @@ import { useNavigate } from "react-router-dom";
 import { WholeReportDialog } from "../WholeReportDialog";
 import React from "react";
 import { BeemDialog } from "../BeemDialog";
+import { LintelBeem } from "../LintelBeem";
 
 export const UploadFile = () => {
   const [openBeemDialog, setOpenBeemDialog] = useState(false);
+  const [openLintelBeemDialog, setOpenLintelBeemDialog] = useState(false);
   const [isFileUploaded, setIsFileUploaded] = useState<any>(false);
   const [finalData, setFinalData] = useState<any>({
     finalBrick: 0,
@@ -334,7 +336,7 @@ export const UploadFile = () => {
                 {t("Whole Report")}
               </Button>
             </Box>
-            <H1 sx={{ textAlign: "center", color: Dark, fontWeight: "bold" }}>
+            <H1 sx={{ textAlign: "center", color: Dark, fontWeight: "bold" , mb:3}}>
               {t("Upload Slab File")}
             </H1>
             
@@ -342,7 +344,8 @@ export const UploadFile = () => {
               .slice(0, !basement ? levels.length - 1 : levels.length)
               .map((i: any, index: number) => (
                 <React.Fragment key={index.toString()}>
-                  
+                  <Box sx={{border:'1px solid #26255f', padding:"16px", mb:4}}>
+                    <H2 sx={{textDecoration:'underline'}}>Upload File {index + 1 }</H2>
                   <Box
                     sx={{
                       display: "flex",
@@ -410,7 +413,7 @@ export const UploadFile = () => {
                             }}
                             onClick={() => {
                               setDisplayIndex(index);
-                              setOpen(true);
+                              setOpenLintelBeemDialog(true);
                             }}
                           >
                             {t("Lintel Beam")}
@@ -470,7 +473,7 @@ export const UploadFile = () => {
                     )} */}
                     </Box>
                   </Box>
-                  
+                  </Box>
                 </React.Fragment>
               ))}
               
@@ -543,6 +546,9 @@ export const UploadFile = () => {
       </Dialog>
       <Dialog open={openBeemDialog} onClose={() => setOpenBeemDialog(false)}>
         <BeemDialog onClose={() => setOpenBeemDialog(false)} />
+      </Dialog>
+      <Dialog open={openLintelBeemDialog} onClose={() => setOpenLintelBeemDialog(false)}>
+        <LintelBeem onClose={() => setOpenLintelBeemDialog(false)}/>
       </Dialog>
     </Layout>
   );

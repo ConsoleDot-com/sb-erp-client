@@ -7,13 +7,13 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { ButtonPadding, Dark } from "../../utils";
 import { useState, useEffect } from "react";
 
-export const BeemDialog=({onClose}:any)=>{
+export const LintelBeem=({onClose}:any)=>{
     const [barLayers, setBarLayers] = useState(1);
     console.log(barLayers, 'bar')
     return(
         <>
         <Box>
-        <DialogTitle sx={{textAlign:"center",backgroundColor:Dark, border:"1px solid #ddd"}}><Typography style={{fontSize:"24px", border:"1px solid #ddd", borderRadius:"8px", backgroundColor:"white"}}> Beam Id : 1</Typography></DialogTitle>
+        <DialogTitle sx={{textAlign:"center",backgroundColor:Dark, border:"1px solid #ddd"}}><Typography style={{fontSize:"24px", border:"1px solid #ddd", borderRadius:"8px", backgroundColor:"white"}}>Lintel Beam Id : 1</Typography></DialogTitle>
       <DialogContent>
         <Box sx={{display:"flex", columnGap:"32px"}}>
       <TextField
