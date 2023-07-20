@@ -11,10 +11,12 @@ import { WholeReportDialog } from "../WholeReportDialog";
 import React from "react";
 import { BeemDialog } from "../BeemDialog";
 import { LintelBeem } from "../LintelBeem";
+import { ColumnDailog } from "../ColumnDailoge";
 
 export const UploadFile = () => {
   const [openBeemDialog, setOpenBeemDialog] = useState(false);
   const [openLintelBeemDialog, setOpenLintelBeemDialog] = useState(false);
+  const [openColumnBeemDialog, setOpenColumnBeemDialog] = useState(false);
   const [isFileUploaded, setIsFileUploaded] = useState<any>(false);
   const [finalData, setFinalData] = useState<any>({
     finalBrick: 0,
@@ -419,6 +421,25 @@ export const UploadFile = () => {
                             {t("Lintel Beam")}
                           </Button>
                         )}
+                        {isFileUploaded && (
+                          <Button
+                            variant="outlined"
+                            sx={{
+                              backgroundColor: "#26255f",
+                              color: "white",
+                              padding: ButtonPadding,
+                              "&:hover": {
+                                bgcolor: Dark,
+                              },
+                            }}
+                            onClick={() => {
+                              setDisplayIndex(index);
+                              setOpenColumnBeemDialog(true);
+                            }}
+                          >
+                            {t("Column")}
+                          </Button>
+                        )}
                       </Box>
                     </Box>
                     <Box
@@ -549,6 +570,9 @@ export const UploadFile = () => {
       </Dialog>
       <Dialog open={openLintelBeemDialog} onClose={() => setOpenLintelBeemDialog(false)}>
         <LintelBeem onClose={() => setOpenLintelBeemDialog(false)}/>
+      </Dialog>
+      <Dialog open={openColumnBeemDialog} onClose={() => setOpenColumnBeemDialog(false)}>
+        <ColumnDailog  onClose={() => setOpenColumnBeemDialog(false)}/>
       </Dialog>
     </Layout>
   );
