@@ -55,7 +55,7 @@ export interface CustomerData {
   city: string;
   province: string;
   levels: string;
-  area:string
+  area: string;
 }
 const initialRows = [
   {
@@ -65,7 +65,7 @@ const initialRows = [
     city: "Lahore",
     province: "Punjab",
     levels: "3",
-    area: "Muslim Town"
+    area: "Muslim Town",
   },
   {
     houseNo: "A-02",
@@ -74,7 +74,7 @@ const initialRows = [
     city: "Lahore",
     province: "Punjab",
     levels: "3",
-    area: "Muslim Town"
+    area: "Muslim Town",
   },
   {
     houseNo: "P-53",
@@ -83,7 +83,7 @@ const initialRows = [
     city: "Lahore",
     province: "Punjab",
     levels: "3",
-    area: "Muslim Town"
+    area: "Muslim Town",
   },
   {
     houseNo: "I-09",
@@ -92,7 +92,7 @@ const initialRows = [
     city: "Lahore",
     province: "Punjab",
     levels: "3",
-    area: "Muslim Town"
+    area: "Muslim Town",
   },
   {
     houseNo: "G-65",
@@ -101,7 +101,7 @@ const initialRows = [
     city: "Lahore",
     province: "Punjab",
     levels: "4",
-    area: "Muslim Town"
+    area: "Muslim Town",
   },
   {
     houseNo: "G-67",
@@ -110,7 +110,7 @@ const initialRows = [
     city: "'Lahore",
     province: "Punjab",
     levels: "3",
-    area: "Muslim Town"
+    area: "Muslim Town",
   },
   {
     houseNo: "H-12",
@@ -119,7 +119,7 @@ const initialRows = [
     city: "Lahore",
     province: "Punjab",
     levels: "3",
-    area: "Muslim Town"
+    area: "Muslim Town",
   },
   {
     houseNo: "H-65",
@@ -128,7 +128,7 @@ const initialRows = [
     city: "Lahore",
     province: "Punjab",
     levels: "3",
-    area: "Muslim Town"
+    area: "Muslim Town",
   },
   {
     houseNo: "H-55",
@@ -137,13 +137,13 @@ const initialRows = [
     city: "Lahore",
     province: "Punjab",
     levels: "3",
-    area: "Muslim Town"
+    area: "Muslim Town",
   },
 ];
 
 export const CustomerData = () => {
   const [fileUploaded, setFileUploaded] = useState(false);
-  const [openBasementWall, setOpenBasementWall]=useState(false)
+  const [openBasementWall, setOpenBasementWall] = useState(false);
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [editIndex, setEditIndex] = useState(-1);
@@ -158,7 +158,7 @@ export const CustomerData = () => {
     city: "",
     province: "",
     levels: "",
-    area:""
+    area: "",
   });
   const [openEditDialog, setOpenEditDialog] = useState(false);
 
@@ -172,7 +172,7 @@ export const CustomerData = () => {
       console.log(deleteRow, "del");
     }
   };
-  
+
   const handleViewDialogOpen = () => {
     setOpenViewDialog(true);
   };
@@ -183,11 +183,10 @@ export const CustomerData = () => {
     handleViewDialogOpen();
   };
 
-  
   const handleEdit = (index: any) => {
     setEditIndex(index);
   };
-  
+
   const isOpenEditDialog = (index: any) => {
     setEditedRow(data[index]);
     setEditIndex(index);
@@ -202,7 +201,6 @@ export const CustomerData = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  
 
   const saveEdit = () => {
     const updatedData = [...data];
@@ -216,7 +214,7 @@ export const CustomerData = () => {
       city: "",
       province: "",
       levels: "",
-      area:""
+      area: "",
     });
     setOpenEditDialog(false);
   };
@@ -230,7 +228,7 @@ export const CustomerData = () => {
       city: "",
       province: "",
       levels: "",
-      area:""
+      area: "",
     });
     setOpenEditDialog(false);
   };
@@ -352,15 +350,21 @@ export const CustomerData = () => {
                                 border: 0,
                               },
                             }}
-                            
                           >
-                            
                             <TableCell align="left">
-                              {row.firstName +" "+ row.lastName}
+                              {row.firstName + " " + row.lastName}
                             </TableCell>
                             <TableCell align="left">{row.houseNo}</TableCell>
                             <TableCell align="left">{row.city}</TableCell>
-                            <TableCell align="left">{row.houseNo+", "+row.area+", "+row.city+", "+row.province}</TableCell>
+                            <TableCell align="left">
+                              {row.houseNo +
+                                ", " +
+                                row.area +
+                                ", " +
+                                row.city +
+                                ", " +
+                                row.province}
+                            </TableCell>
                             <TableCell align="left">{row.levels}</TableCell>
                             <TableCell
                               align="left"
@@ -395,21 +399,6 @@ export const CustomerData = () => {
                   </Table>
                 </TableContainer>
               </div>
-              <Button
-                sx={{
-                  backgroundColor: "#26255f",
-                  color: "white",
-                  height: "3rem",
-                  width: "20%",
-                  fontSize: "14px",
-                  "&:hover": {
-                    bgcolor: Secondary,
-                  },
-                }}
-                onClick={()=>setOpenBasementWall(true)}
-              >
-                Basement Wall
-              </Button>
             </Box>
             <Dialog open={open} onClose={() => setOpen(false)}>
               <AddClientForm
@@ -430,9 +419,6 @@ export const CustomerData = () => {
             </Dialog>
             <Dialog open={openViewDialog} onClose={handleViewDialogClose}>
               <ViewClientData close={() => setOpenViewDialog(false)} />
-            </Dialog>
-            <Dialog open={openBasementWall} onClose={()=> setOpenBasementWall(false)}>
-              <BasementWall close={() => setOpenBasementWall(false)}/>
             </Dialog>
           </Container>
         </Box>

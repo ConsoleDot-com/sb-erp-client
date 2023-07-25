@@ -3,6 +3,7 @@ import {
   Login,
   NavBar,
   SlabSteelCalculator,
+  SteelData,
   UploadFile,
   WholeReportDialog,
 } from "./components";
@@ -24,6 +25,8 @@ function App() {
         {/* <Route path="/wholereport" element={<WholeReportDialog/>}/> */}
         <Route path="/login" element={<Login />} />
         <Route path="/steel" element={<SlabSteelCalculator/>} />
+        <Route path="/enterSteelData" element={<SteelData/>} />
+
       </Routes>
     </>
   );

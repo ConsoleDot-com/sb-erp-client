@@ -95,8 +95,20 @@ export const WholeReportDialog = ({ finalData, onClose }: any) => {
     console.log(finalData, "debug");
   }, [finalData]);
   return (
-    <>
-      <div>
+    <Box
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+    >
+      <Box
+        sx={{
+          width: {
+            xl: "90%",
+            lg: "90",
+            md: "95%",
+            sm: "100%",
+            xs: "100%",
+          },
+        }}
+      >
         <TableContainer component={Paper}>
           <Typography
             sx={{
@@ -111,8 +123,8 @@ export const WholeReportDialog = ({ finalData, onClose }: any) => {
             Complete Report
           </Typography>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
-            <TableHead>
-              <TableRow>
+            <TableHead >
+              <TableRow sx={{bgcolor:'dodgerblue'}}>
                 <StyledTableCell>S.No</StyledTableCell>
                 <StyledTableCell align="left">Description</StyledTableCell>
                 <StyledTableCell align="left">Unit</StyledTableCell>
@@ -154,7 +166,7 @@ export const WholeReportDialog = ({ finalData, onClose }: any) => {
             <Button variant="outlined">Export</Button>
           </Box>
         </TableContainer>
-      </div>
-    </>
+      </Box>
+    </Box>
   );
 };

@@ -70,7 +70,6 @@ export const SideNav = ({ role }: any) => {
   // make the nav disappear on click
   useEffect(() => {
     const handleOutsideClick = (event: any) => {
-
       if (event.clientX > 300) {
         setIsOpen(false);
       }
@@ -129,12 +128,6 @@ export const SideNav = ({ role }: any) => {
           </div>
         </Box>
       </div>
-      <span
-        style={{ fontSize: "30px", cursor: "pointer" }}
-        onClick={handleToggle}
-      >
-        <MenuIcon sx={{ color: "#26255f" }} />
-      </span>
     </>
   );
 };

@@ -12,7 +12,6 @@ import { ButtonHover, ButtonPadding, Dark } from "../../utils";
 import { Logins } from "../../assets";
 
 export const FileViewDialog = ({ close, data }: any) => {
-  
   const { t } = useTranslation();
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -46,7 +45,7 @@ export const FileViewDialog = ({ close, data }: any) => {
   }
 
   const rows = [
-    createData(1, t("Bricks"), t("No's"), data?.bricks || 0,16.5, 4.0),
+    createData(1, t("Bricks"), t("No's"), data?.bricks || 0, 16.5, 4.0),
     createData(1, t("Sand"), t("CFT"), data?.sand || 0, 62, 4.3),
     createData(1, t("Cement"), t("Bags"), data?.cement || 0, 1150, 6.0),
     createData(1, t("Crush"), t("CFT"), 3.7, 133, 4.3),
@@ -57,7 +56,7 @@ export const FileViewDialog = ({ close, data }: any) => {
     createData(1, t("Termite"), t("Sft"), 16.0, 11500, 3.9),
   ];
   return (
-    <div>
+    <Box>
       <TableContainer component={Paper}>
         <Box
           sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
@@ -132,7 +131,7 @@ export const FileViewDialog = ({ close, data }: any) => {
               backgroundColor: Dark,
               color: "white",
               padding: ButtonPadding,
-              "&:hover":ButtonHover
+              "&:hover": ButtonHover,
             }}
           >
             {t("BACK")}
@@ -143,13 +142,13 @@ export const FileViewDialog = ({ close, data }: any) => {
               backgroundColor: Dark,
               color: "white",
               padding: ButtonPadding,
-              "&:hover":ButtonHover
+              "&:hover": ButtonHover,
             }}
           >
             {t("EXPORT")}
           </Button>
         </Box>
       </TableContainer>
-    </div>
+    </Box>
   );
 };
