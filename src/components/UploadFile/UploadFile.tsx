@@ -2,7 +2,7 @@ import { Box, Container, Button, Typography } from "@mui/material";
 import { AddNew } from "../AddNew";
 import { useState, useEffect } from "react";
 import Dialog from "@mui/material/Dialog";
-import { ButtonPadding, Dark, H1, H2, Secondary } from "../../utils";
+import { ButtonPadding, Dark, H1, H2, Primary, Secondary } from "../../utils";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../Layout/Layout";
 import { FileViewDialog } from "../FileViewDialog";
@@ -346,8 +346,8 @@ export const UploadFile = () => {
               .slice(0, !basement ? levels.length - 1 : levels.length)
               .map((i: any, index: number) => (
                 <React.Fragment key={index.toString()}>
-                  <Box sx={{border:'1px solid #26255f', padding:"16px", mb:4}}>
-                    <H2 sx={{textDecoration:'underline'}}>Upload File {index + 1 }</H2>
+                  <Box sx={{border: `2px solid ${Dark}`, padding:"16px", mb:4}}>
+                    <H2 sx={{ border:"1px solid #26255f", borderRadius:"16px", backgroundColor:"whitesmoke", textAlign:"center"}}>Slab {index + 1 }</H2>
                   <Box
                     sx={{
                       display: "flex",

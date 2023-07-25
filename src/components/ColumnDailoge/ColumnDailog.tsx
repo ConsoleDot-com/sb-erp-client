@@ -19,7 +19,7 @@ import { ButtonPadding, Dark } from "../../utils";
 //   onClose: any;
 // };
 
-export const ColumnDailog = ( onClose: any) => {
+export const ColumnDailog = ( {onClose}: any) => {
   // const [formData, setFormData] = useState({
   //   height: '',
   //   width: '',
@@ -104,7 +104,7 @@ console.log(basement, 'basement')
           // onChange={handlechange}
           fullWidth
           required
-          variant="standard"
+          variant="outlined"
         />
         <TextField
           autoFocus
@@ -116,7 +116,7 @@ console.log(basement, 'basement')
           // onChange={handlechange}
           fullWidth
           required
-          variant="standard"
+          variant="outlined"
         />
          <TextField
           autoFocus
@@ -128,7 +128,7 @@ console.log(basement, 'basement')
           // onChange={handlechange}
           fullWidth
           required
-          variant="standard"
+          variant="outlined"
         />
         <TextField
           autoFocus
@@ -140,7 +140,7 @@ console.log(basement, 'basement')
           // onChange={handlechange}
           fullWidth
           required
-          variant="standard"
+          variant="outlined"
           inputProps={{ min: "0" }}
         />
 <TextField
@@ -153,7 +153,7 @@ console.log(basement, 'basement')
           // onChange={handlechange}
           fullWidth
           required
-          variant="standard"
+          variant="outlined"
           inputProps={{ min: "0" }}
         />
         <TextField
@@ -166,7 +166,7 @@ console.log(basement, 'basement')
           // onChange={handlechange}
           fullWidth
           required
-          variant="standard"
+          variant="outlined"
           inputProps={{ min: "0" }}
         />
 <FormControlLabel

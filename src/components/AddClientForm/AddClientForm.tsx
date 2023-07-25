@@ -136,7 +136,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           onChange={handlechange}
           fullWidth
           required
-          variant="standard"
+          variant="outlined"
         />
         <TextField
           autoFocus
@@ -148,7 +148,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           onChange={handlechange}
           fullWidth
           required
-          variant="standard"
+          variant="outlined"
         />
         <TextField
           autoFocus
@@ -160,7 +160,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           onChange={handlechange}
           fullWidth
           required
-          variant="standard"
+          variant="outlined"
         />
         <TextField
           autoFocus
@@ -172,7 +172,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           onChange={handlechange}
           fullWidth
           required
-          variant="standard"
+          variant="outlined"
           inputProps={{ min: "0" }}
         />
         <FormControl fullWidth sx={{ mt: 2 }}>
@@ -235,7 +235,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           onChange={handlechange}
           fullWidth
           required
-          variant="standard"
+          variant="outlined"
           inputProps={{ min: "0" }}
         />
         <FormControlLabel
