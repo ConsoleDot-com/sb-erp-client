@@ -46,6 +46,7 @@ import { url } from "inspector";
 import { bg } from "../../assets/jpg";
 import { UploadFile } from "../UploadFile";
 import { cities } from "../../constraints";
+import { BasementWall } from "../BasementWall";
 
 export interface CustomerData {
   houseNo: string;
@@ -142,7 +143,7 @@ const initialRows = [
 
 export const CustomerData = () => {
   const [fileUploaded, setFileUploaded] = useState(false);
-
+  const [openBasementWall, setOpenBasementWall]=useState(false)
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [editIndex, setEditIndex] = useState(-1);
@@ -394,6 +395,21 @@ export const CustomerData = () => {
                   </Table>
                 </TableContainer>
               </div>
+              <Button
+                sx={{
+                  backgroundColor: "#26255f",
+                  color: "white",
+                  height: "3rem",
+                  width: "20%",
+                  fontSize: "14px",
+                  "&:hover": {
+                    bgcolor: Secondary,
+                  },
+                }}
+                onClick={()=>setOpenBasementWall(true)}
+              >
+                Basement Wall
+              </Button>
             </Box>
             <Dialog open={open} onClose={() => setOpen(false)}>
               <AddClientForm
@@ -411,6 +427,12 @@ export const CustomerData = () => {
                 saveEdit={saveEdit}
                 closeEditDialog={closeEditDialog}
               />
+            </Dialog>
+            <Dialog open={openViewDialog} onClose={handleViewDialogClose}>
+              <ViewClientData close={() => setOpenViewDialog(false)} />
+            </Dialog>
+            <Dialog open={openBasementWall} onClose={()=> setOpenBasementWall(false)}>
+              <BasementWall close={() => setOpenBasementWall(false)}/>
             </Dialog>
           </Container>
         </Box>

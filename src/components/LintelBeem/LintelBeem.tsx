@@ -23,7 +23,7 @@ export const LintelBeem=({onClose}:any)=>{
           label="Beem Id"
           type="text"
           required
-          variant="standard"
+          variant="outlined"
           
         />
         <TextField
@@ -34,7 +34,7 @@ export const LintelBeem=({onClose}:any)=>{
           type="text"
           
           required
-          variant="standard"
+          variant="outlined"
         />
         </Box>
         <Box sx={{display:"flex", columnGap:"32px"}}>
@@ -46,7 +46,7 @@ export const LintelBeem=({onClose}:any)=>{
           type="text"
           
           required
-          variant="standard"
+          variant="outlined"
         />
         <TextField
           autoFocus
@@ -56,7 +56,7 @@ export const LintelBeem=({onClose}:any)=>{
           type="number"
           
           required
-          variant="standard"
+          variant="outlined"
           inputProps={{ min: "0" }}
         />
          </Box>
@@ -68,7 +68,7 @@ export const LintelBeem=({onClose}:any)=>{
           type="number"
           fullWidth
           required
-          variant="standard"
+          variant="outlined"
           inputProps={{ min: "1", max:'10' }}
           value={barLayers}
           onChange={(event) => setBarLayers(parseInt(event.target.value, 10))}
@@ -83,7 +83,7 @@ export const LintelBeem=({onClose}:any)=>{
           type="text"
           sx={{marginRight:"32px"}}
           required
-          variant="standard"
+          variant="outlined"
         />)}
         {barLayers >=2 && (
         
@@ -95,7 +95,7 @@ export const LintelBeem=({onClose}:any)=>{
         type="text"
         
         required
-        variant="standard"
+        variant="outlined"
        
       />
       
@@ -110,7 +110,7 @@ export const LintelBeem=({onClose}:any)=>{
           type="text"
           
           required
-          variant="standard"
+          variant="outlined"
         />)}
         </Box>
         </Box>
@@ -122,7 +122,7 @@ export const LintelBeem=({onClose}:any)=>{
           type="text"
           fullWidth
           required
-          variant="standard"
+          variant="outlined"
         />
         <TextField
           autoFocus
@@ -132,7 +132,7 @@ export const LintelBeem=({onClose}:any)=>{
           type="text"
           fullWidth
           required
-          variant="standard"
+          variant="outlined"
         />
       </DialogContent>
       <DialogActions>
