@@ -346,7 +346,7 @@ export const UploadFile = () => {
               .slice(0, !basement ? levels.length - 1 : levels.length)
               .map((i: any, index: number) => (
                 <React.Fragment key={index.toString()}>
-                  <Box sx={{border:'1px solid #26255f', padding:"16px", mb:4, backgroundColor:Secondary}}>
+                  <Box sx={{border: `2px solid ${Dark}`, padding:"16px", mb:4}}>
                     <H2 sx={{ border:"1px solid #26255f", borderRadius:"16px", backgroundColor:"whitesmoke", textAlign:"center"}}>Slab {index + 1 }</H2>
                   <Box
                     sx={{
