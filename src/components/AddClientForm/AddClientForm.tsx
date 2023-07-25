@@ -137,6 +137,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           fullWidth
           required
           variant="outlined"
+          sx={{backgroundColor:'whitesmoke'}}
         />
         <TextField
           autoFocus
@@ -149,6 +150,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           fullWidth
           required
           variant="outlined"
+          sx={{backgroundColor:'whitesmoke'}}
         />
         <TextField
           autoFocus
@@ -161,6 +163,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           fullWidth
           required
           variant="outlined"
+          sx={{backgroundColor:'whitesmoke'}}
         />
         <TextField
           autoFocus
@@ -174,6 +177,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
           required
           variant="outlined"
           inputProps={{ min: "0" }}
+          sx={{backgroundColor:'whitesmoke'}}
         />
         <FormControl fullWidth sx={{ mt: 2 }}>
           <InputLabel id="demo-simple-select-label">Province</InputLabel>
@@ -216,6 +220,7 @@ export const AddClientForm = ({ initialRows, close }: AddClientFormProps) => {
       },
       
     }}
+    sx={{backgroundColor:'whitesmoke'}}
   >
     {formData.province &&
       cities[formData.province].map((city:any) => (
