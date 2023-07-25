@@ -88,6 +88,7 @@ function a11yProps(index: number) {
 
 export const SteelData = () => {
   const [value, setValue] = React.useState(0);
+  console.log(value)
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
